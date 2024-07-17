@@ -2,10 +2,12 @@
 import Carousel from "@/components/shared/Carousel/Carousel";
 import Test from "@/components/Paral";
 import { ParallaxBanner } from "react-scroll-parallax";
+import Navbar from "@/components/shared/Navbar";
 
 const Home: React.FC = () => {
   return (
     <div className="relative w-full h-screen overflow-y-scroll">
+      <Navbar />
       <ParallaxBanner
         layers={[
           {
