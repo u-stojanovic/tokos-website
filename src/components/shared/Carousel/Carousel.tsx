@@ -18,7 +18,7 @@ export default function Carousel() {
     "https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=2524&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   return (
-    <div className="flex items-center justify-center h-screen w-full bg-gray-900">
+    <div className="flex items-center justify-center h-screen bg-gray-900">
       <Swiper
         modules={[Navigation, Autoplay, EffectFade]}
         loop
@@ -27,8 +27,8 @@ export default function Carousel() {
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
-        speed={2000}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        speed={800}
         effect="fade"
         className="w-full h-full"
       >

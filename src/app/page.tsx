@@ -1,9 +1,38 @@
+"use client";
 import Carousel from "@/components/shared/Carousel/Carousel";
+import Test from "@/components/Paral";
+import { ParallaxBanner } from "react-scroll-parallax";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <div className="relative w-full h-screen">
-      <Carousel />
+    <div className="relative w-full h-screen overflow-y-scroll">
+      <ParallaxBanner
+        layers={[
+          {
+            children: (
+              <div className="relative w-full h-screen bg-gray-900">
+                <Carousel />
+              </div>
+            ),
+          },
+        ]}
+        className="h-screen"
+      />
+
+      <ParallaxBanner
+        layers={[
+          {
+            children: (
+              <div className="relative w-full h-screen bg-red-500">
+                <Test />
+              </div>
+            ),
+          },
+        ]}
+        className="h-screen"
+      />
     </div>
   );
-}
+};
+
+export default Home;

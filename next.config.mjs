@@ -6,6 +6,7 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "lh3.googleusercontent.com",
       "storage.googleapis.com",
+      "plus.unsplash.com",
     ],
     remotePatterns: [
       { protocol: "https", hostname: "firebasestorage.googleapis.com" },
@@ -13,6 +14,7 @@ const nextConfig = {
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
       { protocol: "https", hostname: "storage.googleapis.com" },
+      { protocol: "https", hostname: "plus.unsplash.com" },
     ],
   },
 };

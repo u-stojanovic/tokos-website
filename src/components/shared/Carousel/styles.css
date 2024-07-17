@@ -47,9 +47,9 @@ button {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-  width: 44px;
-  height: 44px;
+  color: rgba(255, 255, 255, 0.8); /* White with 50% opacity */
+  width: 50px;
+  height: 50px;
 }
 
 .swiper-button-next::after,
