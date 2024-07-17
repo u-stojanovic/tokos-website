@@ -19,7 +19,7 @@ export default function Navbar() {
     <nav className="flex flex-row p-5 bg-transparent">
       <div className="w-full flex justify-between items-center">
         <Link href="/">
-          <Image src="/logo.png" width={150} height={150} alt="Logo" />
+          <Image src="/logo.png" width={120} height={120} alt="Logo" />
         </Link>
         <div className="flex justify-between gap-4 items-center">
           <div className="flex flex-row gap-11 mr-12 items-center">
@@ -61,7 +61,7 @@ export default function Navbar() {
           </div>
           <Link href="/korpa">
             <div className="ml-6 mr-3">
-              <span className="bg-pink-200 text-white rounded-full absolute w-5 h-5 top-14 right-4 flex justify-center items-center text-sm text-center">
+              <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 top-14 right-4 flex justify-center items-center text-sm text-center">
                 12
               </span>
               <svg
