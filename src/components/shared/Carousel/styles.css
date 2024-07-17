@@ -1,0 +1,58 @@
+/* Custom styles for Swiper */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Fade-in effect for Swiper slides */
+.fade-slide {
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
+}
+
+.fade-slide-active {
+  opacity: 1;
+}
+
+.swiper-pagination-bullet {
+  background-color: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
+  width: 12px;
+  height: 12px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Slightly more opaque when active */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: rgba(255, 255, 255, 0.8); /* White with 50% opacity */
+  width: 50px;
+  height: 50px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Larger arrow size */
+}
