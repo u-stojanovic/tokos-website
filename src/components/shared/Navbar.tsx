@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,16 +10,16 @@ import {
 } from "../ui/navigation-menu";
 
 const navLinkStyle =
-  "text-black font-sans hover:text-pink-200 transition duration-300";
+  "text-white font-sans hover:text-pink-200 transition duration-300";
 const navLiComponentStyle =
   "px-4 py-2 rounded-lg font-sans transition duration-300 ease-in-out transform hover:bg-pink-200 hover:text-white hover:shadow-lg";
 
 export default function Navbar() {
   return (
-    <nav className="flex flex-row p-5 bg-transparent">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-30 bg-slate-200 backdrop-filter backdrop-blur-lg text-white p-4">
       <div className="w-full flex justify-between items-center">
         <Link href="/">
-          <Image src="/logo.png" width={150} height={150} alt="Logo" />
+          <Image src="/logo.png" width={120} height={120} alt="Logo" />
         </Link>
         <div className="flex justify-between gap-4 items-center">
           <div className="flex flex-row gap-11 mr-12 items-center">
@@ -62,7 +61,7 @@ export default function Navbar() {
           </div>
           <Link href="/korpa">
             <div className="ml-6 mr-3">
-              <span className="bg-pink-200 text-white rounded-full absolute w-5 h-5 top-14 right-4 flex justify-center items-center text-sm text-center">
+              <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 top-14 right-4 flex justify-center items-center text-sm text-center">
                 12
               </span>
               <svg
