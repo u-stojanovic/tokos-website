@@ -10,9 +10,9 @@ import {
 } from "../ui/navigation-menu";
 
 const navLinkStyle =
-  "text-white font-sans hover:text-pink-200 transition duration-300";
+  "text-white font-raleway hover:text-pink-200 transition duration-300";
 const navLiComponentStyle =
-  "px-4 py-2 rounded-lg font-sans transition duration-300 ease-in-out transform hover:bg-pink-200 hover:text-white hover:shadow-lg";
+  "px-4 py-2 rounded-lg font-raleway transition duration-300 ease-in-out transform hover:bg-pink-200 hover:text-white hover:shadow-lg";
 
 export default function Navbar() {
   return (
