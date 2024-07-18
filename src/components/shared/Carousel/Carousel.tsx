@@ -22,6 +22,7 @@ const darkBackgroundImageLinks = [
 ];
 
 export default function Carousel() {
+
   const { theme } = useTheme();
   const [imagesToShow, setImagesToShow] = useState<string[]>([]);
 
