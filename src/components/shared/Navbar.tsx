@@ -17,7 +17,7 @@ const navLiComponentStyle =
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-zinc-500 to-transparent backdrop-filter backdrop-blur-sm text-white p-2">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900 backdrop-filter backdrop-blur-sm text-white p-2">
       <div className="w-full flex justify-between items-center">
         <Link href="/">
           <Image src="/logo.png" width={100} height={100} alt="Logo" />
