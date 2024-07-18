@@ -34,7 +34,7 @@ export default function Carousel() {
   }, [theme]);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
+    <div className="flex items-center justify-center h-screen bg-white">
       <Swiper
         modules={[Navigation, Autoplay, EffectFade]}
         loop
@@ -60,7 +60,6 @@ export default function Carousel() {
               objectFit="cover"
               className="rounded-lg transition-transform duration-500 ease-in-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
           </SwiperSlide>
         ))}
         <div className="absolute bottom-16 left-8 text-white p-6 rounded-xl shadow-sm z-10 transform bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg max-w-xs md:max-w-md lg:max-w-lg">
