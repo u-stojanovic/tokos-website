@@ -11,9 +11,7 @@ import "./styles.css";
 
 export default function Carousel() {
   const imageLinks = [
-    "https://images.unsplash.com/photo-1486428128344-5413e434ad35?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1574085733277-851d9d856a3a?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=2524&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=2850&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
   return (
@@ -29,20 +27,21 @@ export default function Carousel() {
         autoplay={{ delay: 3500, disableOnInteraction: false }}
         speed={800}
         effect="fade"
-        className="w-full h-full"
+        className="w-full h-full relative"
       >
         {imageLinks.map((link, index) => (
           <SwiperSlide
             key={index}
-            className="relative flex justify-center items-center h-full fade-slide"
+            className="relative flex justify-center items-center h-full bg-black"
           >
             <Image
               src={link}
               alt={`Slide ${index + 1}`}
               layout="fill"
               objectFit="cover"
-              className="rounded-lg"
+              className="rounded-lg transition-transform duration-500 ease-in-out"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-10 left-10 text-white p-5 bg-black bg-opacity-60 rounded-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 z-10">
               <h2 className="text-3xl mb-2 font-bold">Slide Title</h2>
               <p className="mb-4 text-lg">
