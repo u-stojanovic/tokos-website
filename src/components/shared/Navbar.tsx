@@ -8,6 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
+import { ModeToggle } from "./ThemeModeToggle";
 
 const navLinkStyle =
   "text-white font-raleway hover:text-pink-200 transition duration-300";
@@ -58,6 +59,7 @@ export default function Navbar() {
             <Link href="/kontakt" className={navLinkStyle}>
               Kontakt
             </Link>
+            <ModeToggle />
           </div>
           <Link href="/korpa">
             <div className="ml-6 mr-3">
