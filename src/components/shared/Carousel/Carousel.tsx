@@ -22,7 +22,6 @@ const darkBackgroundImageLinks = [
 ];
 
 export default function Carousel() {
-
   const { theme } = useTheme();
   const [imagesToShow, setImagesToShow] = useState<string[]>([]);
 
@@ -62,17 +61,16 @@ export default function Carousel() {
               className="rounded-lg transition-transform duration-500 ease-in-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-10 left-10 text-white p-5 bg-black bg-opacity-60 rounded-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 z-10">
-              <h2 className="text-3xl mb-2 font-bold">Slide Title</h2>
-              <p className="mb-4 text-lg">
-                This is some dummy text for the slide.
-              </p>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition-colors duration-300 ease-in-out">
-                Prodavnica
-              </button>
-            </div>
           </SwiperSlide>
         ))}
+
+        <div className="absolute bottom-10 left-10 text-white p-5 bg-black bg-opacity-60 rounded-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 z-10">
+          <h2 className="text-3xl mb-2 font-bold">Slide Title</h2>
+          <p className="mb-4 text-lg">This is some dummy text for the slide.</p>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition-colors duration-300 ease-in-out">
+            Prodavnica
+          </button>
+        </div>
       </Swiper>
     </div>
   );
