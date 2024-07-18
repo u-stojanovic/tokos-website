@@ -75,7 +75,7 @@ export default function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6 hover:text-pink-200 transition duration-300"
+                className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
               >
                 <path
                   strokeLinecap="round"
@@ -94,7 +94,7 @@ export default function Navbar() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-6 w-6 text-gray-900 dark:text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -117,7 +117,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 hover:text-pink-200 transition duration-300"
+              className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
             >
               <path
                 strokeLinecap="round"
