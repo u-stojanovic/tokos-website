@@ -31,7 +31,7 @@ export default function Carousel() {
     } else {
       setImagesToShow(whiteBackgroundImageLinks);
     }
-  }, [theme, imagesToShow]);
+  }, [theme]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900">
@@ -51,7 +51,7 @@ export default function Carousel() {
         {imagesToShow.map((link, index) => (
           <SwiperSlide
             key={index}
-            className="relative flex justify-center items-center h-full bg-black"
+            className="relative flex justify-center items-center h-full"
           >
             <Image
               src={link}
@@ -60,14 +60,19 @@ export default function Carousel() {
               objectFit="cover"
               className="rounded-lg transition-transform duration-500 ease-in-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
           </SwiperSlide>
         ))}
-
-        <div className="absolute bottom-10 left-10 text-white p-5 bg-black bg-opacity-60 rounded-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 z-10">
-          <h2 className="text-3xl mb-2 font-bold">Slide Title</h2>
-          <p className="mb-4 text-lg">This is some dummy text for the slide.</p>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition-colors duration-300 ease-in-out">
+        <div className="absolute bottom-16 left-8 text-white p-6 rounded-xl shadow-sm z-10 transform bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg max-w-xs md:max-w-md lg:max-w-lg">
+          <h2 className="text-4xl mb-4 font-bold">
+            <span className="relative text-[#FFD0CE] font-raleway text-shadow-lg">
+              Slatka kuća Tokos
+            </span>
+          </h2>
+          <p className="mb-4 text-lg leading-relaxed">
+            S&apos;ljubavlju i iskrenom željom za pravi užitak
+          </p>
+          <button className="bg-[#FFD0CE] text-gray-900 px-6 py-3 rounded-lg shadow-lg hover:bg-[#FFB0A0] transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#FFB0A0] focus:ring-opacity-75">
             Prodavnica
           </button>
         </div>

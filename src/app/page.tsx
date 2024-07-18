@@ -1,6 +1,6 @@
 "use client";
 import Carousel from "@/components/shared/Carousel/Carousel";
-import Test from "@/components/ParallTest";
+import Test from "@/components/shared/ParallTest";
 import { Parallax } from "react-scroll-parallax";
 import Navbar from "@/components/shared/Navbar";
 
