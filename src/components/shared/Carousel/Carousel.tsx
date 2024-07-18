@@ -4,15 +4,34 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import "./styles.css";
 
+const whiteBackgroundImageLinks = [
+  "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=2850&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1612198791461-e26e3b5dcb86?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
+const darkBackgroundImageLinks = [
+  "https://images.unsplash.com/photo-1555813456-94a3dd418cd3?q=80&w=3126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1548865163-afb128596c1e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
 export default function Carousel() {
-  const imageLinks = [
-    "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=2850&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
+  const { theme } = useTheme();
+  const [imagesToShow, setImagesToShow] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setImagesToShow(darkBackgroundImageLinks);
+    } else {
+      setImagesToShow(whiteBackgroundImageLinks);
+    }
+  }, [theme, imagesToShow]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900">
@@ -29,7 +48,7 @@ export default function Carousel() {
         effect="fade"
         className="w-full h-full relative"
       >
-        {imageLinks.map((link, index) => (
+        {imagesToShow.map((link, index) => (
           <SwiperSlide
             key={index}
             className="relative flex justify-center items-center h-full bg-black"
