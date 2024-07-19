@@ -3,13 +3,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import "./styles.css";
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import "./styles.css";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { FadeText } from "@/components/magicui/fade-text";
@@ -28,6 +28,16 @@ const BLUR_FADE_DELAY = 0.02;
 const BLUR_FADE_DELAY_TEXT = 0.25;
 
 export default function Carousel() {
+  return (
+    <BlurFade delay={BLUR_FADE_DELAY}>
+      <div className="flex items-center justify-center h-screen bg-white">
+        <SlideShow />
+      </div>
+    </BlurFade>
+  );
+}
+
+function SlideShow() {
   const { theme } = useTheme();
   const [imagesToShow, setImagesToShow] = useState<string[]>([]);
 
@@ -38,41 +48,36 @@ export default function Carousel() {
       setImagesToShow(whiteBackgroundImageLinks);
     }
   }, [theme]);
-
   return (
-    <BlurFade delay={BLUR_FADE_DELAY}>
-      <div className="flex items-center justify-center h-screen bg-white">
-        <Swiper
-          modules={[Navigation, Autoplay, EffectFade]}
-          loop
-          freeMode
-          spaceBetween={30}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          speed={800}
-          effect="fade"
-          className="w-full h-full relative"
+    <Swiper
+      modules={[Navigation, Autoplay, EffectFade]}
+      loop
+      freeMode
+      spaceBetween={30}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 3500, disableOnInteraction: false }}
+      speed={800}
+      effect="fade"
+      className="w-full h-full relative"
+    >
+      {imagesToShow.map((link, index) => (
+        <SwiperSlide
+          key={index}
+          className="relative flex justify-center items-center h-full"
         >
-          {imagesToShow.map((link, index) => (
-            <SwiperSlide
-              key={index}
-              className="relative flex justify-center items-center h-full"
-            >
-              <Image
-                src={link}
-                alt={`Slide ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg transition-transform duration-500 ease-in-out"
-              />
-            </SwiperSlide>
-          ))}
-          <HeadingText />
-        </Swiper>
-      </div>
-    </BlurFade>
+          <Image
+            src={link}
+            alt={`Slide ${index + 1}`}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg transition-transform duration-500 ease-in-out"
+          />
+        </SwiperSlide>
+      ))}
+      <HeadingText />
+    </Swiper>
   );
 }
 
