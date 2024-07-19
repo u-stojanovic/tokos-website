@@ -28,28 +28,32 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900 backdrop-filter backdrop-blur-sm text-white p-2">
-      <div className="w-full flex justify-between items-center">
-        <Logo />
-        <DesktopMenu />
-        <MobileMenuToggle
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-        />
-      </div>
-      {isMenuOpen && (
-        <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      )}
-    </nav>
+    <header>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900 backdrop-filter backdrop-blur-sm text-white p-2">
+        <BlurFade delay={BLUR_FADE_DELAY}>
+          <div className="w-full flex justify-between items-center">
+            <Logo />
+            <DesktopMenu />
+            <MobileMenuToggle
+              isMenuOpen={isMenuOpen}
+              setIsMenuOpen={setIsMenuOpen}
+            />
+          </div>
+        </BlurFade>
+        {isMenuOpen && (
+          <BlurFade delay={BLUR_FADE_DELAY}>
+            <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          </BlurFade>
+        )}
+      </nav>
+    </header>
   );
 }
 
 function Logo() {
   return (
     <Link href="/">
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <Image src="/logo.png" width={100} height={100} alt="Logo" />
-      </BlurFade>
+      <Image src="/logo.png" width={100} height={100} alt="Logo" />
     </Link>
   );
 }
@@ -59,9 +63,7 @@ function DesktopMenu() {
     <div className="hidden md:flex justify-between gap-4 items-center">
       <div className="flex flex-row gap-11 mr-12 items-center">
         <NavLinks />
-        <BlurFade delay={BLUR_FADE_DELAY}>
-          <ModeToggle />
-        </BlurFade>
+        <ModeToggle />
       </div>
       <CartIcon />
     </div>
@@ -75,9 +77,7 @@ function NavLinks() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              <BlurFadeText delay={BLUR_FADE_DELAY} text="Prodavnica" />
-            </NavigationMenuTrigger>
+            <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem href="/torte" text="Torte" />
@@ -104,7 +104,7 @@ interface NavLinkProps {
 function NavLink({ href, text }: NavLinkProps) {
   return (
     <Link href={href} className={navLinkStyle}>
-      <BlurFadeText delay={BLUR_FADE_DELAY} text={text} />
+      {text}
     </Link>
   );
 }
@@ -125,27 +125,25 @@ function NavListItem({ href, text }: NavListItemProps) {
 function CartIcon() {
   return (
     <Link href="/korpa">
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <div className="ml-6 mr-3 relative">
-          <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center">
-            12
-          </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-            />
-          </svg>
-        </div>
-      </BlurFade>
+      <div className="ml-6 mr-3 relative">
+        <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center">
+          12
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+          />
+        </svg>
+      </div>
     </Link>
   );
 }
