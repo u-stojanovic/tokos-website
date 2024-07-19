@@ -48,6 +48,7 @@ function SlideShow() {
       setImagesToShow(whiteBackgroundImageLinks);
     }
   }, [theme]);
+
   return (
     <Swiper
       modules={[Navigation, Autoplay, EffectFade]}
