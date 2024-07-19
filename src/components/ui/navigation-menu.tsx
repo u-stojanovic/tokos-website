@@ -3,6 +3,7 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import BlurFade from "../magicui/blur-fade";
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -43,6 +44,8 @@ const navigationMenuTriggerStyle = cva(
   "flex text-gray-800 dark:text-white justify-center items-center font-raleway lg:hover:text-pink-200 transition duration-300",
 );
 
+const BLUR_FADE_DELAY = 0.04;
+
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
@@ -52,11 +55,13 @@ const NavigationMenuTrigger = React.forwardRef<
     className={cn(navigationMenuTriggerStyle(), "group", className)}
     {...props}
   >
-    {children}{" "}
-    <ChevronDown
-      className="relative top-[1px] ml-1 h-3 w-3 transition duration-100 group-data-[state=open]:rotate-180"
-      aria-hidden="true"
-    />
+    <BlurFade className="flex items-center" delay={BLUR_FADE_DELAY}>
+      {children}{" "}
+      <ChevronDown
+        className="relative top-[1px] ml-1 h-3 w-3 transition duration-100 group-data-[state=open]:rotate-180"
+        aria-hidden="true"
+      />
+    </BlurFade>
   </NavigationMenuPrimitive.Trigger>
 ));
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;

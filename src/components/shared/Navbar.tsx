@@ -75,9 +75,9 @@ function NavLinks() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <BlurFade delay={BLUR_FADE_DELAY}>
-              <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
-            </BlurFade>
+            <NavigationMenuTrigger>
+              <BlurFadeText delay={BLUR_FADE_DELAY} text="Prodavnica" />
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem href="/torte" text="Torte" />
@@ -101,9 +101,25 @@ interface NavLinkProps {
   text: string;
 }
 
+function NavLink({ href, text }: NavLinkProps) {
+  return (
+    <Link href={href} className={navLinkStyle}>
+      <BlurFadeText delay={BLUR_FADE_DELAY} text={text} />
+    </Link>
+  );
+}
+
 interface NavListItemProps {
   href: string;
   text: string;
+}
+
+function NavListItem({ href, text }: NavListItemProps) {
+  return (
+    <li className={navLiComponentStyle}>
+      <Link href={href}>{text}</Link>
+    </li>
+  );
 }
 
 function CartIcon() {
@@ -233,26 +249,8 @@ interface NavLinkProps {
   onClick?: () => void;
 }
 
-function NavLink({ href, text, onClick }: NavLinkProps) {
-  return (
-    <Link href={href} className={navLinkStyle} onClick={onClick}>
-      <BlurFadeText delay={BLUR_FADE_DELAY} text={text} />
-    </Link>
-  );
-}
-
 interface NavListItemProps {
   href: string;
   text: string;
   onClick?: () => void;
-}
-
-function NavListItem({ href, text, onClick }: NavListItemProps) {
-  return (
-    <li className={navLiComponentStyle}>
-      <Link href={href} onClick={onClick}>
-        {text}
-      </Link>
-    </li>
-  );
 }
