@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function ShopInfoSection() {
   return (
@@ -33,28 +34,32 @@ export default function ShopInfoSection() {
 
 const products = [
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc:
+      "https://images.unsplash.com/photo-1453227588063-bb302b62f50b?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     altText: "Product 1",
     title: "Cozy Throw Blanket",
     price: "$39.99",
     link: "#",
   },
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc:
+      "https://images.unsplash.com/photo-1505941625782-5f8710bdd9f3?q=80&w=2647&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     altText: "Product 2",
     title: "Minimalist Vase",
     price: "$24.99",
     link: "#",
   },
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc:
+      "https://plus.unsplash.com/premium_photo-1682310316833-578612b07de7?q=80&w=2712&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     altText: "Product 3",
     title: "Rustic Wood Shelves",
     price: "$59.99",
     link: "#",
   },
   {
-    imageSrc: "/placeholder.svg",
+    imageSrc:
+      "https://plus.unsplash.com/premium_photo-1677464011833-892c3fb15c2a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     altText: "Product 4",
     title: "Decorative Pillows",
     price: "$29.99",
@@ -82,7 +87,7 @@ function ProductCard({
       <Link href={link} className="absolute inset-0 z-10" prefetch={false}>
         <span className="sr-only">View</span>
       </Link>
-      <img
+      <Image
         src={imageSrc}
         alt={altText}
         width={500}
