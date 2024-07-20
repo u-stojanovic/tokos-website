@@ -7,10 +7,14 @@ export default function Main() {
   return (
     <>
       <Parallax>
-        <ShopInfoSection />
+        <div className="h-screen flex items-center justify-center">
+          <ShopInfoSection />
+        </div>
       </Parallax>
       <Parallax speed={-10}>
-        <CategoriesInfoSection />
+        <div className="h-screen flex items-center justify-center">
+          <CategoriesInfoSection />
+        </div>
       </Parallax>
     </>
   );
