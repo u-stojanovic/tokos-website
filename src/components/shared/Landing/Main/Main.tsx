@@ -5,11 +5,13 @@ import ShopInfoSection from "./ShopInfoSection";
 
 export default function Main() {
   return (
-    <Parallax className="h-screen">
-      <ShopInfoSection />
+    <>
+      <Parallax>
+        <ShopInfoSection />
+      </Parallax>
       <Parallax speed={-10}>
         <CategoriesInfoSection />
       </Parallax>
-    </Parallax>
+    </>
   );
 }
