@@ -1,19 +1,14 @@
 "use client";
-import Carousel from "@/components/shared/Carousel/Carousel";
-import Test from "@/components/shared/ParallTest";
-import { Parallax } from "react-scroll-parallax";
 import Navbar from "@/components/shared/Navbar";
+import Hero from "@/components/shared/Landing/Hero/Hero";
+import Main from "@/components/shared/Landing/Main/Main";
 
 const Home: React.FC = () => {
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <Navbar />
-      <Parallax speed={-50}>
-        <Carousel />
-      </Parallax>
-      <Parallax>
-        <Test />
-      </Parallax>
+      <Hero />
+      <Main />
     </div>
   );
 };
