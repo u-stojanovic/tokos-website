@@ -4,17 +4,8 @@ import Image from "next/image";
 
 export default function ShopInfoSection() {
   return (
-    <section className="w-full h-screen bg-gray-800 py-12 md:py-24 text-gray-900 dark:text-white">
+    <section className="w-full h-full bg-white py-12 md:py-24 text-gray-900 dark:text-white">
       <div className="container mx-auto grid gap-8 px-4 md:px-6 max-w-6xl">
-        <div className="grid gap-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Tokos - The Best Shop
-          </h2>
-          <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed">
-            Discover a curated collection of stylish home decor and furnishings
-            to transform your living space.
-          </p>
-        </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product, index) => (
             <ProductCard

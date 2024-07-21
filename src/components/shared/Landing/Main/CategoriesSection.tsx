@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   CakeIcon,
   CookieIcon,
@@ -68,8 +69,17 @@ const categories = [
 
 export default function CategoriesInfoSection() {
   return (
-    <section className="w-full py-12 h-full bg-gray-800 md:py-20 text-white">
-      <div className="container mx-auto grid gap-8 px-4 md:px-6 max-w-6xl">
+    <section className="relative w-full py-12 h-full md:py-20 text-white">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://images.unsplash.com/photo-1640184713819-69d3195f0b92?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          layout="fill"
+          objectFit="cover"
+          alt="Background Image"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+      </div>
+      <div className="relative z-10 container mx-auto grid gap-8 px-4 md:px-6 max-w-6xl">
         <div className="grid gap-2 text-center">
           <h2 className="text-3xl font-bold tracking-tight">Categories</h2>
           <p className="text-muted-foreground">
