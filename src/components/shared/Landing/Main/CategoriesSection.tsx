@@ -104,10 +104,10 @@ export default function CategoriesInfoSection() {
             At Sweet House, we take pride in offering a wide variety of
             high-quality and delicious treats. Our products are made with the
             finest ingredients to ensure that every bite is a delightful
-            experience. Whether you're celebrating a special occasion or simply
-            indulging your sweet tooth, we have something for everyone. Discover
-            the joy of sweet indulgence with our carefully curated selection of
-            cakes, cookies, candies, and more.
+            experience. Whether you&apos;re celebrating a special occasion or
+            simply indulging your sweet tooth, we have something for everyone.
+            Discover the joy of sweet indulgence with our carefully curated
+            selection of cakes, cookies, candies, and more.
           </p>
         </div>
       </div>

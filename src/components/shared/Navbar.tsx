@@ -37,7 +37,7 @@ export default function Navbar() {
         } backdrop-filter backdrop-blur-sm text-white`}
       >
         <BlurFade delay={BLUR_FADE_DELAY}>
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-between items-center p-4">
             <Logo />
             <DesktopMenu />
             <MobileMenuToggle

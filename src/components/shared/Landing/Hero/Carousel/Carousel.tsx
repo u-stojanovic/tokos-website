@@ -11,8 +11,6 @@ import { Navigation, Autoplay, EffectFade, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
-// import { FadeText } from "@/components/magicui/fade-text";
 
 const whiteBackgroundImageLinks = [
   "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=2850&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -71,6 +69,7 @@ function SlideShow() {
           <Image
             src={link}
             alt={`Slide ${index + 1}`}
+            loading="eager"
             layout="fill"
             objectFit="cover"
             className="rounded-lg transition-transform duration-500 ease-in-out"
@@ -90,14 +89,13 @@ function HeadingText() {
           <div className="relative text-[#FFD0CE] font-raleway text-shadow-md">
             <div className="flex flex-col md:flex-row items-center text-nowrap">
               Slatka kuća Tokos
-              {/* <FadeText direction="up" text="Tokos" /> */}
             </div>
           </div>
         </h2>
       </BlurFade>
       <BlurFade delay={BLUR_FADE_DELAY_TEXT * 2} inView>
         <span className="mb-6 text-2xl md:text-2xl leading-relaxed font-poppins [text-shadow:_-1px_3px_7px_rgb(0_0_0_/_50%)]">
-          "S'ljubavlju i iskrenom željom za pravi užitak"
+          &quot;S&apos;ljubavlju i iskrenom željom za pravi užitak&quot;
         </span>
       </BlurFade>
       <BlurFade delay={BLUR_FADE_DELAY_TEXT * 4}>
