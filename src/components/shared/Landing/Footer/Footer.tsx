@@ -1,72 +1,96 @@
 import Link from "next/link";
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, InboxIcon, SendHorizontal } from "lucide-react";
+import { Logo } from "../../Navbar";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-muted-foreground py-8 sm:py-12 h-fit">
-      <div className="container mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-gray-100 text-muted-foreground py-8 sm:py-12 dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="flex flex-col items-start gap-4">
-          <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <HomeIcon className="w-6 h-6" />
-            <span className="font-bold text-lg">Tokos</span>
-          </Link>
+          <Logo />
           <p className="text-sm leading-relaxed">
-            Welcome to Sweet House, your one-stop shop for all things sweet and
-            delightful. Discover a wide range of high-quality products to
-            satisfy your cravings.
+            Dobrodošli u Slatku Kuću, vašu jedinu destinaciju za sve slatke i
+            ukusne proizvode. Otkrijte širok asortiman visokokvalitetnih
+            proizvoda koji će zadovoljiti vaše želje.
           </p>
         </div>
         <div className="grid gap-2">
-          <h3 className="font-semibold text-base">Quick Links</h3>
+          <h3 className="font-semibold text-base">Brzi Linkovi</h3>
           <nav className="grid gap-1">
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Home
+              Naslovna
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Products
+              O Nama
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              About
+              FAQ
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Contact
+              Kontakt
             </Link>
           </nav>
         </div>
         <div className="grid gap-2">
-          <h3 className="font-semibold text-base">Categories</h3>
+          <h3 className="font-semibold text-base">Kategorije</h3>
           <nav className="grid gap-1">
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Cakes
+              Svi Proizvodi
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Cookies
+              Torte
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Candies
+              Kolači
             </Link>
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Pastries
+              Poslastice
+            </Link>
+            <Link href="#" className="text-sm hover:underline" prefetch={false}>
+              Slani Ketering
             </Link>
           </nav>
         </div>
         <div className="grid gap-2">
-          <h3 className="font-semibold text-base">Contact</h3>
+          <h3 className="font-semibold text-base">Kontakt</h3>
           <nav className="grid gap-1">
             <Link href="#" className="text-sm hover:underline" prefetch={false}>
               info@sweethouse.com
             </Link>
-            <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              +1 (234) 567-890
+            <Link
+              href="tel:+381654274270"
+              className="text-sm hover:underline"
+              prefetch={false}
+            >
+              +381 (65) 427-427-0
             </Link>
-            <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Visit our store
+            <Link
+              href="https://maps.app.goo.gl/1WkxqP1KXhAvAEet5"
+              className="text-sm hover:underline"
+              prefetch={false}
+            >
+              Posetite nas
             </Link>
           </nav>
         </div>
+        <div className="grid gap-2">
+          <h3 className="font-semibold text-base">
+            Pretplatite se za novosti i specijalne ponude
+          </h3>
+          <div className="relative">
+            <InboxIcon className="absolute left-3 top-5 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="email"
+              className="px-10 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white dark:placeholder-white"
+              placeholder="Enter your email"
+              required
+            />
+            <SendHorizontal className="absolute right-3 top-5 transform -translate-y-1/2 w-5 h-5 text-pink-500 cursor-pointer" />
+          </div>
+        </div>
       </div>
       <div className="container mx-auto px-4 sm:px-6 mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-between">
-        <p className="text-sm">&copy; 2024 Sweet House. All rights reserved.</p>
+        <p className="text-sm">&copy; 2024 Tokos. All rights reserved.</p>
         <div className="flex items-center gap-4 mt-4 sm:mt-0">
           <Link href="#" className="text-sm hover:underline" prefetch={false}>
             Privacy Policy
