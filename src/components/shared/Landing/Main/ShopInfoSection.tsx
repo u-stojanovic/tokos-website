@@ -5,7 +5,7 @@ import NumberTicker from "@/components/magicui/number-ticker";
 
 export default function ShopInfoSection() {
   return (
-    <section className="bg-white py-12 text-[#754437] dark:text-white dark:bg-gray-900 grid-cols-1 p-4 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-4 grid">
+    <section className="bg-white py-12 text-[#754437] dark:bg-gray-900 grid-cols-1 p-4 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-4 grid">
       <TextCard />
       <PictureCard />
       <StatsCard />
@@ -68,7 +68,10 @@ function StatsCardInfo({ number, text }: StatsCardInfoProps) {
   return (
     <div className="text-nowrap">
       <h2>
-        <NumberTicker value={number} className="text-[#754437]" />
+        <NumberTicker
+          value={number}
+          className="text-[#754437] dark:text-[#754437]"
+        />
       </h2>
       <p>{text}</p>
     </div>
