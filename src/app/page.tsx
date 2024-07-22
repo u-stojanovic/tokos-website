@@ -14,7 +14,7 @@ const Home: React.FC = () => {
         <Parallax speed={-20} className="relative">
           <Hero />
         </Parallax>
-        <div className="relative z-20 bg-white">
+        <div className="relative z-20">
           <ShopInfoSection />
         </div>
         <Parallax speed={-20}>
