@@ -4,10 +4,12 @@ import { Parallax } from "react-scroll-parallax";
 import ShopInfoSection from "@/components/shared/Landing/Main/ShopInfoSection";
 import CategoriesInfoSection from "@/components/shared/Landing/Main/CategoriesSection";
 import Footer from "@/components/shared/Landing/Footer/Footer";
+import Navbar from "@/components/shared/Navbar";
 
 const Home: React.FC = () => {
   return (
     <div className="h-screen flex flex-col">
+      <Navbar />
       <div className="flex-grow">
         <Parallax speed={-20} className="relative">
           <Hero />
