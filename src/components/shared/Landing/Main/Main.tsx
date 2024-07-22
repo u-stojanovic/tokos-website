@@ -11,7 +11,7 @@ export default function Main() {
           <ShopInfoSection />
         </div>
       </Parallax>
-      <Parallax>
+      <Parallax speed={-20}>
         <div className="items-center justify-center">
           <CategoriesInfoSection />
         </div>

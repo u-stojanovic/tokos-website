@@ -7,7 +7,7 @@ import "./styles.css";
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, Autoplay, EffectFade, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import BlurFade from "@/components/magicui/blur-fade";
@@ -51,7 +51,7 @@ function SlideShow() {
 
   return (
     <Swiper
-      modules={[Navigation, Autoplay, EffectFade]}
+      modules={[Navigation, Pagination, Autoplay, EffectFade]}
       loop
       freeMode
       spaceBetween={30}
