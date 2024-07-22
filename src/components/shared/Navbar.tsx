@@ -11,6 +11,7 @@ import {
 } from "../ui/navigation-menu";
 import { ModeToggle } from "./ThemeModeToggle";
 import BlurFade from "../magicui/blur-fade";
+import { XIcon } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 const navLinkStyle =
@@ -28,7 +29,9 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900 backdrop-filter backdrop-blur-sm text-white p-2">
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 ${isMenuOpen ? "bg-gray-100 dark:bg-gray-900 lg:bg-transparent" : "bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900"} backdrop-filter backdrop-blur-sm text-white`}
+      >
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="w-full flex justify-between items-center">
             <Logo />
@@ -79,10 +82,10 @@ function NavLinks() {
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
-                <NavListItem href="/torte" text="Torte" />
-                <NavListItem href="/kolaci" text="Kolači" />
-                <NavListItem href="/poslastice" text="Poslastice" />
-                <NavListItem href="/slani-ketering" text="Slani Ketering" />
+                <NavListItem href="/cakes" text="Torte" />
+                <NavListItem href="/cookies" text="Kolači" />
+                <NavListItem href="/treats" text="Poslastice" />
+                <NavListItem href="/salty-catering" text="Slani Ketering" />
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
@@ -98,11 +101,12 @@ function NavLinks() {
 interface NavLinkProps {
   href: string;
   text: string;
+  onClick?: () => void;
 }
 
-function NavLink({ href, text }: NavLinkProps) {
+function NavLink({ href, text, onClick }: NavLinkProps) {
   return (
-    <Link href={href} className={navLinkStyle}>
+    <Link href={href} className={navLinkStyle} onClick={onClick}>
       {text}
     </Link>
   );
@@ -111,12 +115,15 @@ function NavLink({ href, text }: NavLinkProps) {
 interface NavListItemProps {
   href: string;
   text: string;
+  onClick?: () => void;
 }
 
-function NavListItem({ href, text }: NavListItemProps) {
+function NavListItem({ href, text, onClick }: NavListItemProps) {
   return (
     <li className={navLiComponentStyle}>
-      <Link href={href}>{text}</Link>
+      <Link href={href} onClick={onClick}>
+        {text}
+      </Link>
     </li>
   );
 }
@@ -149,50 +156,36 @@ function CartIcon() {
 
 function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
   return (
-    <div className="md:hidden flex items-center gap-6">
+    <div className="flex items-center gap-6 lg:hidden">
       <ModeToggle />
       <button className="ml-4 p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-gray-900 dark:text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4 6h16M4 12h16m-7 6h7"
-          />
-        </svg>
+        {isMenuOpen ? (
+          <XIcon />
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-gray-900 dark:text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        )}
       </button>
-      <Link href="/korpa" className="relative ml-4">
-        <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center">
-          12
-        </span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-          />
-        </svg>
-      </Link>
+      <CartIcon />
     </div>
   );
 }
 
 function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
   return (
-    <div className="md:hidden mt-2 p-2 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex flex-col items-center justify-center">
+    <div className="fixed top-0 left-0 font-bold w-full h-fit bg-gray-100 dark:bg-gray-900 flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
       <NavLink href="/" text="Naslovna" onClick={() => setIsMenuOpen(false)} />
       <NavigationMenu>
         <NavigationMenuList>
@@ -201,22 +194,22 @@ function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/torte"
+                  href="/cakes"
                   text="Torte"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/kolaci"
+                  href="/cookies"
                   text="Kolači"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/poslastice"
+                  href="/treats"
                   text="Poslastice"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/slani-ketering"
+                  href="/salty-catering"
                   text="Slani Ketering"
                   onClick={() => setIsMenuOpen(false)}
                 />
@@ -226,28 +219,16 @@ function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
         </NavigationMenuList>
       </NavigationMenu>
       <NavLink
-        href="/o-nama"
+        href="/about"
         text="O Nama"
         onClick={() => setIsMenuOpen(false)}
       />
       <NavLink href="/faq" text="FAQ" onClick={() => setIsMenuOpen(false)} />
       <NavLink
-        href="/kontakt"
+        href="/contact"
         text="Kontakt"
         onClick={() => setIsMenuOpen(false)}
       />
     </div>
   );
-}
-
-interface NavLinkProps {
-  href: string;
-  text: string;
-  onClick?: () => void;
-}
-
-interface NavListItemProps {
-  href: string;
-  text: string;
-  onClick?: () => void;
 }

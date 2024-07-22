@@ -1,6 +1,4 @@
 "use client";
-
-import Navbar from "@/components/shared/Navbar";
 import Hero from "@/components/shared/Landing/Hero/Hero";
 import { Parallax } from "react-scroll-parallax";
 import ShopInfoSection from "@/components/shared/Landing/Main/ShopInfoSection";
@@ -10,7 +8,6 @@ import Footer from "@/components/shared/Landing/Footer/Footer";
 const Home: React.FC = () => {
   return (
     <div className="h-screen flex flex-col">
-      <Navbar />
       <div className="flex-grow">
         <Parallax speed={-20} className="relative">
           <Hero />
