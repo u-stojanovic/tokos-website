@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CategoriesData } from "@/data/categories";
+import Link from "next/link";
 
 export default function CategoriesSection() {
   return (
@@ -47,7 +48,7 @@ function CategoryCard({
   link,
 }: CategoryCardProps) {
   return (
-    <a
+    <Link
       href={link}
       className="relative flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
     >
@@ -68,6 +69,6 @@ function CategoryCard({
           <p className="mt-1 text-md text-gray-400">{count} products</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
