@@ -4,12 +4,12 @@ import Link from "next/link";
 
 export default function CategoriesSection() {
   return (
-    <section className="relative w-full py-16 h-full md:py-24 text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-900">
+    <section className="relative w-full py-16 h-full md:py-24 text-lightMode-text dark:text-darkMode-text bg-lightMode-surface dark:bg-darkMode-surface">
       <div className="relative z-10 container mx-auto grid gap-12 px-4 md:px-6 max-w-7xl">
         <div className="grid gap-4 text-center">
-          <h2 className="text-4xl font-bold tracking-tight">Categories</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Explore our delectable selection of sweet treats.
+          <h2 className="text-4xl font-bold tracking-tight">Kategorije</h2>
+          <p className="text-lg text-lightMode-text dark:text-darkMode-text">
+            Istražite naš asortiman slatkih poslastica.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-12">
