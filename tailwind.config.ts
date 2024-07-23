@@ -25,32 +25,48 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#5A2B0C", // Dark Brown
+          foreground: "#F7BFB4", // Light Pink
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#D89E94", // Soft Brown
+          foreground: "#5A2B0C", // Dark Brown
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#F7BFB4", // Light Pink
+          foreground: "#5A2B0C", // Dark Brown
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#FFF5F0", // Cream
+          foreground: "#5A2B0C", // Dark Brown
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#FFF5F0", // Cream
+          foreground: "#5A2B0C", // Dark Brown
+        },
+        // Light mode colors
+        lightMode: {
+          background: "#FFFFFF", // White
+          text: "#5A2B0C", // Dark Brown
+          primary: "#F7BFB4", // Light Pink
+          secondary: "#D89E94", // Soft Brown
+          surface: "#FFF5F0", // Cream
+        },
+        // Dark mode colors
+        darkMode: {
+          background: "#2E2E2E", // Dark Gray
+          text: "#F7BFB4", // Light Pink
+          primary: "#D89E94", // Soft Brown
+          secondary: "#5A2B0C", // Dark Brown
+          surface: "#3E3E3E", // Medium Gray
         },
       },
       fontFamily: {
