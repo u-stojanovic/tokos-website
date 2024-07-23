@@ -8,7 +8,7 @@ import Navbar from "@/components/shared/Navbar";
 
 const Home: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col">
       <Navbar />
       <div className="flex-grow">
         <Parallax speed={-20} className="relative">
@@ -17,15 +17,15 @@ const Home: React.FC = () => {
         <div className="relative z-20">
           <ShopInfoSection />
         </div>
-        <Parallax speed={-20}>
-          <div className="h-screen flex items-start">
+        <Parallax speed={-7}>
+          <div className="flex items-start">
             <CategoriesInfoSection />
           </div>
         </Parallax>
       </div>
-      <Parallax speed={-5}>
+      <div className="relative z-20">
         <Footer />
-      </Parallax>
+      </div>
     </div>
   );
 };

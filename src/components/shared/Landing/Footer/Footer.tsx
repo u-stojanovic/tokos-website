@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { HomeIcon, InboxIcon, SendHorizontal } from "lucide-react";
+import { InboxIcon, SendHorizontal } from "lucide-react";
 import { Logo } from "../../Navbar";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-muted-foreground py-8 sm:py-12 dark:bg-gray-900">
+    <footer className="bg-gray-100 text-muted-foreground py-8 sm:py-12 dark:bg-gray-900 h-fit">
       <div className="container mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="flex flex-col items-start gap-4">
           <Logo />
           <p className="text-sm leading-relaxed">
-            Dobrodošli u Slatku Kuću, vašu jedinu destinaciju za sve slatke i
-            ukusne proizvode. Otkrijte širok asortiman visokokvalitetnih
-            proizvoda koji će zadovoljiti vaše želje.
+            Dobrodošli u Slatku Kuću, vašu destinaciju za sve slatke i ukusne
+            proizvode. Otkrijte širok asortiman visokokvalitetnih proizvoda koji
+            će zadovoljiti vaše želje.
           </p>
         </div>
         <div className="grid gap-2">
@@ -82,7 +82,7 @@ export default function Footer() {
             <input
               type="email"
               className="px-10 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white dark:placeholder-white"
-              placeholder="Enter your email"
+              placeholder="Email"
               required
             />
             <SendHorizontal className="absolute right-3 top-5 transform -translate-y-1/2 w-5 h-5 text-pink-500 cursor-pointer" />
