@@ -70,7 +70,6 @@ function DesktopMenu() {
       <div className="flex flex-row gap-11 mr-12 items-center">
         <NavLinks />
       </div>
-      <ModeToggle />
       <CartIcon />
     </div>
   );
@@ -135,6 +134,7 @@ function NavListItem({ href, text, onClick }: NavListItemProps) {
 function CartIcon() {
   return (
     <div className="flex flex-row justify-center items-center content-center">
+      <ModeToggle />
       <Link href="/korpa">
         <div className="ml-6 mr-3 relative">
           <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center">
@@ -165,9 +165,9 @@ function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
     <div className="flex items-center gap-6 lg:hidden">
       <button className="ml-4 p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? (
-          <XIcon className="hover:text-pink-200" />
+          <XIcon className="hover:text-pink-200 text-gray-900 dark:text-white" />
         ) : (
-          <Menu className="hover:text-pink-200" />
+          <Menu className="hover:text-pink-200 text-gray-900 dark:text-white" />
         )}
       </button>
       <CartIcon />
