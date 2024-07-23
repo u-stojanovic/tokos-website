@@ -40,10 +40,10 @@ function SlideShow() {
   const [imagesToShow, setImagesToShow] = useState<string[]>([]);
 
   useEffect(() => {
-    if (theme === "dark") {
-      setImagesToShow(darkBackgroundImageLinks);
-    } else {
+    if (theme === "light") {
       setImagesToShow(whiteBackgroundImageLinks);
+    } else {
+      setImagesToShow(darkBackgroundImageLinks);
     }
   }, [theme]);
 
