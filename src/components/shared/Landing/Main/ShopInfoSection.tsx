@@ -3,7 +3,7 @@ import NumberTicker from "@/components/magicui/number-ticker";
 
 export default function ShopInfoSection() {
   return (
-    <section className="bg-white py-12 text-[#754437] dark:bg-gray-900 grid-cols-1 p-4 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-4 grid">
+    <section className="bg-white py-12 text-[#754437] dark:bg-gray-900 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-8 p-6">
       <TextCard />
       <PictureCard />
       <StatsCard />
@@ -13,10 +13,10 @@ export default function ShopInfoSection() {
 
 function TextCard() {
   return (
-    <div className="items-center justify-center text-center content-center font-raleway bg-[#FFD0CE] rounded-lg p-4 drop-shadow-xl min-h-[300px] h-full">
+    <div className="flex items-center justify-center text-center font-raleway bg-[#FFD0CE] rounded-lg p-6 shadow-lg min-h-[300px] h-full transform transition-transform duration-300 hover:scale-105">
       <div>
-        <h2 className="text-2xl">Tokos magija</h2>
-        <p>
+        <h2 className="text-3xl font-bold mb-4">Tokos magija</h2>
+        <p className="text-lg">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis,
           molestiae qui! Veniam iure harum rerum tenetur, dolorum, nulla
           praesentium id minus ea cupiditate unde similique commodi voluptatem
@@ -29,11 +29,13 @@ function TextCard() {
 
 function PictureCard() {
   return (
-    <div className="items-center justify-center rounded-lg drop-shadow-xl min-h-[300px] min-w[300px] h-full object-contain lg:w-full md:w-full">
+    <div className="flex items-center justify-center rounded-lg shadow-lg min-h-[300px] min-w-[300px] h-full object-contain lg:w-full md:w-full transform transition-transform duration-300 hover:scale-105">
       <Image
         src="https://images.unsplash.com/photo-1545396113-20ce94ab6433?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Muffin Image"
-        fill={true}
+        layout="fill"
+        objectFit="cover"
+        className="rounded-lg"
       />
     </div>
   );
@@ -49,7 +51,7 @@ function StatsCard() {
   }
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-4 text-center font-raleway text-2xl bg-[#FFD0CE] rounded-lg p-4 drop-shadow-xl min-h-[300px] h-full items-center justify-center">
+    <div className="grid grid-cols-2 grid-rows-2 gap-4 text-center font-raleway text-2xl bg-[#FFD0CE] rounded-lg p-6 shadow-lg min-h-[300px] h-full items-center justify-center transform transition-transform duration-300 hover:scale-105">
       <StatsCardInfo number={54} text="ukusa torti" />
       <StatsCardInfo number={workingYears} text="godina rada" />
       <StatsCardInfo number={23} text="ukusa kolača" />
@@ -65,13 +67,13 @@ interface StatsCardInfoProps {
 function StatsCardInfo({ number, text }: StatsCardInfoProps) {
   return (
     <div className="text-nowrap">
-      <h2>
+      <h2 className="text-4xl font-bold mb-2">
         <NumberTicker
           value={number}
           className="text-[#754437] dark:text-[#754437]"
         />
       </h2>
-      <p>{text}</p>
+      <p className="text-lg">{text}</p>
     </div>
   );
 }
