@@ -15,9 +15,9 @@ import { XIcon, Menu } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 const navLinkStyle =
-  "text-gray-800 dark:text-white font-raleway lg:hover:text-pink-200 transition duration-300 text-nowrap";
+  "text-lightMode-text dark:text-darkMode-text font-raleway lg:hover:text-pink-200 transition duration-300 text-nowrap";
 const navLiComponentStyle =
-  "text-gray-800 dark:text-white px-4 py-2 rounded-lg font-raleway transition duration-300 ease-in-out transform hover:bg-pink-200 hover:text-white hover:shadow-lg";
+  "text-lightMode-text dark:text-darkMode-text px-4 py-2 rounded-lg font-raleway transition duration-300 ease-in-out transform hover:bg-lightMode-surface dark:hover:bg-darkMode-surface dark:hover:text-white hover:shadow-lg";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -32,9 +32,9 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 w-full z-50 ${
           isMenuOpen
-            ? "bg-gray-100 dark:bg-gray-900 lg:bg-transparent"
-            : "bg-gradient-to-b from-zinc-500 to-transparent dark:from-gray-900"
-        } backdrop-filter backdrop-blur-sm text-white`}
+            ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent"
+            : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"
+        } backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
       >
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="w-full flex justify-between items-center p-4">
@@ -83,7 +83,7 @@ function NavLinks() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
-            <NavigationMenuContent>
+            <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem href="/svi-proizvodi" text="Svi Proizvodi" />
                 <NavListItem href="/torte" text="Torte" />
@@ -136,7 +136,7 @@ function CartIcon() {
       <ModeToggle />
       <Link href="/korpa">
         <div className="ml-6 mr-3 relative">
-          <span className="bg-pink-300 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center">
+          <span className="bg-red-600 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center p-[8px]">
             12
           </span>
           <svg
@@ -145,7 +145,7 @@ function CartIcon() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6 hover:text-pink-200 transition duration-300 text-gray-900 dark:text-white"
+            className="size-6 transition duration-300 text-lightMode-text dark:text-darkMode-text"
           >
             <path
               strokeLinecap="round"
@@ -164,9 +164,9 @@ function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
     <div className="flex items-center gap-6 lg:hidden">
       <button className="ml-4 p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? (
-          <XIcon className="hover:text-pink-200 text-gray-900 dark:text-white" />
+          <XIcon className="text-lightMode-text dark:text-darkMode-text" />
         ) : (
-          <Menu className="hover:text-pink-200 text-gray-900 dark:text-white" />
+          <Menu className="text-lightMode-text dark:text-darkMode-text" />
         )}
       </button>
       <CartIcon />
@@ -176,7 +176,7 @@ function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
 
 function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
   return (
-    <div className="fixed font-bold w-full h-fit bg-gray-100 dark:bg-gray-900 flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
+    <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
       <NavLink href="/" text="Naslovna" onClick={() => setIsMenuOpen(false)} />
       <NavigationMenu>
         <NavigationMenuList>

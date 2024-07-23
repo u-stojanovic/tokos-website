@@ -3,7 +3,7 @@ import NumberTicker from "@/components/magicui/number-ticker";
 
 export default function ShopInfoSection() {
   return (
-    <section className="bg-white py-12 text-[#754437] dark:bg-gray-900 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-8 p-6">
+    <section className="bg-lightMode-background py-12 text-lightMode-text dark:text-darkMode-text dark:bg-darkMode-background grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-8 p-6">
       <TextCard />
       <PictureCard />
       <StatsCard />
@@ -13,7 +13,7 @@ export default function ShopInfoSection() {
 
 function TextCard() {
   return (
-    <div className="flex items-center justify-center text-center font-raleway bg-[#FFD0CE] rounded-lg p-6 shadow-lg min-h-[300px] h-full transform transition-transform duration-300 hover:scale-105">
+    <div className="flex items-center justify-center text-center font-raleway rounded-lg p-6 min-h-[300px] h-full transform transition-transform duration-300 hover:scale-105">
       <div>
         <h2 className="text-3xl font-bold mb-4">Tokos magija</h2>
         <p className="text-lg">
@@ -42,7 +42,7 @@ function PictureCard() {
 }
 
 function StatsCard() {
-  const startDate = new Date("2004-09-15");
+  const startDate = new Date("2004-09-05");
   const currentDate = new Date();
   let workingYears = currentDate.getFullYear() - startDate.getFullYear();
   const m = currentDate.getMonth() - startDate.getMonth();
@@ -51,7 +51,7 @@ function StatsCard() {
   }
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-4 text-center font-raleway text-2xl bg-[#FFD0CE] rounded-lg p-6 shadow-lg min-h-[300px] h-full items-center justify-center transform transition-transform duration-300 hover:scale-105">
+    <div className="grid grid-cols-2 grid-rows-2 gap-4 text-center font-raleway text-2xl rounded-lg p-6 bg-lightMode-surface dark:bg-darkMode-surface min-h-[300px] h-full items-center justify-center transform transition-transform duration-300 hover:scale-105">
       <StatsCardInfo number={54} text="ukusa torti" />
       <StatsCardInfo number={workingYears} text="godina rada" />
       <StatsCardInfo number={23} text="ukusa kolača" />
@@ -70,7 +70,7 @@ function StatsCardInfo({ number, text }: StatsCardInfoProps) {
       <h2 className="text-4xl font-bold mb-2">
         <NumberTicker
           value={number}
-          className="text-[#754437] dark:text-[#754437]"
+          className="text-lightMode-text dark:text-darkMode-text"
         />
       </h2>
       <p className="text-lg">{text}</p>

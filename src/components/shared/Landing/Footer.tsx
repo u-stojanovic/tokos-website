@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { InboxIcon, SendHorizontal } from "lucide-react";
-import { Logo } from "../Navbar";
+import { Logo } from "../../Navbar";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-muted-foreground py-8 sm:py-12 dark:bg-gray-900 h-fit">
+    <footer className="bg-lightMode-background text-lightMode-text dark:text-darkMode-text py-8 sm:py-12 dark:bg-darkMode-background h-fit">
       <div className="container mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="flex flex-col items-start gap-4">
           <Logo />
