@@ -1,10 +1,10 @@
 "use client";
-import Hero from "@/components/shared/Landing/Hero/Hero";
 import { Parallax } from "react-scroll-parallax";
-import ShopInfoSection from "@/components/shared/Landing/Main/ShopInfoSection";
-import CategoriesInfoSection from "@/components/shared/Landing/Main/CategoriesSection";
-import Footer from "@/components/shared/Landing/Footer/Footer";
+import ShopInfoSection from "@/components/shared/Landing/Sections/ShopInfoSection";
+import CategoriesInfoSection from "@/components/shared/Landing/Sections/CategoriesSection";
+import Footer from "@/components/shared/Landing/Footer";
 import Navbar from "@/components/shared/Navbar";
+import Carousel from "@/components/shared/Landing/Carousel/Carousel";
 
 const Home: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       <Navbar />
       <div className="flex-grow">
         <Parallax speed={-20} className="relative">
-          <Hero />
+          <Carousel />
         </Parallax>
         <div className="relative z-20">
           <ShopInfoSection />

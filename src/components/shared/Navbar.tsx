@@ -85,7 +85,7 @@ function NavLinks() {
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
-                <NavListItem href="/all-products" text="Svi Proizvodi" />
+                <NavListItem href="/svi-proizvodi" text="Svi Proizvodi" />
                 <NavListItem href="/torte" text="Torte" />
                 <NavListItem href="/kolaci" text="Kolači" />
                 <NavListItem href="/poslastice" text="Poslastice" />
@@ -95,9 +95,9 @@ function NavLinks() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <NavLink href="/about" text="O Nama" />
+      <NavLink href="/o-nama" text="O Nama" />
       <NavLink href="/faq" text="FAQ" />
-      <NavLink href="/contact" text="Kontakt" />
+      <NavLink href="/kontakt" text="Kontakt" />
     </>
   );
 }
@@ -185,22 +185,22 @@ function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/cakes"
+                  href="/torte"
                   text="Torte"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/cookies"
+                  href="/kolaci"
                   text="Kolači"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/treats"
+                  href="/poslastice"
                   text="Poslastice"
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/salty-catering"
+                  href="/slani-ketering"
                   text="Slani Ketering"
                   onClick={() => setIsMenuOpen(false)}
                 />
@@ -210,13 +210,13 @@ function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
         </NavigationMenuList>
       </NavigationMenu>
       <NavLink
-        href="/about"
+        href="/o-nama"
         text="O Nama"
         onClick={() => setIsMenuOpen(false)}
       />
       <NavLink href="/faq" text="FAQ" onClick={() => setIsMenuOpen(false)} />
       <NavLink
-        href="/contact"
+        href="/kontakt"
         text="Kontakt"
         onClick={() => setIsMenuOpen(false)}
       />
