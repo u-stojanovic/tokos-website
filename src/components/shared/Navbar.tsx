@@ -85,6 +85,7 @@ function NavLinks() {
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
+                <NavListItem href="/all-products" text="Svi Proizvodi" />
                 <NavListItem href="/torte" text="Torte" />
                 <NavListItem href="/kolaci" text="Kolači" />
                 <NavListItem href="/poslastice" text="Poslastice" />
@@ -123,11 +124,9 @@ interface NavListItemProps {
 
 function NavListItem({ href, text, onClick }: NavListItemProps) {
   return (
-    <li className={navLiComponentStyle}>
-      <Link href={href} onClick={onClick}>
-        {text}
-      </Link>
-    </li>
+    <Link href={href} onClick={onClick}>
+      <li className={navLiComponentStyle}>{text}</li>
+    </Link>
   );
 }
 
