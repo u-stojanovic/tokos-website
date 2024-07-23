@@ -28,7 +28,7 @@ const BLUR_FADE_DELAY_TEXT = 0.25;
 export default function Carousel() {
   return (
     <BlurFade delay={BLUR_FADE_DELAY}>
-      <div className="flex items-center justify-center h-screen bg-white">
+      <div className="flex items-center justify-center h-screen bg-white dark:bg-gray-800">
         <SlideShow />
       </div>
     </BlurFade>
@@ -36,16 +36,17 @@ export default function Carousel() {
 }
 
 function SlideShow() {
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
   const [imagesToShow, setImagesToShow] = useState<string[]>([]);
 
   useEffect(() => {
-    if (theme === "light") {
-      setImagesToShow(whiteBackgroundImageLinks);
-    } else {
+    const currentTheme = theme === "system" ? resolvedTheme : theme;
+    if (currentTheme === "dark") {
       setImagesToShow(darkBackgroundImageLinks);
+    } else {
+      setImagesToShow(whiteBackgroundImageLinks);
     }
-  }, [theme]);
+  }, [theme, resolvedTheme]);
 
   return (
     <Swiper
