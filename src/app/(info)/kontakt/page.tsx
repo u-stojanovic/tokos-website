@@ -8,7 +8,7 @@ export default function Contact() {
         <div className="inline-block rounded-lg bg-lightMode-primary px-3 py-1 text-sm dark:bg-darkMode-primary text-lightMode-text">
           Kontakt
         </div>
-        <h1 className="text-3xl font-bold mb-6 text-lightMode-text dark:text-darkMode-text">
+        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
           Kontaktirajte nas
         </h1>
         <div className="flex flex-col lg:flex-row items-center lg:items-start bg-lightMode-background dark:bg-darkMode-background shadow-lg rounded-lg overflow-hidden w-full max-w-screen-lg">
