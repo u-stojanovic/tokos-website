@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = React.useState(null);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
   const faqItems = [
     {
@@ -59,7 +59,7 @@ export default function FAQ() {
     },
   ];
 
-  const toggleFAQ = (index: any) => {
+  const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -98,18 +98,24 @@ export default function FAQ() {
                 className="w-full flex justify-between items-center text-left focus:outline-none focus:bg-none dark:hover:bg-none"
                 onClick={() => toggleFAQ(index)}
               >
-                <span className="flex items-center text-lg font-medium text-lightMode-text dark:text-gray-50 break-words">
-                  <FaQuestionCircle className="mr-2 text-lightMode-primary dark:text-darkMode-primary" />
-                  {item.question}
+                <span className="flex items-center text-lg font-medium text-lightMode-text dark:text-gray-50">
+                  <FaQuestionCircle
+                    className="mr-2 text-lightMode-primary dark:text-darkMode-primary"
+                    size={20}
+                  />
+                  <span className="flex-1 text-wrap">{item.question}</span>
                 </span>
                 <span className="text-gray-500 dark:text-gray-400">
                   {activeIndex === index ? <FaChevronUp /> : <FaChevronDown />}
                 </span>
               </Button>
               {activeIndex === index && (
-                <div className="mt-4 text-lightMode-text dark:text-darkMode-text break-words">
-                  {item.answer}
-                </div>
+                <>
+                  <div className="py-4 border-b border-gray-300 dark:border-gray-600" />
+                  <div className="mt-4 font-semibold text-lightMode-text dark:text-darkMode-text">
+                    {item.answer}
+                  </div>
+                </>
               )}
             </div>
           ))}
