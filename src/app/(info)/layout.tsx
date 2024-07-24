@@ -7,7 +7,7 @@ export default function InfoLayout({
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 mt-16">{children}</div>
       <Footer />
     </div>
   );
