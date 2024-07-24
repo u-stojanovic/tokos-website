@@ -3,15 +3,22 @@ import Link from "next/link";
 
 export default function Contact() {
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
-      <div className="space-y-2 flex flex-col p-6 items-center justify-center">
-        <div className="inline-block rounded-lg bg-lightMode-primary px-3 py-1 text-sm dark:bg-darkMode-primary text-lightMode-text">
-          Kontakt
+    <section
+      id="contact"
+      className="w-full py-12 md:py-24 lg:py-32 bg-lightMode-surface dark:bg-darkMode-surface"
+    >
+      <div className="container px-4 md:px-6">
+        <div className="flex flex-col p-6 items-center justify-center space-y-4 text-center">
+          <div className="space-y-2">
+            <div className="inline-block rounded-lg bg-lightMode-primary px-3 py-1 text-sm dark:bg-darkMode-primary text-lightMode-text">
+              Kontakt
+            </div>
+            <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+              Kontaktirajte nas
+            </h1>
+          </div>
         </div>
-        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
-          Kontaktirajte nas
-        </h1>
-        <div className="flex flex-col lg:flex-row items-center lg:items-start bg-lightMode-background dark:bg-darkMode-background shadow-lg rounded-lg overflow-hidden w-full max-w-screen-lg">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center lg:items-start bg-lightMode-background dark:bg-darkMode-background shadow-lg rounded-lg overflow-hidden">
           <div className="w-full lg:w-1/2 p-4">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2874.798693671049!2d22.2780373764668!3d43.90143587109143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475473cae0a09be9%3A0x2d9b17154e662e37!2sSlatka%20kuca%20To-Ko%20S!5e0!3m2!1sen!2srs!4v1721832064093!5m2!1sen!2srs"
@@ -25,7 +32,7 @@ export default function Contact() {
               aria-label="Google Maps showing the location of Slatka kuca To-Ko S"
             ></iframe>
           </div>
-          <div className="w-full lg:w-1/2 p-6 bg-lightMode-background dark:bg-darkMode-background">
+          <div className="w-full lg:w-1/2 p-6">
             <h2 className="text-2xl font-semibold mb-4 text-lightMode-text dark:text-darkMode-text">
               Poručivanje
             </h2>
@@ -73,6 +80,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
