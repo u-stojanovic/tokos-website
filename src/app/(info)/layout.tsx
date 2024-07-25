@@ -5,9 +5,9 @@ export default function InfoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="flex flex-col flex-1 bg-lightMode-surface dark:bg-darkMode-surface">
+    <div className="flex flex-col bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
       <Navbar />
-      <div className="flex-1 mt-16">{children}</div>
+      <main className="flex-grow">{children}</main>
       <Footer />
     </div>
   );

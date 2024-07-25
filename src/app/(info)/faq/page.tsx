@@ -57,6 +57,19 @@ export default function FAQ() {
       question: "Koji su načini plaćanja?",
       answer: "keš keš keš",
     },
+    {
+      question: "Koje je vaše radno vreme i kada mogu poručiti proizvode?",
+      answer: (
+        <div>
+          Naše radno vreme je:
+          <ul className="list-disc ml-5">
+            <li>Radnim danima: od 09h do 21h</li>
+            <li>Subotom: od 09h do 15h</li>
+          </ul>
+          Proizvode možete naručiti u bilo koje vreme tokom radnog vremena.
+        </div>
+      ),
+    },
   ];
 
   const toggleFAQ = (index: number) => {
