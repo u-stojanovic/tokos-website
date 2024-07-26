@@ -4,7 +4,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full py-12 bg-lightMode-surface dark:bg-darkMode-surface flex flex-col gap-6"
+      className="w-full py-32 bg-lightMode-surface dark:bg-darkMode-surface flex flex-col gap-6"
     >
       <TextRightImageLeft
         text="Slatka Kuća Tokos je porodična poslastičarnica
