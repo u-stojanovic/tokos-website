@@ -4,8 +4,8 @@ import Banner from "@/components/shared/Banner";
 import React from "react";
 import { Parallax } from "react-scroll-parallax";
 import AboutSection from "./AboutSection";
-import Footer from "@/components/shared/Landing/Footer";
 import BlurFade from "@/components/magicui/blur-fade";
+import Footer from "@/components/shared/Landing/Footer";
 
 const BLUR_FADE_DELAY = 0.02;
 
@@ -13,8 +13,8 @@ export default function About() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
-        <Parallax speed={-55}>
-          <div className="flex h-screen flex-col">
+        <Parallax speed={-60}>
+          <div className="flex min-h-screen flex-col">
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Banner
                 imageSrc="/enterior.jpg"
@@ -32,10 +32,8 @@ export default function About() {
           </div>
         </Parallax>
       </div>
-      <div className="flex flex-1 mt-auto">
-        <Parallax speed={20}>
-          <Footer />
-        </Parallax>
+      <div className="relative z-20">
+        <Footer />
       </div>
     </div>
   );
