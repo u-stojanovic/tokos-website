@@ -4,7 +4,9 @@ import { FaChevronDown, FaChevronUp, FaQuestionCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Footer from "@/components/shared/Landing/Footer";
+import BlurFade from "@/components/magicui/blur-fade";
 
+const BLUR_FADE_DELAY = 0.02;
 export default function FAQ() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
@@ -78,7 +80,7 @@ export default function FAQ() {
   };
 
   return (
-    <>
+    <BlurFade delay={BLUR_FADE_DELAY}>
       <section
         id="faq"
         className="w-full py-12 md:py-24 lg:py-32 bg-lightMode-surface dark:bg-darkMode-surface mt-12 sm:mt-0"
@@ -142,6 +144,6 @@ export default function FAQ() {
         </div>
       </section>
       <Footer />
-    </>
+    </BlurFade>
   );
 }
