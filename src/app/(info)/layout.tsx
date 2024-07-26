@@ -7,8 +7,7 @@ export default function InfoLayout({
   return (
     <div className="flex flex-col bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
       <Navbar />
-      <main className="flex-grow">{children}</main>
-      <Footer />
+      <main>{children}</main>
     </div>
   );
 }
