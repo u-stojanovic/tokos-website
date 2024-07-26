@@ -6,7 +6,7 @@ import Footer from "@/components/shared/Landing/Footer";
 import Navbar from "@/components/shared/Navbar";
 import Carousel from "@/components/shared/Landing/Carousel/Carousel";
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
     <div className="flex flex-col">
       <Navbar />
@@ -28,6 +28,4 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}
