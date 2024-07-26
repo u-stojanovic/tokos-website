@@ -22,15 +22,17 @@ export default function About() {
           </BlurFade>
         </div>
       </Parallax>
-      <Parallax speed={-40}>
+      <Parallax speed={-45}>
         <div className="relative z-20">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <AboutSection />
           </BlurFade>
         </div>
       </Parallax>
-      <Parallax speed={40}>
-        <Footer />
+      <Parallax speed={25}>
+        <div className="relative z-20">
+          <Footer />
+        </div>
       </Parallax>
     </div>
   );
