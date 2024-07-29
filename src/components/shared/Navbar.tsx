@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState, Dispatch, SetStateAction } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,32 +16,16 @@ import { XIcon, Menu } from "lucide-react";
 const BLUR_FADE_DELAY = 0.04;
 const navLinkStyle =
   "text-lightMode-text dark:text-darkMode-text font-raleway lg:hover:text-pink-200 transition duration-300 text-nowrap";
-const activeNavLinkStyle = `${navLinkStyle} font-bold underline`;
 const navLiComponentStyle =
   "text-lightMode-text dark:text-darkMode-text px-4 py-2 rounded-lg font-raleway transition duration-300 ease-in-out transform hover:bg-lightMode-surface dark:hover:bg-darkMode-surface dark:hover:text-white hover:shadow-lg";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
-  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface NavLinkProps {
-  href: string;
-  text: string;
-  pathname: string;
-  onClick?: () => void;
-}
-
-interface NavListItemProps {
-  href: string;
-  text: string;
-  pathname: string;
-  onClick?: () => void;
+  setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname(); // Get current pathname
 
   return (
     <header>
@@ -56,7 +39,7 @@ export default function Navbar() {
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="w-full flex justify-between items-center p-4">
             <Logo />
-            <DesktopMenu pathname={pathname} />
+            <DesktopMenu />
             <MobileMenuToggle
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
@@ -65,7 +48,7 @@ export default function Navbar() {
         </BlurFade>
         {isMenuOpen && (
           <BlurFade delay={BLUR_FADE_DELAY}>
-            <MobileMenu pathname={pathname} setIsMenuOpen={setIsMenuOpen} />
+            <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </BlurFade>
         )}
       </nav>
@@ -81,80 +64,68 @@ export function Logo() {
   );
 }
 
-function DesktopMenu({ pathname }: { pathname: string }) {
+function DesktopMenu() {
   return (
     <div className="hidden lg:flex justify-between gap-4 items-center">
       <div className="flex flex-row gap-11 mr-12 items-center">
-        <NavLinks pathname={pathname} />
+        <NavLinks />
       </div>
       <CartIcon />
     </div>
   );
 }
 
-function NavLinks({ pathname }: { pathname: string }) {
+function NavLinks() {
   return (
     <>
-      <NavLink href="/" text="Naslovna" pathname={pathname} />
+      <NavLink href="/" text="Naslovna" />
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
               <ul className="grid gap-3 p-4 text-nowrap">
-                <NavListItem
-                  href="/svi-proizvodi"
-                  text="Svi Proizvodi"
-                  pathname={pathname}
-                />
-                <NavListItem href="/torte" text="Torte" pathname={pathname} />
-                <NavListItem href="/kolaci" text="Kolači" pathname={pathname} />
-                <NavListItem
-                  href="/poslastice"
-                  text="Poslastice"
-                  pathname={pathname}
-                />
-                <NavListItem
-                  href="/slani-ketering"
-                  text="Slani Ketering"
-                  pathname={pathname}
-                />
+                <NavListItem href="/svi-proizvodi" text="Svi Proizvodi" />
+                <NavListItem href="/torte" text="Torte" />
+                <NavListItem href="/kolaci" text="Kolači" />
+                <NavListItem href="/poslastice" text="Poslastice" />
+                <NavListItem href="/slani-ketering" text="Slani Ketering" />
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <NavLink href="/o-nama" text="O Nama" pathname={pathname} />
-      <NavLink href="/faq" text="FAQ" pathname={pathname} />
-      <NavLink href="/kontakt" text="Kontakt" pathname={pathname} />
+      <NavLink href="/o-nama" text="O Nama" />
+      <NavLink href="/faq" text="FAQ" />
+      <NavLink href="/kontakt" text="Kontakt" />
     </>
   );
 }
 
-function NavLink({ href, text, pathname, onClick }: NavLinkProps) {
-  const isActive = pathname === href;
+interface NavLinkProps {
+  href: string;
+  text: string;
+  onClick?: () => void;
+}
+
+function NavLink({ href, text, onClick }: NavLinkProps) {
   return (
-    <Link
-      href={href}
-      className={isActive ? activeNavLinkStyle : navLinkStyle}
-      onClick={onClick}
-    >
+    <Link href={href} className={navLinkStyle} onClick={onClick}>
       {text}
     </Link>
   );
 }
 
-function NavListItem({ href, text, pathname, onClick }: NavListItemProps) {
-  const isActive = pathname === href;
+interface NavListItemProps {
+  href: string;
+  text: string;
+  onClick?: () => void;
+}
+
+function NavListItem({ href, text, onClick }: NavListItemProps) {
   return (
     <Link href={href} onClick={onClick}>
-      <li
-        className={
-          isActive ? `${navLiComponentStyle} bg-pink-200` : navLiComponentStyle
-        }
-      >
-        {text}
-      </li>
+      <li className={navLiComponentStyle}>{text}</li>
     </Link>
   );
 }
@@ -203,21 +174,10 @@ function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
   );
 }
 
-function MobileMenu({
-  pathname,
-  setIsMenuOpen,
-}: {
-  pathname: string;
-  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function MobileMenu({ setIsMenuOpen }: MobileMenuProps) {
   return (
     <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
-      <NavLink
-        href="/"
-        text="Naslovna"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
+      <NavLink href="/" text="Naslovna" onClick={() => setIsMenuOpen(false)} />
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -225,27 +185,28 @@ function MobileMenu({
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
+                  href="/svi-proizvodi"
+                  text="Svi Proizvodi"
+                  onClick={() => setIsMenuOpen(false)}
+                />
+                <NavListItem
                   href="/torte"
                   text="Torte"
-                  pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
                   href="/kolaci"
                   text="Kolači"
-                  pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
                   href="/poslastice"
                   text="Poslastice"
-                  pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
                   href="/slani-ketering"
                   text="Slani Ketering"
-                  pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
               </ul>
@@ -256,19 +217,12 @@ function MobileMenu({
       <NavLink
         href="/o-nama"
         text="O Nama"
-        pathname={pathname}
         onClick={() => setIsMenuOpen(false)}
       />
-      <NavLink
-        href="/faq"
-        text="FAQ"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
+      <NavLink href="/faq" text="FAQ" onClick={() => setIsMenuOpen(false)} />
       <NavLink
         href="/kontakt"
         text="Kontakt"
-        pathname={pathname}
         onClick={() => setIsMenuOpen(false)}
       />
     </div>
