@@ -8,6 +8,7 @@ export default function InfoLayout({
     <div className="flex flex-col bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
       <Navbar />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }
