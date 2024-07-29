@@ -32,9 +32,11 @@ export default function About() {
           </div>
         </Parallax>
       </div>
-      <div className="relative z-20">
-        <Footer />
-      </div>
+      <Parallax speed={45}>
+        <div className="relative z-20">
+          <Footer />
+        </div>
+      </Parallax>
     </div>
   );
 }
