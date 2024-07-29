@@ -1,4 +1,3 @@
-import { Product } from "@prisma/client";
 import {
   Card,
   CardBody,
@@ -12,6 +11,21 @@ import {
   Button,
   SimpleGrid,
 } from "@chakra-ui/react";
+
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number | null;
+  categoryId: number;
+  images: Image[];
+};
+
+type Image = {
+  id: number;
+  imageUrl: string;
+  productId: number;
+};
 
 type ListAllProductsProps = {
   products: Product[];
