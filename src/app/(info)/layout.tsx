@@ -1,4 +1,3 @@
-import Footer from "@/components/shared/Landing/Footer";
 import Navbar from "@/components/shared/Navbar";
 
 export default function InfoLayout({
