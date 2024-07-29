@@ -1,4 +1,17 @@
 import { Product } from "@prisma/client";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Stack,
+  Heading,
+  Image,
+  Text,
+  Divider,
+  ButtonGroup,
+  Button,
+  SimpleGrid,
+} from "@chakra-ui/react";
 
 type ListAllProductsProps = {
   products: Product[];
@@ -6,13 +19,40 @@ type ListAllProductsProps = {
 
 export default function ListAllProducts({ products }: ListAllProductsProps) {
   return (
-    <ul>
+    <SimpleGrid columns={[1, 2, 3]} spacing="10">
       {products.map((product) => (
-        <li key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-        </li>
+        <Card key={product.id} maxW="sm">
+          <CardBody>
+            <Image
+              src={
+                product.images.length > 0
+                  ? product.images[0].imageUrl
+                  : "placeholder-image-url"
+              }
+              alt={product.name}
+              borderRadius="lg"
+            />
+            <Stack mt="6" spacing="3">
+              <Heading size="md">{product.name}</Heading>
+              <Text>{product.description}</Text>
+              <Text color="blue.600" fontSize="2xl">
+                $450{/* ${product.price} */}
+              </Text>
+            </Stack>
+          </CardBody>
+          <Divider />
+          <CardFooter>
+            <ButtonGroup spacing="2">
+              <Button variant="solid" colorScheme="blue">
+                Buy now
+              </Button>
+              <Button variant="ghost" colorScheme="blue">
+                Add to cart
+              </Button>
+            </ButtonGroup>
+          </CardFooter>
+        </Card>
       ))}
-    </ul>
+    </SimpleGrid>
   );
 }
