@@ -9,15 +9,16 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "../ui/navigation-menu";
-import { ModeToggle } from "./ThemeModeToggle";
-import BlurFade from "../magicui/blur-fade";
+} from "@/components/ui/navigation-menu";
+import { ModeToggle } from "../../ThemeModeToggle";
 import { XIcon, Menu } from "lucide-react";
 
-const BLUR_FADE_DELAY = 0.04;
 const navLinkStyle =
-  "text-lightMode-text dark:text-darkMode-text font-raleway lg:hover:text-pink-200 transition duration-300 text-nowrap";
-const activeNavLinkStyle = `${navLinkStyle} font-bold underline`;
+  "relative text-lightMode-text dark:text-darkMode-text font-raleway transition duration-300 text-nowrap after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full";
+
+const activeNavLinkStyle =
+  "relative text-lightMode-text dark:text-darkMode-text font-raleway transition duration-300 text-nowrap font-bold after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-current after:transition-all after:duration-300";
+
 const navLiComponentStyle =
   "text-lightMode-text dark:text-darkMode-text px-4 py-2 rounded-lg font-raleway transition duration-300 ease-in-out transform hover:bg-lightMode-surface dark:hover:bg-darkMode-surface dark:hover:text-white hover:shadow-lg";
 
@@ -40,33 +41,25 @@ interface NavListItemProps {
   onClick?: () => void;
 }
 
-export default function Navbar() {
+export default function ProductNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname(); // Get current pathname
 
   return (
     <header>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 ${
-          isMenuOpen
-            ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent"
-            : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"
-        } backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
+        className={`w-full bg-lightMode-background dark:bg-darkMode-background text-lightMode-text dark:text-darkMode-text`}
       >
-        <BlurFade delay={BLUR_FADE_DELAY}>
-          <div className="w-full flex justify-between items-center p-4">
-            <Logo />
-            <DesktopMenu pathname={pathname} />
-            <MobileMenuToggle
-              isMenuOpen={isMenuOpen}
-              setIsMenuOpen={setIsMenuOpen}
-            />
-          </div>
-        </BlurFade>
+        <div className="w-full flex justify-between items-center p-4">
+          <Logo />
+          <DesktopMenu pathname={pathname} />
+          <MobileMenuToggle
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+          />
+        </div>
         {isMenuOpen && (
-          <BlurFade delay={BLUR_FADE_DELAY}>
-            <MobileMenu pathname={pathname} setIsMenuOpen={setIsMenuOpen} />
-          </BlurFade>
+          <MobileMenu pathname={pathname} setIsMenuOpen={setIsMenuOpen} />
         )}
       </nav>
     </header>
@@ -150,7 +143,9 @@ function NavListItem({ href, text, pathname, onClick }: NavListItemProps) {
     <Link href={href} onClick={onClick}>
       <li
         className={
-          isActive ? `${navLiComponentStyle} bg-pink-200` : navLiComponentStyle
+          isActive
+            ? `${navLiComponentStyle} bg-lightMode-surface dark:bg-darkMode-surface`
+            : navLiComponentStyle
         }
       >
         {text}
@@ -161,11 +156,11 @@ function NavListItem({ href, text, pathname, onClick }: NavListItemProps) {
 
 function CartIcon() {
   return (
-    <div className="flex flex-row justify-center items-center content-center">
+    <div className="flex flex-row justify-center items-center">
       <ModeToggle />
       <Link href="/korpa">
-        <div className="ml-6 mr-3 relative">
-          <span className="bg-red-600 text-white rounded-full absolute w-4 h-4 -top-1 -right-1 flex justify-center items-center text-sm text-center p-[8px]">
+        <div className="ml-6 mr-3">
+          <span className="absolute translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
             12
           </span>
           <svg
@@ -174,7 +169,7 @@ function CartIcon() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6 transition duration-300 text-lightMode-text dark:text-darkMode-text"
+            className="w-6 h-6 text-lightMode-text dark:text-darkMode-text"
           >
             <path
               strokeLinecap="round"
@@ -211,7 +206,7 @@ function MobileMenu({
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
+    <div className="font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 lg:hidden">
       <NavLink
         href="/"
         text="Naslovna"
@@ -224,6 +219,12 @@ function MobileMenu({
             <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
+                <NavListItem
+                  href="/svi-proizvodi"
+                  text="Svi Proizvodi"
+                  pathname={pathname}
+                  onClick={() => setIsMenuOpen(false)}
+                />
                 <NavListItem
                   href="/torte"
                   text="Torte"
