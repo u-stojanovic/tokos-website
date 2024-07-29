@@ -1,4 +1,3 @@
-import Footer from "@/components/shared/Landing/Footer";
 import Navbar from "@/components/shared/Navbar";
 
 export default function InfoLayout({
@@ -8,7 +7,6 @@ export default function InfoLayout({
     <div className="flex flex-col bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
       <Navbar />
       <main>{children}</main>
-      <Footer />
     </div>
   );
 }
