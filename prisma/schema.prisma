@@ -7,3 +7,42 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_DATABASE_URL")
 }
+
+model Product {
+  id          Int                 @id @default(autoincrement())
+  name        String
+  description String
+  categoryId  Int
+  category    Category            @relation(fields: [categoryId], references: [id])
+  ingredients ProductIngredient[]
+  images      Image[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model Ingredient {
+  id        Int                 @id @default(autoincrement())
+  name      String
+  isAlergen Boolean
+  products  ProductIngredient[]
+}
+
+model ProductIngredient {
+  productId    Int
+  ingredientId Int
+  product      Product    @relation(fields: [productId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@id([productId, ingredientId])
+}
+
+model Image {
+  id        Int     @id @default(autoincrement())
+  imageUrl  String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
