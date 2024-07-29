@@ -1,4 +1,4 @@
-import getAllProducts from "@/lib/actions/getProducts";
+import { getAllProducts } from "@/lib/actions/getProducts";
 import ListAllProducts from "@/components/shared/Products/AllProducts";
 
 export default async function AllProducts() {
@@ -11,8 +11,8 @@ export default async function AllProducts() {
   }
 
   return (
-    <div>
-      <h1>All Products</h1>
+    <div className="flex flex-col items-center justify-center m-4">
+      <h1 className="text-2xl font-raleway p-6">All Products</h1>
       <ListAllProducts products={products} />
     </div>
   );

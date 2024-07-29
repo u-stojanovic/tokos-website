@@ -1,5 +1,6 @@
 import ProductFooter from "@/components/shared/Products/ui/footer";
 import ProductsNavbar from "@/components/shared/Products/ui/navbar";
+
 export default function ProductsLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
