@@ -87,7 +87,9 @@ function SlideShow() {
 function HeadingText() {
   return (
     <div className="absolute top-1/2 md:top-2/3 space-y-6 left-1/2 md:left-2/3 transform -translate-x-1/2 -translate-y-1/2 p-4 md:p-8 rounded-xl z-10 max-w-xs md:max-w-lg text-center">
-      <BlurFade delay={BLUR_FADE_DELAY_TEXT} inView>
+      <BlurFade delay={BLUR_FADE_DELAY_TEXT}>
+        {" "}
+        {/*inView*/}
         <h2 className="text-4xl md:text-6xl mb-4 font-bold [text-shadow:_-1px_3px_7px_rgb(0_0_0_/_50%)]">
           <div className="relative text-lightMode-primary dark:text-darkMode-primary font-raleway text-shadow-md">
             <div className="flex flex-col md:flex-row items-center text-nowrap">
@@ -96,7 +98,9 @@ function HeadingText() {
           </div>
         </h2>
       </BlurFade>
-      <BlurFade delay={BLUR_FADE_DELAY_TEXT * 2} inView>
+      <BlurFade delay={BLUR_FADE_DELAY_TEXT * 2}>
+        {" "}
+        {/*inView*/}
         <span className="mb-6 text-2xl md:text-2xl leading-relaxed font-poppins text-white [text-shadow:_-1px_3px_7px_rgb(0_0_0_/_50%)]">
           &quot;S&apos; ljubavlju i iskrenom željom za pravi užitak&quot;
         </span>
