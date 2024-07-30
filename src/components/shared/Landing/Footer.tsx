@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { InboxIcon, SendHorizontal } from "lucide-react";
-import { Logo } from "../Navbar";
+import { Logo } from "../Products/ui/navbar";
 
 export default function Footer() {
   return (

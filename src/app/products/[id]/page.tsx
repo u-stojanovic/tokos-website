@@ -1,8 +1,8 @@
 import { getProductById } from "@/lib/actions/getProducts";
 import ProductPage from "@/components/shared/Products/IndividualProduct";
 
-export default async function Slug({ params }: { params: { slug: string } }) {
-  const product = await getProductById(Number(params.slug));
+export default async function Slug({ params }: { params: { id: number } }) {
+  const product = await getProductById(params.id);
 
   if (!product) {
     return (

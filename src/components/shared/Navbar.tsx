@@ -13,6 +13,7 @@ import {
 import { ModeToggle } from "./ThemeModeToggle";
 import BlurFade from "../magicui/blur-fade";
 import { XIcon, Menu } from "lucide-react";
+import { navigationLinks } from "@/data/navigationLinks";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -46,16 +47,12 @@ interface NavListItemProps {
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
 
   return (
     <header>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 ${
-          isMenuOpen
-            ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent"
-            : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"
-        } backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
+        className={`fixed top-0 left-0 w-full z-50 ${isMenuOpen ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent" : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"} backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
       >
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="w-full flex justify-between items-center p-4">
@@ -77,7 +74,7 @@ export default function Navbar() {
   );
 }
 
-export function Logo() {
+function Logo() {
   return (
     <Link href="/">
       <Image src="/logo.png" width={100} height={100} alt="Logo" />
@@ -99,46 +96,36 @@ function DesktopMenu({ pathname }: { pathname: string }) {
 function NavLinks({ pathname }: { pathname: string }) {
   return (
     <>
-      <NavLink href="/" text="Naslovna" pathname={pathname} />
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
-            <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
-              <ul className="grid gap-3 p-4 text-nowrap">
-                <NavListItem
-                  href="/products/svi-proizvodi"
-                  text="Svi Proizvodi"
-                  pathname={pathname}
-                />
-                <NavListItem
-                  href="/products/torte"
-                  text="Torte"
-                  pathname={pathname}
-                />
-                <NavListItem
-                  href="/products/kolaci"
-                  text="Kolači"
-                  pathname={pathname}
-                />
-                <NavListItem
-                  href="/products/poslastice"
-                  text="Poslastice"
-                  pathname={pathname}
-                />
-                <NavListItem
-                  href="/products/slani-ketering"
-                  text="Slani Ketering"
-                  pathname={pathname}
-                />
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <NavLink href="/o-nama" text="O Nama" pathname={pathname} />
-      <NavLink href="/faq" text="FAQ" pathname={pathname} />
-      <NavLink href="/kontakt" text="Kontakt" pathname={pathname} />
+      {navigationLinks.map((link, index) =>
+        link.subLinks ? (
+          <NavigationMenu key={index}>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>{link.text}</NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
+                  <ul className="grid gap-3 p-4 text-nowrap">
+                    {link.subLinks.map((subLink, subIndex) => (
+                      <NavListItem
+                        key={subIndex}
+                        href={subLink.href}
+                        text={subLink.text}
+                        pathname={pathname}
+                      />
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        ) : (
+          <NavLink
+            key={index}
+            href={link.href}
+            text={link.text}
+            pathname={pathname}
+          />
+        ),
+      )}
     </>
   );
 }
@@ -224,71 +211,34 @@ function MobileMenu({
 }) {
   return (
     <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
-      <NavLink
-        href="/"
-        text="Naslovna"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Prodavnica</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 text-nowrap">
+      {navigationLinks.map((link, index) =>
+        link.subLinks ? (
+          <>
+            <span key={index} className="font-semibold">
+              {link.text}
+            </span>
+            <ul>
+              {link.subLinks.map((subLink, subIndex) => (
                 <NavListItem
-                  href="/products/svi-proizvodi"
-                  text="Svi Proizvodi"
+                  key={subIndex}
+                  href={subLink.href}
+                  text={subLink.text}
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
-                <NavListItem
-                  href="/products/torte"
-                  text="Torte"
-                  pathname={pathname}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-                <NavListItem
-                  href="/kolaci"
-                  text="Kolači"
-                  pathname={pathname}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-                <NavListItem
-                  href="/poslastice"
-                  text="Poslastice"
-                  pathname={pathname}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-                <NavListItem
-                  href="/slani-ketering"
-                  text="Slani Ketering"
-                  pathname={pathname}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <NavLink
-        href="/o-nama"
-        text="O Nama"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
-      <NavLink
-        href="/faq"
-        text="FAQ"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
-      <NavLink
-        href="/kontakt"
-        text="Kontakt"
-        pathname={pathname}
-        onClick={() => setIsMenuOpen(false)}
-      />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <NavLink
+            key={index}
+            href={link.href}
+            text={link.text}
+            pathname={pathname}
+            onClick={() => setIsMenuOpen(false)}
+          />
+        ),
+      )}
     </div>
   );
 }

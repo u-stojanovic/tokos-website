@@ -16,7 +16,7 @@ type ListAllProductsProps = {
   products: Product[];
 };
 
-export default function ListAllProducts({ products }: ListAllProductsProps) {
+export default function ListProducts({ products }: ListAllProductsProps) {
   return (
     <SimpleGrid columns={[1, 2, 3]} spacing="10">
       {products.map((product) => (

@@ -1,8 +1,18 @@
-import { getAllProducts } from "@/lib/actions/getProducts";
+import { getProductsByCategory } from "@/lib/actions/getProducts";
 import ListProducts from "@/components/shared/Products/ListProducts";
 
-export default async function AllProducts() {
-  const products = await getAllProducts();
+interface CategoryPageProps {
+  params: {
+    category: string;
+  };
+}
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category } = params;
+
+  const products = await getProductsByCategory(category);
+
+  console.log("products: ", products);
 
   if (!products || !products.length) {
     return <div>No products available</div>;
@@ -11,7 +21,7 @@ export default async function AllProducts() {
   return (
     <div className="flex flex-col items-center justify-center m-4 gap-4">
       <div className="inline-block rounded-lg bg-lightMode-primary px-3 py-1 text-sm dark:bg-darkMode-primary text-lightMode-text">
-        Svi Proizvodi
+        {category}
       </div>
       <ListProducts products={products} />
     </div>
