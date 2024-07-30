@@ -107,19 +107,27 @@ function NavLinks({ pathname }: { pathname: string }) {
             <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/svi-proizvodi"
+                  href="/products/svi-proizvodi"
                   text="Svi Proizvodi"
                   pathname={pathname}
                 />
-                <NavListItem href="/torte" text="Torte" pathname={pathname} />
-                <NavListItem href="/kolaci" text="Kolači" pathname={pathname} />
                 <NavListItem
-                  href="/poslastice"
+                  href="/products/torte"
+                  text="Torte"
+                  pathname={pathname}
+                />
+                <NavListItem
+                  href="/products/kolaci"
+                  text="Kolači"
+                  pathname={pathname}
+                />
+                <NavListItem
+                  href="/products/poslastice"
                   text="Poslastice"
                   pathname={pathname}
                 />
                 <NavListItem
-                  href="/slani-ketering"
+                  href="/products/slani-ketering"
                   text="Slani Ketering"
                   pathname={pathname}
                 />
@@ -229,7 +237,13 @@ function MobileMenu({
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/torte"
+                  href="/products/svi-proizvodi"
+                  text="Svi Proizvodi"
+                  pathname={pathname}
+                  onClick={() => setIsMenuOpen(false)}
+                />
+                <NavListItem
+                  href="/products/torte"
                   text="Torte"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}

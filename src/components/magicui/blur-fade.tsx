@@ -6,10 +6,7 @@ import { AnimatePresence, motion, useInView, Variants } from "framer-motion";
 interface BlurFadeProps {
   children: React.ReactNode;
   className?: string;
-  variant?: {
-    hidden: { y: number };
-    visible: { y: number };
-  };
+  variant?: Variants;
   duration?: number;
   delay?: number;
   yOffset?: number;
@@ -26,17 +23,24 @@ export default function BlurFade({
   delay = 0,
   yOffset = 0,
   inView = false,
-  inViewMargin = "-50px",
+  inViewMargin = "-50px 0px",
   blur = "6px",
 }: BlurFadeProps) {
   const ref = useRef(null);
-  const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
+  const inViewResult = useInView(ref, {
+    once: true,
+    margin: inViewMargin as any,
+  });
+
+  // NOTE: BOKI FIXUJE SVE
+
   const isInView = !inView || inViewResult;
   const defaultVariants: Variants = {
     hidden: { y: yOffset, opacity: 0, filter: `blur(${blur})` },
     visible: { y: -yOffset, opacity: 1, filter: `blur(0px)` },
   };
   const combinedVariants = variant || defaultVariants;
+
   return (
     <AnimatePresence>
       <motion.div
