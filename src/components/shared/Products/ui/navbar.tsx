@@ -96,19 +96,27 @@ function NavLinks({ pathname }: { pathname: string }) {
             <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/svi-proizvodi"
+                  href="/products/svi-proizvodi"
                   text="Svi Proizvodi"
                   pathname={pathname}
                 />
-                <NavListItem href="/torte" text="Torte" pathname={pathname} />
-                <NavListItem href="/kolaci" text="Kolači" pathname={pathname} />
                 <NavListItem
-                  href="/poslastice"
+                  href="/products/torte"
+                  text="Torte"
+                  pathname={pathname}
+                />
+                <NavListItem
+                  href="/products/kolaci"
+                  text="Kolači"
+                  pathname={pathname}
+                />
+                <NavListItem
+                  href="/products/poslastice"
                   text="Poslastice"
                   pathname={pathname}
                 />
                 <NavListItem
-                  href="/slani-ketering"
+                  href="/products/slani-ketering"
                   text="Slani Ketering"
                   pathname={pathname}
                 />
@@ -206,7 +214,7 @@ function MobileMenu({
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <div className="font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 lg:hidden">
+    <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
       <NavLink
         href="/"
         text="Naslovna"
@@ -220,31 +228,31 @@ function MobileMenu({
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 text-nowrap">
                 <NavListItem
-                  href="/svi-proizvodi"
+                  href="/products/svi-proizvodi"
                   text="Svi Proizvodi"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/torte"
+                  href="/products/torte"
                   text="Torte"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/kolaci"
+                  href="/products/kolaci"
                   text="Kolači"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/poslastice"
+                  href="/products/poslastice"
                   text="Poslastice"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <NavListItem
-                  href="/slani-ketering"
+                  href="/products/slani-ketering"
                   text="Slani Ketering"
                   pathname={pathname}
                   onClick={() => setIsMenuOpen(false)}

@@ -5,7 +5,13 @@ export async function getAllProducts() {
   try {
     const products = await prisma.product.findMany({
       include: {
+        category: true,
         images: true,
+        ingredients: {
+          include: {
+            ingredient: true,
+          },
+        },
       },
     });
     return products;
@@ -17,8 +23,16 @@ export async function getAllProducts() {
 export async function getProductById(id: number) {
   try {
     const product = await prisma.product.findUnique({
-      where: { id: id },
-      include: { images: true },
+      where: { id: Number(id) },
+      include: {
+        category: true,
+        images: true,
+        ingredients: {
+          include: {
+            ingredient: true,
+          },
+        },
+      },
     });
     return product;
   } catch (error) {
