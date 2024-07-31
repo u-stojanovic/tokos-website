@@ -8,15 +8,33 @@ datasource db {
   directUrl = env("DIRECT_DATABASE_URL")
 }
 
+enum UserRoles {
+  HeadAdmin
+  Worker
+  None
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  firstName String
+  lastName  String
+  role      UserRoles @default(None)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([id, email])
+}
+
 model Product {
   id          Int                 @id @default(autoincrement())
   name        String
   description String
-  price       Int?
   categoryId  Int
+  price       Int?
+  images      Image[]
   category    Category            @relation(fields: [categoryId], references: [id])
   ingredients ProductIngredient[]
-  images      Image[]
 }
 
 model Category {
@@ -35,8 +53,8 @@ model Ingredient {
 model ProductIngredient {
   productId    Int
   ingredientId Int
-  product      Product    @relation(fields: [productId], references: [id])
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
 
   @@id([productId, ingredientId])
 }
