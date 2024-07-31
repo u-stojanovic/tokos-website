@@ -49,7 +49,7 @@ export default function ProductNavbar() {
   return (
     <header>
       <nav
-        className={`w-full bg-lightMode-background dark:bg-darkMode-background text-lightMode-text dark:text-darkMode-text`}
+        className={`drop-shadow-md w-full bg-lightMode-background dark:bg-darkMode-background text-lightMode-text dark:text-darkMode-text`}
       >
         <div className="w-full flex justify-between items-center p-4">
           <Logo />
