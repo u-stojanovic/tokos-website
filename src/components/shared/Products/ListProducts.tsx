@@ -9,6 +9,8 @@ import {
   Text,
   Button,
   SimpleGrid,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -18,51 +20,88 @@ type ListAllProductsProps = {
 
 export default function ListProducts({ products }: ListAllProductsProps) {
   return (
-    <SimpleGrid columns={[1, 2, 3]} spacing="10">
+    <SimpleGrid
+      columns={[1, 2, 3]}
+      spacing={6}
+      maxW="70vw"
+      margin="0 auto"
+      padding={4}
+    >
       {products.map((product) => (
         <Card
           key={product.id}
-          maxW="sm"
           bg="white"
           borderRadius="lg"
           overflow="hidden"
           boxShadow="md"
-          transition="transform 0.2s"
-          _hover={{ transform: "translateY(-2px)" }}
-          className="bg-lightMode-primary dark:bg-darkMode-primary"
+          transition="all 0.3s"
+          _hover={{ transform: "translateY(-0.125em) scale(1.02)" }}
+          className="bg-lightMode-surface dark:bg-darkMode-background"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          height="100%"
         >
           <Link prefetch={true} href={`/products/${product.id}`}>
-            <CardBody padding="6">
-              <Image
-                src={
-                  product.images.length > 0
-                    ? product.images[0].imageUrl
-                    : "placeholder-image-url"
-                }
-                alt={product.name}
-                borderRadius="md"
-                objectFit="cover"
-                height="200px"
-                width="100%"
-              />
-              <Stack mt="4" spacing="1">
-                <Heading fontWeight="bold">{product.name}</Heading>
-                <Text fontSize="md" color="gray.600">
-                  {product.description}
-                </Text>
-                <Text fontSize="sm" color="purple">
-                  {product.category.name}
-                </Text>
-                <Text color="blue.500" fontSize="lg" fontWeight="semibold">
-                  {product.price ? product.price.toFixed(2) : "150 dinara"}
-                </Text>
-              </Stack>
-            </CardBody>
-            <CardFooter padding="4">
-              <Button colorScheme="blue" variant="solid" width="full">
-                Add to cart
-              </Button>
-            </CardFooter>
+            <Flex
+              flexDirection="column"
+              justifyContent="space-between"
+              height="100%"
+            >
+              <CardBody padding="1em" display="flex" flexDirection="column">
+                <Box
+                  as="div"
+                  position="relative"
+                  overflow="hidden"
+                  width="100%"
+                  paddingTop="75%"
+                >
+                  <Image
+                    src={
+                      product.images.length > 0
+                        ? product.images[0].imageUrl
+                        : "placeholder-image-url"
+                    }
+                    alt={product.name}
+                    position="absolute"
+                    top="0"
+                    left="0"
+                    height="100%"
+                    width="100%"
+                    objectFit="cover"
+                  />
+                </Box>
+                <Stack mt="1em" spacing="0.5em">
+                  <Heading
+                    fontWeight="bold"
+                    color="#F7BFB4"
+                    fontSize={{ base: "1em", md: "1.25em", lg: "1.5em" }} // Responsive font size
+                    isTruncated // Truncate the text if it's too long
+                  >
+                    {product.name}
+                  </Heading>
+                  <Text
+                    fontSize={{ base: "0.75em", md: "0.875em", lg: "1em" }} // Responsive font size
+                    color="whitesmoke"
+                    isTruncated
+                  >
+                    {product.description}
+                  </Text>
+                  <Text
+                    color="blue.500"
+                    fontSize={{ base: "0.875em", md: "1em", lg: "1.25em" }} // Responsive font size
+                    fontWeight="semibold"
+                  >
+                    {product.price ? product.price.toFixed(2) : "150 dinara"}
+                  </Text>
+                </Stack>
+              </CardBody>
+              <CardFooter padding="0.5em" mt="auto" alignSelf="stretch">
+                <Button colorScheme="blue" variant="solid" width="full">
+                  Add to cart
+                </Button>
+              </CardFooter>
+            </Flex>
           </Link>
         </Card>
       ))}

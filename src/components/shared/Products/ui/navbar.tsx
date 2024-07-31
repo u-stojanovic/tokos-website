@@ -117,7 +117,7 @@ function NavLinks({ pathname }: { pathname: string }) {
             text={link.text}
             pathname={pathname}
           />
-        ),
+        )
       )}
     </>
   );
@@ -232,7 +232,7 @@ function MobileMenu({
             pathname={pathname}
             onClick={() => setIsMenuOpen(false)}
           />
-        ),
+        )
       )}
     </div>
   );
