@@ -74,22 +74,22 @@ export default function ListProducts({ products }: ListAllProductsProps) {
                 <Stack mt="1em" spacing="0.5em">
                   <Heading
                     fontWeight="bold"
-                    color="#F7BFB4"
-                    fontSize={{ base: "1em", md: "1.25em", lg: "1.5em" }} // Responsive font size
-                    isTruncated // Truncate the text if it's too long
+                    fontSize={{ base: "1em", md: "1.25em", lg: "1.5em" }}
+                    className="text-lightMode-text dark:text-darkMode-text"
+                    isTruncated
                   >
                     {product.name}
                   </Heading>
                   <Text
-                    fontSize={{ base: "0.75em", md: "0.875em", lg: "1em" }} // Responsive font size
-                    color="whitesmoke"
+                    fontSize={{ base: "0.75em", md: "0.875em", lg: "1em" }}
+                    className="text-darkMode-surface dark:text-lightMode-surface"
                     isTruncated
                   >
                     {product.description}
                   </Text>
                   <Text
                     color="blue.500"
-                    fontSize={{ base: "0.875em", md: "1em", lg: "1.25em" }} // Responsive font size
+                    fontSize={{ base: "0.875em", md: "1em", lg: "1.25em" }}
                     fontWeight="semibold"
                   >
                     {product.price ? product.price.toFixed(2) : "150 dinara"}
