@@ -17,13 +17,14 @@ enum UserRoles {
 model User {
   id        Int       @id @default(autoincrement())
   email     String    @unique
+  useranme  String
   firstName String
   lastName  String
   role      UserRoles @default(None)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  @@unique([id, email])
+  @@unique([id, email, useranme])
 }
 
 model Product {
