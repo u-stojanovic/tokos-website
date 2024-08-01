@@ -49,7 +49,7 @@ export default function ProductNavbar() {
   return (
     <header>
       <nav
-        className={`drop-shadow-md w-full bg-lightMode-background dark:bg-darkMode-background text-lightMode-text dark:text-darkMode-text`}
+        className={`w-full bg-lightMode-background dark:bg-darkMode-background text-lightMode-text dark:text-darkMode-text drop-shadow-md`}
       >
         <div className="w-full flex justify-between items-center p-4">
           <Logo />
@@ -92,7 +92,7 @@ function NavLinks({ pathname }: { pathname: string }) {
       {navigationLinks.map((link, index) =>
         link.subLinks ? (
           <NavigationMenu key={index}>
-            <NavigationMenuList>
+            <NavigationMenuList className="z-50">
               <NavigationMenuItem>
                 <NavigationMenuTrigger>{link.text}</NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
