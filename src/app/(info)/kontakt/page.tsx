@@ -5,65 +5,44 @@ import Footer from "@/components/shared/Landing/Footer";
 export default function Contact() {
   return (
     <>
-      {" "}
       <section
         id="contact"
-        className="flex flex-col md:flex-row h-screen bg-lightMode-surface dark:bg-darkMode-surface"
+        className="flex flex-col md:flex-row h-screen bg-lightMode-surface dark:bg-darkMode-surface mt-16"
       >
-        <div className="w-full md:w-1/2 h-1/2 md:h-screen p-4 md:p-6 lg:p-8 drop-shadow-lg">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2874.798693671049!2d22.2780373764668!3d43.90143587109143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475473cae0a09be9%3A0x2d9b17154e662e37!2sSlatka%20kuca%20To-Ko%20S!5e0!3m2!1sen!2srs!4v1721832064093!5m2!1sen!2srs"
-            className="w-full h-full rounded-lg"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
-        </div>
-        <div className="w-full md:w-1/2 flex items-center justify-center bg-lightMode-surface dark:bg-darkMode-surface p-4 md:p-6 lg:p-8">
-          <div className="w-full lg:w-3/4 bg-lightMode-surface rounded-lg shadow-lg p-6 md:p-8 text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-lightMode-text dark:text-lightMode-text">
-              Poručivanje
-            </h2>
-            <ul className="list-disc list-inside space-y-2 text-lightMode-text dark:text-lightMode-text">
-              <li>
-                <strong>Online:</strong> Preko našeg sajta.
-              </li>
-              <li>
-                <strong>Telefon:</strong> Pozovite nas{" "}
-                <Link className="text-blue-500" href="tel:+381654274270">
-                  +381 (65) 427-427-0
-                </Link>
-                .
-              </li>
-              <li>
-                <strong>Instagram:</strong> Slanjem poruke na našem profilu{" "}
-                <Link
-                  href="https://www.instagram.com/slatkakucatokos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 font-poppins"
-                >
-                  @slatkakucatokos
-                </Link>
-                .
-              </li>
-              <li>
-                <strong>Facebook:</strong> Slanjem poruke na našem profilu
-                <br />
-                <Link
-                  href="https://www.facebook.com/Slatka-Kuca-Tokos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 font-poppins"
-                >
-                  Slatka Kuca Tokos
-                </Link>
-                .
-              </li>
-              <li>
-                <strong>WhatsApp i Viber:</strong> Korišćenjem aplikacija
-                WhatsApp i Viber.
-              </li>
-            </ul>
+        <div className="w-full max-w-5xl mx-auto py-12 md:py-16 lg:py-20">
+          <div className="px-4 md:px-6">
+            <div className="space-y-4 mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                Kontaktirajte nas
+              </h1>
+              <p className="text-muted-foreground text-lg md:text-xl">
+                Dopustite da ulepšamo Vaš poseban trenutak.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <div className="bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="h-48 md:h-auto rounded-t-lg md:rounded-l-lg md:rounded-tr-none overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11499.194769100606!2d22.2806123!3d43.9014359!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475473cae0a09be9%3A0x2d9b17154e662e37!2sSlatka%20kuca%20To-Ko%20S!5e0!3m2!1sen!2srs!4v1722524440812!5m2!1sen!2srs"
+                    width="450"
+                    height="250"
+                    loading="lazy"
+                    className=""
+                  ></iframe>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                </div>
+                <div className="p-6 space-y-2">
+                  <h3 className="text-xl font-semibold">Zaječar</h3>
+                  <p>Ljube Nešića 51, Zaječar 19000</p>
+                  <p>Telefon: +381 (65) 427-427-0</p>
+                  <p className="text-muted-foreground">
+                    Our San Francisco office is located in the heart of the
+                    city, close to public transportation and popular
+                    attractions.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

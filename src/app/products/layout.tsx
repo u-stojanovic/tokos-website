@@ -6,8 +6,10 @@ export default function ProductsLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex flex-col bg-lightMode-surface dark:bg-darkMode-surface min-h-screen">
-      <ProductsNavbar />
-      <main className="flex-grow">{children}</main>
+      <header className="fixed w-full z-50">
+        <ProductsNavbar />
+      </header>
+      <main className="mt-36">{children}</main>
       <ProductFooter />
     </div>
   );
