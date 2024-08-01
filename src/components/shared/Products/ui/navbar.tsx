@@ -117,7 +117,7 @@ function NavLinks({ pathname }: { pathname: string }) {
             text={link.text}
             pathname={pathname}
           />
-        )
+        ),
       )}
     </>
   );
@@ -206,33 +206,37 @@ function MobileMenu({
 }) {
   return (
     <div className="fixed font-bold w-full h-fit bg-lightMode-background dark:bg-darkMode-background flex flex-col items-center gap-6 py-4 z-10 lg:hidden">
-      {navigationLinks.map((link, index) =>
+      {navigationLinks.map((link) =>
         link.subLinks ? (
-          <>
-            <span key={index} className="font-semibold">
-              {link.text}
-            </span>
-            <ul>
-              {link.subLinks.map((subLink, subIndex) => (
-                <NavListItem
-                  key={subIndex}
-                  href={subLink.href}
-                  text={subLink.text}
-                  pathname={pathname}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-              ))}
-            </ul>
-          </>
+          <NavigationMenu key={link.text}>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>{link.text}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 text-nowrap">
+                    {link.subLinks.map((subLink) => (
+                      <NavListItem
+                        key={subLink.text}
+                        href={subLink.href}
+                        text={subLink.text}
+                        pathname={pathname}
+                        onClick={() => setIsMenuOpen(false)}
+                      />
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         ) : (
           <NavLink
-            key={index}
+            key={link.text}
             href={link.href}
             text={link.text}
             pathname={pathname}
             onClick={() => setIsMenuOpen(false)}
           />
-        )
+        ),
       )}
     </div>
   );
