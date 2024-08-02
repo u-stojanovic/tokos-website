@@ -22,7 +22,7 @@ export default function RootLayout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <body className={inter.className}>
+      <body className={inter.className} style={{ overflowX: "hidden" }}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
