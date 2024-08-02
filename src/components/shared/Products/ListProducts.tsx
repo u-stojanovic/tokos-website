@@ -17,12 +17,12 @@ export default function ListProducts({ products }: ListAllProductsProps) {
         {products.map((product) => (
           <div
             key={product.id}
-            className="rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col justify-between h-full bg-lightMode-background dark:bg-darkMode-background"
+            className="rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col justify-between h-fit bg-lightMode-background dark:bg-darkMode-background"
           >
             <Link
               prefetch={true}
               href={`/products/${product.id}`}
-              className="flex flex-col justify-between h-full"
+              className="flex flex-col justify-between"
             >
               <div className="p-3 flex-1 flex flex-col">
                 <div className="relative w-full pt-[70%] overflow-hidden">
@@ -33,7 +33,7 @@ export default function ListProducts({ products }: ListAllProductsProps) {
                         : "placeholder-image-url"
                     }
                     alt={product.name}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    className="absolute top-0 left-0 w-full h-auto object-cover"
                   />
                 </div>
                 <Stack mt="3" spacing="2" className="flex-1">
