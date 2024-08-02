@@ -12,7 +12,7 @@ export default function ListProducts({ products }: ListAllProductsProps) {
       <h1 className="text-lightMode-text dark:text-darkMode-text text-4xl font-raleway py-4 mx-auto sm:mx-14 text-center sm:text-left">
         Svi Proizvodi
       </h1>
-      <div className="w-full h-px bg-gray-400 dark:bg-gray-300 drop-shadow-md my-2 mb-4 z-0"></div>
+      <div className="w-full max-w-[90%] mx-auto px-1 md:px-2 lg:px-3 h-px bg-gray-400 dark:bg-gray-300 drop-shadow-md my-2 mb-4 z-0"></div>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5 max-w-[90%] mx-auto p-1 md:p-2 lg:p-3">
         {products.map((product) => (
           <div

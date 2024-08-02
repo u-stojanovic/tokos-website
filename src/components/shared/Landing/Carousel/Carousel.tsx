@@ -90,7 +90,7 @@ function HeadingText() {
       <BlurFade delay={BLUR_FADE_DELAY_TEXT} inView>
         <h2 className="text-4xl md:text-6xl mb-4 font-bold [text-shadow:_-1px_3px_7px_rgb(0_0_0_/_50%)]">
           <div className="relative text-lightMode-primary dark:text-darkMode-primary font-raleway text-shadow-md">
-            <div className="flex flex-col md:flex-row items-center text-nowrap">
+            <div className="flex flex-col md:flex-row items-center whitespace-nowrap">
               Slatka kuća Tokos
             </div>
           </div>

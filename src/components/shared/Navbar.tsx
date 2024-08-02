@@ -52,7 +52,11 @@ export default function Navbar() {
   return (
     <header>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 ${isMenuOpen ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent" : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"} backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
+        className={`fixed top-0 left-0 w-full z-50 ${
+          isMenuOpen
+            ? "bg-lightMode-background dark:bg-darkMode-background lg:bg-transparent"
+            : "bg-gradient-to-b from-lightMode-background to-transparent dark:from-darkMode-background"
+        } backdrop-filter backdrop-blur-sm text-lightMode-text dark:text-darkMode-text`}
       >
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="w-full flex justify-between items-center p-4">
@@ -103,7 +107,7 @@ function NavLinks({ pathname }: { pathname: string }) {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>{link.text}</NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-lightMode-background dark:bg-darkMode-background">
-                  <ul className="grid gap-3 p-4 text-nowrap">
+                  <ul className="grid gap-3 p-4 whitespace-nowrap">
                     {link.subLinks.map((subLink, subIndex) => (
                       <NavListItem
                         key={subIndex}
@@ -124,7 +128,7 @@ function NavLinks({ pathname }: { pathname: string }) {
             text={link.text}
             pathname={pathname}
           />
-        ),
+        )
       )}
     </>
   );
@@ -241,7 +245,7 @@ function MobileMenu({
             pathname={pathname}
             onClick={() => setIsMenuOpen(false)}
           />
-        ),
+        )
       )}
     </div>
   );
