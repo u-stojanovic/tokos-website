@@ -28,7 +28,7 @@ export default function ListProducts({ products }: ListAllProductsProps) {
       <SimpleGrid
         columns={[1, 1, 2, 3]}
         spacing={{ base: 4, md: 6 }}
-        w="full"
+        maxW={{ base: "90vw", md: "70vw" }}
         margin="0 auto"
         padding={{ base: 2, md: 4 }}
       >
