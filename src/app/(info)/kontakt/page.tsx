@@ -34,11 +34,37 @@ export default function Contact() {
                 <div className="p-6 space-y-2">
                   <h3 className="text-xl font-semibold">Zaječar</h3>
                   <p>Ljube Nešića 51, Zaječar 19000</p>
-                  <p>Telefon: +381 (65) 427-427-0</p>
-                  <p className="text-muted-foreground">
-                    Our San Francisco office is located in the heart of the
-                    city, close to public transportation and popular
-                    attractions.
+                  <p>
+                    Telefon:{" "}
+                    <Link href="tel:+381654274270" className="text-blue-500">
+                      +381 (65) 427-427-0
+                    </Link>
+                  </p>
+                  <p>
+                    Instagram:{" "}
+                    <Link
+                      href="https://www.instagram.com/slatkakucatokos/"
+                      className="text-blue-500"
+                      target="_blank"
+                    >
+                      @slatkakucatokos
+                    </Link>
+                  </p>
+                  <p>
+                    Facebook:{" "}
+                    <Link
+                      href="https://www.facebook.com/slatkakuca.tokos"
+                      className="text-blue-500"
+                      target="_blank"
+                    >
+                      Slatka Kuća Tokos
+                    </Link>
+                  </p>
+                  <p>
+                    Viber i WhatsApp:{" "}
+                    <Link href="tel:+381654274270" className="text-blue-500">
+                      +381 (65) 427-427-0
+                    </Link>
                   </p>
                 </div>
               </div>
