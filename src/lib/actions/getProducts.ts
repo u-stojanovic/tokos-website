@@ -55,8 +55,6 @@ export async function getProductsByCategory(category: string) {
       return;
     }
 
-    console.log("foundCategory: ", foundCatagory);
-
     const products = await prisma.product.findMany({
       where: {
         categoryId: foundCatagory.id,
@@ -71,8 +69,6 @@ export async function getProductsByCategory(category: string) {
         },
       },
     });
-
-    console.log("products: ", products);
 
     return products;
   } catch (error) {
