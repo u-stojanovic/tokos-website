@@ -1,7 +1,9 @@
 "use server";
+import { cookies } from "next/headers";
 import prisma from "../../../prisma/client";
 
 export async function getAllProducts() {
+  const _ = cookies();
   try {
     const products = await prisma.product.findMany({
       include: {
@@ -41,6 +43,7 @@ export async function getProductById(id: number) {
 }
 
 export async function getProductsByCategory(category: string) {
+  const _ = cookies();
   try {
     const foundCatagory = await prisma.category.findFirst({
       where: {
