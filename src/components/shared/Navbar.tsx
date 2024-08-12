@@ -14,6 +14,7 @@ import { ModeToggle } from "./ThemeModeToggle";
 import BlurFade from "../magicui/blur-fade";
 import { XIcon, Menu } from "lucide-react";
 import { navigationLinks } from "@/data/navigationLinks";
+import Cart from "./Cart/Cart";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -48,7 +49,6 @@ interface NavListItemProps {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-
   return (
     <header>
       <nav
@@ -77,7 +77,6 @@ export default function Navbar() {
     </header>
   );
 }
-
 function Logo() {
   return (
     <Link href="/">
@@ -92,7 +91,10 @@ function DesktopMenu({ pathname }: { pathname: string }) {
       <div className="flex flex-row gap-11 mr-12 items-center">
         <NavLinks pathname={pathname} />
       </div>
-      <CartIcon />
+      <div className="flex items-center gap-6">
+        <ModeToggle />
+        <Cart />
+      </div>
     </div>
   );
 }
@@ -128,7 +130,7 @@ function NavLinks({ pathname }: { pathname: string }) {
             text={link.text}
             pathname={pathname}
           />
-        )
+        ),
       )}
     </>
   );
@@ -162,35 +164,6 @@ function NavListItem({ href, text, pathname, onClick }: NavListItemProps) {
   );
 }
 
-function CartIcon() {
-  return (
-    <div className="flex flex-row justify-center items-center">
-      <ModeToggle />
-      <Link href="/korpa">
-        <div className="relative ml-6 mr-3">
-          <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
-            12
-          </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6 text-lightMode-text dark:text-darkMode-text"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-            />
-          </svg>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
 function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
   return (
     <div className="flex items-center gap-6 lg:hidden">
@@ -201,7 +174,10 @@ function MobileMenuToggle({ isMenuOpen, setIsMenuOpen }: MobileMenuProps) {
           <Menu className="text-lightMode-text dark:text-darkMode-text" />
         )}
       </button>
-      <CartIcon />
+      <div className="flex items-center gap-6">
+        <ModeToggle />
+        <Cart />
+      </div>
     </div>
   );
 }
@@ -245,7 +221,7 @@ function MobileMenu({
             pathname={pathname}
             onClick={() => setIsMenuOpen(false)}
           />
-        )
+        ),
       )}
     </div>
   );
