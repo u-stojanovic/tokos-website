@@ -19,9 +19,10 @@ export default function Cart() {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="relative ml-6 mr-3 hover:bg-transparent"
+          className="relative p-2 hover:bg-transparent inline-flex items-center justify-center"
+          style={{ width: "auto", minWidth: "auto" }}
         >
-          <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+          <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-4 h-4 flex justify-center items-center text-xs">
             12
           </span>
           <CartIconSVG />
@@ -29,7 +30,7 @@ export default function Cart() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-full max-w-md bg-background shadow-lg"
+        className="w-full max-w-xs h-auto bg-background shadow-lg"
       >
         <SheetHeader className="flex items-center justify-between border-b border-muted px-6 py-4">
           <SheetTitle className="text-xl font-semibold">Your Cart</SheetTitle>
