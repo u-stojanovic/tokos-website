@@ -7,6 +7,14 @@ type ListAllProductsProps = {
   products: Product[];
 };
 
+// Helper function to truncate the text
+const truncateText = (text: string, limit: number) => {
+  if (text.length > limit) {
+    return text.substring(0, limit) + "...";
+  }
+  return text;
+};
+
 export default function ListProducts({ products }: ListAllProductsProps) {
   return (
     <div className="relative w-screen py-16 h-full md:py-24 text-lightMode-text dark:text-darkMode-text bg-lightMode-surface dark:bg-darkMode-surface">
@@ -42,7 +50,8 @@ export default function ListProducts({ products }: ListAllProductsProps) {
                   fontSize={{ base: "md", md: "lg" }}
                   className="text-gray-600 dark:text-gray-300 mb-2"
                 >
-                  {product.description}
+                  {truncateText(product.description, 100)}{" "}
+                  {/* Adjust the character limit as needed */}
                 </Text>
                 <Text
                   fontSize={{ base: "md", md: "lg" }}

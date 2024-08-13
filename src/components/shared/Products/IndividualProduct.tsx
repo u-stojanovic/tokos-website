@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
-import { RectangleHorizontal, Square } from "lucide-react";
+import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -77,8 +77,16 @@ export default function ProductPage({ product }: ProductPageProps) {
         </div>
         {showDetails ? (
           <div className="grid gap-4 bg-background shadow-lg rounded-lg p-4 sm:p-6">
-            <div className="border-b border-muted pb-2 sm:pb-4">
+            <div className="items-center flex justify-between border-b border-muted pb-2 sm:pb-4">
               <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowDetails(false)}
+              >
+                <ArrowLeftIcon className="w-5 h-5" />
+                <span className="sr-only">Go back</span>
+              </Button>
             </div>
             <div className="grid gap-4">
               <div className="text-muted-foreground text-sm sm:text-base">
