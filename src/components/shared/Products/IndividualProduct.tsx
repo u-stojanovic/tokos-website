@@ -1,4 +1,5 @@
 "use client";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
+import { Slider } from "@/components/ui/slider"; // Import ShadCN slider
 
 interface ProductPageProps {
   product: Product;
@@ -17,6 +19,11 @@ interface ProductPageProps {
 
 export default function ProductPage({ product }: ProductPageProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [weight, setWeight] = useState<number>(0.5); // Single number for weight
+
+  const handleWeightChange = (value: number[]) => {
+    setWeight(value[0]); // Set the first value from the array
+  };
 
   return (
     <div className="max-w-7xl mx-auto py-10 px-6">
@@ -76,27 +83,20 @@ export default function ProductPage({ product }: ProductPageProps) {
           <div className="text-xl text-gray-500 dark:text-darkMode-primary">
             {product.description}
           </div>
-          <div className="text-3xl font-bold text-lightMode-text dark:text-darkMode-text">
-            ${product.price ? product.price : 20}
+          <div className="text-3xl font-poppins text-lightMode-text dark:text-darkMode-text">
+            {product.price ? product.price : 20} RSD
           </div>
           <div className="flex space-x-4">
             <Button
               size="lg"
               className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text"
             >
-              Add to cart
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-lightMode-primary text-darkMode-primary dark:border-darkMode-primary dark:text-darkMode-primary"
-            >
-              Buy Now
+              Dodaj u korpu
             </Button>
           </div>
           <div>
             <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
-              Category
+              Kategorija
             </h2>
             <p className="text-lg text-gray-600 dark:text-darkMode-primary">
               {product.category.name}
@@ -104,16 +104,42 @@ export default function ProductPage({ product }: ProductPageProps) {
           </div>
           <div>
             <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
-              Ingredients
+              Sastojci
             </h2>
-            <ul className="list-disc list-inside text-lg text-gray-600 dark:text-darkMode-primary">
-              {product.ingredients.map(({ ingredient }) => (
-                <li key={ingredient.id}>
-                  {ingredient.name} {ingredient.isAlergen ? "(Allergen)" : ""}
-                </li>
-              ))}
-            </ul>
+            <div className="text-lg text-gray-600 dark:text-darkMode-primary">
+              {product.ingredients
+                .map(({ ingredient }) => ingredient.name)
+                .join(", ")}
+            </div>
+
+            <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
+              Alergeni
+            </h2>
+            <div className="text-lg text-gray-600 dark:text-darkMode-primary">
+              {product.ingredients.some(
+                ({ ingredient }) => ingredient.isAlergen,
+              )
+                ? product.ingredients
+                    .filter(({ ingredient }) => ingredient.isAlergen)
+                    .map(({ ingredient }) => ingredient.name)
+                    .join(", ")
+                : "Nema alergena"}
+            </div>
           </div>
+          {/* <div> */}
+          {/*   <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text"> */}
+          {/*     Težina */}
+          {/*   </h2> */}
+          {/*   <div className="text-lg text-gray-600 dark:text-darkMode-primary"> */}
+          {/*     <Slider */}
+          {/*       min={0.5} */}
+          {/*       max={20} */}
+          {/*       step={0.5} */}
+          {/*       value={[weight]} // Pass as array */}
+          {/*       onValueChange={handleWeightChange} // Use the correct handler */}
+          {/*     /> */}
+          {/*     <p>Izabrana težina: {weight} kg</p>{" "} */}
+          {/*   </div> */}
         </div>
       </div>
     </div>
