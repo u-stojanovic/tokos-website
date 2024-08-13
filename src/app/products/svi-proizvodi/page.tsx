@@ -1,19 +1,26 @@
-import { getAllProducts } from "@/lib/actions/getProducts";
+"use client";
+
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
+import ListingProductsSkeletonLoader from "@/components/shared/Products/ui/ListingProductsSkeletonLoader";
+import { useFetchProducts } from "@/lib/hooks/useGetProducts";
 
-export default async function AllProducts() {
-  const products = await getAllProducts();
+export default function AllProducts() {
+  const { data: products, isLoading } = useFetchProducts();
 
-  if (!products || !products.length) {
-    return <div>No products available</div>;
+  if (!products && isLoading) {
+    return <ListingProductsSkeletonLoader />;
+  }
+
+  if (!products && !isLoading) {
+    return <p>Failed to fetch products</p>;
   }
 
   return (
-    <div className="flex flex-col items-center py-6">
-      <div className="flex flex-col items-left gap-4">
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col items-left">
         <ProductsTitle title="Svi Proizvodi" />
-        <ListProducts products={products} />
+        <ListProducts products={products as any} />
       </div>
     </div>
   );

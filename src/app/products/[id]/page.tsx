@@ -1,4 +1,4 @@
-import { getProductById } from "@/lib/actions/getProducts";
+import { getProductById } from "@/lib/actions/productActions";
 import ProductPage from "@/components/shared/Products/IndividualProduct";
 
 export default async function Slug({ params }: { params: { id: number } }) {

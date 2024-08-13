@@ -1,6 +1,9 @@
-import { getProductsByCategory } from "@/lib/actions/getProducts";
+"use client";
+
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
+import { useFetchProductsFromCategories } from "@/lib/hooks/useGetProductsFromCategory";
+import ListingProductsSkeletonLoader from "@/components/shared/Products/ui/ListingProductsSkeletonLoader";
 
 interface CategoryPageProps {
   params: {
@@ -8,7 +11,7 @@ interface CategoryPageProps {
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
 
   const transformCategoryName = (category: string) => {
@@ -26,19 +29,24 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     }
   };
 
-  const products = await getProductsByCategory(category);
+  const { data: products, isLoading } =
+    useFetchProductsFromCategories(category);
 
   console.log("products: ", products);
 
-  if (!products || !products.length) {
+  if (!products && !isLoading) {
     return <div>No products available</div>;
   }
 
+  if (!products && isLoading) {
+    return <ListingProductsSkeletonLoader />;
+  }
+
   return (
-    <div className="flex flex-col items-center py-6">
-      <div className="flex flex-col items-left gap-4">
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col items-left">
         <ProductsTitle title={transformCategoryName(category)} />
-        <ListProducts products={products} />
+        <ListProducts products={products as any} />
       </div>
     </div>
   );
