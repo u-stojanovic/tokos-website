@@ -16,9 +16,6 @@ export default async function Slug({ params }: { params: { id: number } }) {
 
   return (
     <div className="flex flex-col items-center justify-center m-4">
-      <div className="inline-block rounded-lg bg-lightMode-primary px-3 py-1 text-sm dark:bg-darkMode-primary text-lightMode-text">
-        {product.name}
-      </div>
       <ProductPage product={product} />
     </div>
   );
