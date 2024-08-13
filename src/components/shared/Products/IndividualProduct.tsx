@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
-import { Slider } from "@/components/ui/slider"; // Import ShadCN slider
+import { RectangleHorizontal, Square } from "lucide-react";
 
 interface ProductPageProps {
   product: Product;
@@ -19,10 +19,9 @@ interface ProductPageProps {
 
 export default function ProductPage({ product }: ProductPageProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [weight, setWeight] = useState<number>(0.5); // Single number for weight
-
+  const [weight, setWeight] = useState<number>(0.5);
   const handleWeightChange = (value: number[]) => {
-    setWeight(value[0]); // Set the first value from the array
+    setWeight(value[0]);
   };
 
   return (
@@ -86,6 +85,23 @@ export default function ProductPage({ product }: ProductPageProps) {
           <div className="text-3xl font-poppins text-lightMode-text dark:text-darkMode-text">
             {product.price ? product.price : 20} RSD
           </div>
+          {product.category.name.toLowerCase() === "torte" && (
+            <div className="flex flex-row gap-2 mt-4">
+              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
+                  <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <span className="text-gray-300 mt-2">Mala</span>
+              </div>
+
+              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
+                  <Square className="w-16 h-16 stroke-[1.5]" />
+                </div>
+                <span className="text-gray-300 mt-2">Velika</span>
+              </div>
+            </div>
+          )}
           <div className="flex space-x-4">
             <Button
               size="lg"
@@ -111,7 +127,6 @@ export default function ProductPage({ product }: ProductPageProps) {
                 .map(({ ingredient }) => ingredient.name)
                 .join(", ")}
             </div>
-
             <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
               Alergeni
             </h2>
@@ -126,20 +141,6 @@ export default function ProductPage({ product }: ProductPageProps) {
                 : "Nema alergena"}
             </div>
           </div>
-          {/* <div> */}
-          {/*   <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text"> */}
-          {/*     Težina */}
-          {/*   </h2> */}
-          {/*   <div className="text-lg text-gray-600 dark:text-darkMode-primary"> */}
-          {/*     <Slider */}
-          {/*       min={0.5} */}
-          {/*       max={20} */}
-          {/*       step={0.5} */}
-          {/*       value={[weight]} // Pass as array */}
-          {/*       onValueChange={handleWeightChange} // Use the correct handler */}
-          {/*     /> */}
-          {/*     <p>Izabrana težina: {weight} kg</p>{" "} */}
-          {/*   </div> */}
         </div>
       </div>
     </div>
