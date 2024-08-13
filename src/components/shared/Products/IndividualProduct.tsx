@@ -85,21 +85,23 @@ export default function ProductPage({ product }: ProductPageProps) {
           <div className="text-3xl font-poppins text-lightMode-text dark:text-darkMode-text">
             {product.price ? product.price : 20} RSD
           </div>
-          <div className="flex flex-row gap-2 mt-4">
-            <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-              <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
-                <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+          {product.category.name.toLowerCase() === "torte" && (
+            <div className="flex flex-row gap-2 mt-4">
+              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
+                  <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+                </div>
+                <span className="text-gray-300 mt-2">Mala</span>
               </div>
-              <span className="text-gray-300 mt-2">Mala</span>
-            </div>
 
-            <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-              <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
-                <Square className="w-16 h-16 stroke-[1.5]" />
+              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
+                  <Square className="w-16 h-16 stroke-[1.5]" />
+                </div>
+                <span className="text-gray-300 mt-2">Velika</span>
               </div>
-              <span className="text-gray-300 mt-2">Velika</span>
             </div>
-          </div>
+          )}
           <div className="flex space-x-4">
             <Button
               size="lg"
