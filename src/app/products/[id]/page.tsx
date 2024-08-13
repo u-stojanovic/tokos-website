@@ -1,10 +1,13 @@
-import { getProductById } from "@/lib/actions/getProducts";
+"use client";
+
 import ProductPage from "@/components/shared/Products/IndividualProduct";
+import { useFetchProductById } from "@/lib/hooks/useGetProductById";
+import ProductDetailsSkeleton from "./ProductDetailsSkeleton";
 
-export default async function Slug({ params }: { params: { id: number } }) {
-  const product = await getProductById(params.id);
+export default function Slug({ params }: { params: { id: number } }) {
+  const { data: product, isLoading } = useFetchProductById(params.id);
 
-  if (!product) {
+  if (!product && !isLoading) {
     return (
       <div className="flex flex-col items-center justify-center m-4">
         <h1 className="text-3xl font-bold text-lightMode-text dark:text-darkMode-text mb-6">
@@ -14,9 +17,13 @@ export default async function Slug({ params }: { params: { id: number } }) {
     );
   }
 
+  if (!product && isLoading) {
+    return <ProductDetailsSkeleton />;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center m-4">
-      <ProductPage product={product} />
+      <ProductPage product={product as any} />
     </div>
   );
 }
