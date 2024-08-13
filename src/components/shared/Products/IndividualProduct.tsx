@@ -12,6 +12,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
 import { RectangleHorizontal, Square } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ProductPageProps {
   product: Product;
@@ -19,15 +21,13 @@ interface ProductPageProps {
 
 export default function ProductPage({ product }: ProductPageProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [weight, setWeight] = useState<number>(0.5);
-  const handleWeightChange = (value: number[]) => {
-    setWeight(value[0]);
-  };
+  const [showDetails, setShowDetails] = useState(false);
+  const [additionalDetails, setAdditionalDetails] = useState("");
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-6">
-      <div className="grid md:grid-cols-2 gap-10">
-        <div className="space-y-6">
+    <div className="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+        <div className="space-y-4 md:space-y-6">
           <Swiper
             modules={[Navigation, EffectFade, Thumbs]}
             loop={false}
@@ -67,81 +67,113 @@ export default function ProductPage({ product }: ProductPageProps) {
                 <Image
                   src={image.imageUrl}
                   alt={`Thumbnail ${index + 1}`}
-                  width={80}
-                  height={80}
+                  width={200}
+                  height={200}
                   className="object-cover rounded-lg"
                 />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        <div className="space-y-6">
-          <h1 className="text-4xl font-bold text-lightMode-text dark:text-darkMode-text">
-            {product.name}
-          </h1>
-          <div className="text-xl text-gray-500 dark:text-darkMode-primary">
-            {product.description}
-          </div>
-          <div className="text-3xl font-poppins text-lightMode-text dark:text-darkMode-text">
-            {product.price ? product.price : 20} RSD
-          </div>
-          {product.category.name.toLowerCase() === "torte" && (
-            <div className="flex flex-row gap-2 mt-4">
-              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
-                  <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
-                </div>
-                <span className="text-gray-300 mt-2">Mala</span>
-              </div>
-
-              <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-                <div className="flex items-center justify-center text-gray-300 rounded-lg w-20 h-20">
-                  <Square className="w-16 h-16 stroke-[1.5]" />
-                </div>
-                <span className="text-gray-300 mt-2">Velika</span>
-              </div>
+        {showDetails ? (
+          <div className="grid gap-4 bg-background shadow-lg rounded-lg p-4 sm:p-6">
+            <div className="border-b border-muted pb-2 sm:pb-4">
+              <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
             </div>
-          )}
-          <div className="flex space-x-4">
-            <Button
-              size="lg"
-              className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text"
-            >
-              Dodaj u korpu
-            </Button>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
-              Kategorija
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-darkMode-primary">
-              {product.category.name}
-            </p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
-              Sastojci
-            </h2>
-            <div className="text-lg text-gray-600 dark:text-darkMode-primary">
-              {product.ingredients
-                .map(({ ingredient }) => ingredient.name)
-                .join(", ")}
+            <div className="grid gap-4">
+              <div className="text-muted-foreground text-sm sm:text-base">
+                Napomena: Ukoliko želite drugačije detalje u odnosu na prikazanu
+                dekoraciju torte, molimo Vas da to navedete ovde:
+              </div>
+              <Textarea
+                placeholder="Unesite dodatne detalje"
+                value={additionalDetails}
+                onChange={(e) => setAdditionalDetails(e.target.value)}
+                className="p-3 sm:p-4 min-h-[150px] sm:min-h-[200px]"
+              />
+              <Button
+                size="lg"
+                className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text"
+              >
+                Dodaj u korpu
+              </Button>
             </div>
-            <h2 className="text-2xl font-semibold text-lightMode-text dark:text-darkMode-text">
-              Alergeni
-            </h2>
-            <div className="text-lg text-gray-600 dark:text-darkMode-primary">
-              {product.ingredients.some(
-                ({ ingredient }) => ingredient.isAlergen,
-              )
-                ? product.ingredients
-                    .filter(({ ingredient }) => ingredient.isAlergen)
+          </div>
+        ) : (
+          <div className="grid gap-4 bg-background shadow-lg rounded-lg p-4 sm:p-6">
+            <div className="border-b border-muted pb-2 sm:pb-4">
+              <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
+            </div>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="size" className="text-sm sm:text-base">
+                  Veličina
+                </Label>
+                {product.category.name.toLowerCase() === "torte" && (
+                  <div className="flex flex-row gap-2 mt-2 sm:mt-4">
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-16 sm:w-20 h-16 sm:h-20">
+                        <RectangleHorizontal className="w-8 sm:w-12 h-8 sm:h-12 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1 sm:mt-2">
+                        Mala
+                      </span>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-16 sm:w-20 h-16 sm:h-20">
+                        <Square className="w-10 sm:w-16 h-10 sm:h-16 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1 sm:mt-2">
+                        Velika
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="text-3xl sm:text-4xl font-bold">
+                {product.price ? product.price : 20} RSD
+              </div>
+              <Button
+                size="lg"
+                className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text"
+                onClick={() => setShowDetails(true)}
+              >
+                Dodaj u korpu
+              </Button>
+            </div>
+            <div className="grid gap-4">
+              <div>
+                <h2 className="text-base sm:text-lg font-semibold">
+                  Opis proizvoda
+                </h2>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  {product.description}
+                </p>
+              </div>
+              <div>
+                <h2 className="text-base sm:text-lg font-semibold">Sastojci</h2>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  {product.ingredients
                     .map(({ ingredient }) => ingredient.name)
-                    .join(", ")
-                : "Nema alergena"}
+                    .join(", ")}
+                </p>
+              </div>
+              <div>
+                <h2 className="text-base sm:text-lg font-semibold">Alergeni</h2>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  {product.ingredients.some(
+                    ({ ingredient }) => ingredient.isAlergen,
+                  )
+                    ? product.ingredients
+                        .filter(({ ingredient }) => ingredient.isAlergen)
+                        .map(({ ingredient }) => ingredient.name)
+                        .join(", ")
+                    : "Ovaj proizvod ne sadrži alergene."}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
