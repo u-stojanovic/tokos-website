@@ -2,6 +2,7 @@ import { Product } from "@/lib/types";
 import { Heading, Text, Button } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
+import AddToCartButton from "../Cart/AddToCartButton";
 
 type ListAllProductsProps = {
   products: Product[];
@@ -20,23 +21,24 @@ export default function ListProducts({ products }: ListAllProductsProps) {
       <div className="relative z-10 container mx-auto grid gap-12 px-4 md:px-6 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
           {products.map((product) => (
-            <Link
+            <div
               key={product.id}
-              href={`/products/${product.id}`}
               className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform hover:-translate-y-2"
             >
               <div className="relative w-full h-80 font-semibold rounded-t-lg overflow-hidden group">
-                <Image
-                  src={
-                    product.images.length > 0
-                      ? product.images[0].imageUrl
-                      : "/placeholder-image-url"
-                  }
-                  alt={product.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="object-cover opacity-95 transition-transform duration-300 transform group-hover:scale-105"
-                />
+                <Link href={`/products/${product.id}`}>
+                  <Image
+                    src={
+                      product.images.length > 0
+                        ? product.images[0].imageUrl
+                        : "/placeholder-image-url"
+                    }
+                    alt={product.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="object-cover opacity-95 transition-transform duration-300 transform group-hover:scale-105"
+                  />
+                </Link>
               </div>
               <div className="p-4 w-full flex flex-col items-center">
                 <Heading
@@ -60,11 +62,9 @@ export default function ListProducts({ products }: ListAllProductsProps) {
                     ? `${product.price.toFixed(2)} dinara`
                     : "150 dinara"}
                 </Text>
-                <Button colorScheme="blue" variant="solid" width="full">
-                  Add to cart
-                </Button>
+                <AddToCartButton product={product} />
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
