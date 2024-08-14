@@ -7,7 +7,6 @@ type ListAllProductsProps = {
   products: Product[];
 };
 
-// Helper function to truncate the text
 const truncateText = (text: string, limit: number) => {
   if (text.length > limit) {
     return text.substring(0, limit) + "...";
@@ -24,7 +23,7 @@ export default function ListProducts({ products }: ListAllProductsProps) {
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu hover:-translate-y-2"
             >
               <div className="relative w-full h-80 font-semibold rounded-t-lg overflow-hidden group">
                 <Image
