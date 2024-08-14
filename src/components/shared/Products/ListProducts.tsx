@@ -23,7 +23,7 @@ export default function ListProducts({ products }: ListAllProductsProps) {
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu hover:-translate-y-2"
+              className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform hover:-translate-y-2"
             >
               <div className="relative w-full h-80 font-semibold rounded-t-lg overflow-hidden group">
                 <Image

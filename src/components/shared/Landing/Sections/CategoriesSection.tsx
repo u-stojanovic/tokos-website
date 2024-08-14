@@ -50,7 +50,7 @@ function CategoryCard({
   return (
     <Link
       href={link}
-      className="relative flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+      className="relative flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform hover:-translate-y-2"
     >
       <div className="relative w-full h-80 font-semibold rounded-lg overflow-hidden group">
         <Image
@@ -58,7 +58,7 @@ function CategoryCard({
           layout="fill"
           objectFit="cover"
           alt={title}
-          className="object-cover opacity-65 transition-transform duration-300 transform group-hover:scale-105"
+          className="object-cover opacity-65 transition-transform duration-300 transform-gpu will-change-transform group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-300 flex flex-col justify-center items-center p-4">
           <div className="p-2 bg-primary rounded-full text-primary-foreground">
