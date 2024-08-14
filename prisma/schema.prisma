@@ -76,7 +76,8 @@ model Order {
   status          OrderStatus
   completedBy     User?            @relation(fields: [userId], references: [id])
   userId          Int?
-  orderDateTime   DateTime 
+  orderDateTime   DateTime
+  createdAt       DateTime         @default(now())
 }
 
 model OrderedProduct {
