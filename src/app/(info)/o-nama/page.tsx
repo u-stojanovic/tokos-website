@@ -1,7 +1,6 @@
 "use client";
 
 import Banner from "@/components/shared/Banner";
-import { ParallaxBanner } from "react-scroll-parallax";
 import React from "react";
 import { Parallax } from "react-scroll-parallax";
 import AboutSection from "./AboutSection";
@@ -13,27 +12,18 @@ export default function About() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
-        <ParallaxBanner
-          layers={[
-            { image: "/enterior.jpg", speed: -60 },
-            {
-              children: (
-                <div className="flex min-h-screen flex-col">
-                  <BlurFade delay={BLUR_FADE_DELAY}>
-                    <Banner
-                      imageSrc="/enterior.jpg"
-                      title="O Nama"
-                      description="Tu smo da ulepšamo Vaš dan"
-                    />
-                  </BlurFade>
-                </div>
-              ),
-              speed: -20,
-            },
-          ]}
-          style={{ aspectRatio: "2 / 1" }}
-        />
-        <Parallax speed={-35}>
+        <Parallax speed={-60}>
+          <div className="flex min-h-screen flex-col">
+            <BlurFade delay={BLUR_FADE_DELAY}>
+              <Banner
+                imageSrc="/enterior.jpg"
+                title="O Nama"
+                description="Tu smo da ulepšamo Vaš dan"
+              />
+            </BlurFade>
+          </div>
+        </Parallax>
+        <Parallax speed={-45}>
           <div className="relative z-50">
             <BlurFade delay={BLUR_FADE_DELAY}>
               <AboutSection />
