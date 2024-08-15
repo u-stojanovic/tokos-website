@@ -2,7 +2,7 @@
 
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
-import { useFetchProductsFromCategories } from "@/lib/hooks/useGetProductsFromCategories";
+import { useFetchProductsFromCategories } from "@/lib/hooks/products/useGetProductsFromCategories";
 import ListingProductsSkeletonLoader from "@/components/shared/Products/ListingProductsSkeletonLoader";
 
 interface CategoryPageProps {
