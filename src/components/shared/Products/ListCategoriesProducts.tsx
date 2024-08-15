@@ -4,7 +4,7 @@ import { Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
 import AddToCartButton from "../Cart/AddToCartButton";
-import { useFetchProducts } from "@/lib/hooks/products/useGetProducts";
+import { useFetchProductsFromCategories } from "@/lib/hooks/products/useGetProductsFromCategories";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 
 const truncateText = (text: string, limit: number) => {
@@ -14,8 +14,13 @@ const truncateText = (text: string, limit: number) => {
   return text;
 };
 
-export default function ListProducts() {
-  const { data: products, isLoading } = useFetchProducts();
+interface Props {
+  category: string;
+}
+
+export default function ListCategoryProducts({ category }: Props) {
+  const { data: products, isLoading } =
+    useFetchProductsFromCategories(category);
 
   if (!products && isLoading) {
     return <ListingProductsSkeletonLoader />;
@@ -24,6 +29,7 @@ export default function ListProducts() {
   if (!products && !isLoading) {
     return <p>Failed to fetch products</p>;
   }
+
   return (
     <div className="relative w-screen py-16 h-full md:py-24 text-lightMode-text dark:text-darkMode-text bg-lightMode-surface dark:bg-darkMode-surface">
       <div className="relative z-10 container mx-auto grid gap-12 px-4 md:px-6 max-w-7xl">

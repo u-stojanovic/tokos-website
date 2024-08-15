@@ -1,15 +1,18 @@
-"use client";
-
-import ListProducts from "@/components/shared/Products/ListProducts";
+import ListCategoryProducts from "@/components/shared/Products/ListCategoriesProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
-import { useFetchProductsFromCategories } from "@/lib/hooks/products/useGetProductsFromCategories";
-import ListingProductsSkeletonLoader from "@/components/shared/Products/ListingProductsSkeletonLoader";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 
 interface CategoryPageProps {
   params: {
     category: string;
   };
 }
+
+const queryClient = new QueryClient();
 
 export default function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
@@ -29,24 +32,13 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     }
   };
 
-  const { data: products, isLoading } =
-    useFetchProductsFromCategories(category);
-
-  console.log("products: ", products);
-
-  if (!products && !isLoading) {
-    return <div>No products available</div>;
-  }
-
-  if (!products && isLoading) {
-    return <ListingProductsSkeletonLoader />;
-  }
-
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-left">
         <ProductsTitle title={transformCategoryName(category)} />
-        <ListProducts products={products as any} />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ListCategoryProducts category={category} />
+        </HydrationBoundary>
       </div>
     </div>
   );
