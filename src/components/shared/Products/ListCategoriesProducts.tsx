@@ -1,6 +1,5 @@
 "use client";
 
-import { Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
 import AddToCartButton from "../Cart/AddToCartButton";
@@ -35,7 +34,7 @@ export default function ListCategoryProducts({ category }: Props) {
       <div className="relative z-10 container mx-auto grid gap-12 px-4 md:px-6 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products &&
-            products.map((product) => (
+            products.map((product: any) => (
               <div
                 key={product.id}
                 className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform hover:-translate-y-2"
@@ -56,27 +55,18 @@ export default function ListCategoryProducts({ category }: Props) {
                   </Link>
                 </div>
                 <div className="p-4 w-full flex flex-col items-center">
-                  <Heading
-                    fontSize={{ base: "lg", md: "xl" }}
-                    className="text-lightMode-text dark:text-darkMode-text font-bold mb-2"
-                  >
+                  <h3 className="text-lightMode-text dark:text-darkMode-text font-bold text-xl mb-2">
                     {product.name}
-                  </Heading>
-                  <Text
-                    fontSize={{ base: "md", md: "lg" }}
-                    className="text-gray-600 dark:text-gray-300 mb-2"
-                  >
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-2 text-lg">
                     {truncateText(product.description, 100)}{" "}
                     {/* Adjust the character limit as needed */}
-                  </Text>
-                  <Text
-                    fontSize={{ base: "md", md: "lg" }}
-                    className="text-blue-500 font-semibold mb-4"
-                  >
+                  </p>
+                  <p className="text-blue-500 font-semibold mb-4 text-lg">
                     {product.price
                       ? `${product.price.toFixed(2)} dinara`
                       : "150 dinara"}
-                  </Text>
+                  </p>
                   <AddToCartButton product={product} />
                 </div>
               </div>

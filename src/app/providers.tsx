@@ -1,7 +1,6 @@
 "use client";
 
 import { ParallaxProvider } from "react-scroll-parallax";
-import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function makeQueryClient() {
@@ -30,9 +29,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ParallaxProvider>
-        <ChakraProvider>{children}</ChakraProvider>
-      </ParallaxProvider>
+      <ParallaxProvider>{children}</ParallaxProvider>
     </QueryClientProvider>
   );
 }
