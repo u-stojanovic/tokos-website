@@ -14,6 +14,7 @@ import { Product } from "@/lib/types";
 import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import AddToCartButton from "../Cart/AddToCartButton";
 
 interface ProductPageProps {
   product: Product;
@@ -99,12 +100,7 @@ export default function ProductPage({ product }: ProductPageProps) {
                 onChange={(e) => setAdditionalDetails(e.target.value)}
                 className="p-3 sm:p-4 min-h-[150px] sm:min-h-[200px]"
               />
-              <Button
-                size="lg"
-                className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text"
-              >
-                Dodaj u korpu
-              </Button>
+              <AddToCartButton product={product} />
             </div>
           </div>
         ) : (

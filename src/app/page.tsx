@@ -1,10 +1,11 @@
 "use client";
+
 import { Parallax } from "react-scroll-parallax";
 import ShopInfoSection from "@/components/shared/Landing/Sections/ShopInfoSection";
 import CategoriesInfoSection from "@/components/shared/Landing/Sections/CategoriesSection";
-import Footer from "@/components/shared/Landing/Footer";
 import Navbar from "@/components/shared/Navbar";
 import Carousel from "@/components/shared/Landing/Carousel/Carousel";
+import Footer from "@/components/shared/Landing/Footer";
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
           </div>
         </Parallax>
       </div>
-      <div className="relative z-20">
+      <div className="relative z-50 h-fit">
         <Footer />
       </div>
     </div>
