@@ -18,7 +18,7 @@ export default function Home() {
         <div className="relative z-20">
           <ShopInfoSection />
         </div>
-        <Parallax speed={-7}>
+        <Parallax>
           <div className="flex items-start">
             <CategoriesInfoSection />
           </div>
