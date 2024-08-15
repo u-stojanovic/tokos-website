@@ -7,7 +7,7 @@ export default function Contact() {
     <>
       <section
         id="contact"
-        className="flex flex-col md:flex-row h-screen bg-lightMode-surface dark:bg-darkMode-surface mt-16"
+        className="flex flex-col md:flex-row h-fit bg-lightMode-surface dark:bg-darkMode-surface mt-16"
       >
         <div className="w-full max-w-5xl mx-auto py-12 md:py-16 lg:py-20">
           <div className="px-4 md:px-6">
@@ -72,7 +72,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

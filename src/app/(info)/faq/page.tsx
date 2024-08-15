@@ -83,7 +83,7 @@ export default function FAQ() {
     <BlurFade delay={BLUR_FADE_DELAY}>
       <section
         id="faq"
-        className="w-full py-12 md:py-24 lg:py-32 bg-lightMode-surface dark:bg-darkMode-surface mt-12 sm:mt-0"
+        className="w-full h-full py-12 md:py-24 lg:py-32 bg-lightMode-surface dark:bg-darkMode-surface mt-12 sm:mt-0"
       >
         <div className="container px-4 md:px-6">
           <div className="flex flex-col p-6 items-center justify-center space-y-4 text-center">
@@ -143,7 +143,6 @@ export default function FAQ() {
           </div>
         </div>
       </section>
-      <Footer />
     </BlurFade>
   );
 }
