@@ -10,20 +10,37 @@ import { Navigation, EffectFade, Thumbs } from "swiper/modules";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/lib/types";
 import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import AddToCartButton from "../Cart/AddToCartButton";
+import { useFetchProductById } from "@/lib/hooks/products/useGetProductById";
+import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
 
-interface ProductPageProps {
-  product: Product;
+interface Props {
+  id: number;
 }
 
-export default function ProductPage({ product }: ProductPageProps) {
+export default function ProductPage({ id }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [additionalDetails, setAdditionalDetails] = useState("");
+
+  const { data: product, isLoading } = useFetchProductById(id);
+
+  if (!product && !isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center m-4">
+        <h1 className="text-3xl font-bold text-lightMode-text dark:text-darkMode-text mb-6">
+          Product not found
+        </h1>
+      </div>
+    );
+  }
+
+  if (!product && isLoading) {
+    return <ProductDetailsSkeleton />;
+  }
 
   return (
     <div className="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 mx-auto">
@@ -39,21 +56,22 @@ export default function ProductPage({ product }: ProductPageProps) {
             thumbs={{ swiper: thumbsSwiper }}
             className="w-full h-auto"
           >
-            {product.images.map((image, index) => (
-              <SwiperSlide
-                key={index}
-                className="flex justify-center items-center"
-              >
-                <Image
-                  src={image.imageUrl}
-                  alt={`${product.name} image ${index + 1}`}
-                  loading="lazy"
-                  width={800}
-                  height={800}
-                  className="object-cover rounded-lg"
-                />
-              </SwiperSlide>
-            ))}
+            {product &&
+              product.images.map((image, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="flex justify-center items-center"
+                >
+                  <Image
+                    src={image.imageUrl}
+                    alt={`${product.name} image ${index + 1}`}
+                    loading="lazy"
+                    width={800}
+                    height={800}
+                    className="object-cover rounded-lg"
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
           <Swiper
             onSwiper={setThumbsSwiper}
@@ -63,23 +81,26 @@ export default function ProductPage({ product }: ProductPageProps) {
             watchSlidesProgress
             className="w-full h-auto"
           >
-            {product.images.map((image, index) => (
-              <SwiperSlide key={index} className="cursor-pointer">
-                <Image
-                  src={image.imageUrl}
-                  alt={`Thumbnail ${index + 1}`}
-                  width={200}
-                  height={200}
-                  className="object-cover rounded-lg"
-                />
-              </SwiperSlide>
-            ))}
+            {product &&
+              product.images.map((image, index) => (
+                <SwiperSlide key={index} className="cursor-pointer">
+                  <Image
+                    src={image.imageUrl}
+                    alt={`Thumbnail ${index + 1}`}
+                    width={200}
+                    height={200}
+                    className="object-cover rounded-lg"
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
         {showDetails ? (
           <div className="grid gap-4 bg-background shadow-lg rounded-lg p-4 sm:p-6">
             <div className="items-center flex justify-between border-b border-muted pb-2 sm:pb-4">
-              <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">
+                {product && product.name}
+              </h1>
               <Button
                 variant="ghost"
                 size="icon"
@@ -100,20 +121,22 @@ export default function ProductPage({ product }: ProductPageProps) {
                 onChange={(e) => setAdditionalDetails(e.target.value)}
                 className="p-3 sm:p-4 min-h-[150px] sm:min-h-[200px]"
               />
-              <AddToCartButton product={product} />
+              <AddToCartButton product={product as any} />
             </div>
           </div>
         ) : (
           <div className="grid gap-4 bg-background shadow-lg rounded-lg p-4 sm:p-6">
             <div className="border-b border-muted pb-2 sm:pb-4">
-              <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">
+                {product && product.name}
+              </h1>
             </div>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="size" className="text-sm sm:text-base">
                   Veličina
                 </Label>
-                {product.category.name.toLowerCase() === "torte" && (
+                {product && product.category.name.toLowerCase() === "torte" && (
                   <div className="flex flex-row gap-2 mt-2 sm:mt-4">
                     <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
                       <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-16 sm:w-20 h-16 sm:h-20">
@@ -135,7 +158,7 @@ export default function ProductPage({ product }: ProductPageProps) {
                 )}
               </div>
               <div className="text-3xl sm:text-4xl font-bold">
-                {product.price ? product.price : 20} RSD
+                {product && product.price ? product.price : 20} RSD
               </div>
               <Button
                 size="lg"
@@ -151,21 +174,23 @@ export default function ProductPage({ product }: ProductPageProps) {
                   Opis proizvoda
                 </h2>
                 <p className="text-muted-foreground text-sm sm:text-base">
-                  {product.description}
+                  {product && product.description}
                 </p>
               </div>
               <div>
                 <h2 className="text-base sm:text-lg font-semibold">Sastojci</h2>
                 <p className="text-muted-foreground text-sm sm:text-base">
-                  {product.ingredients
-                    .map(({ ingredient }) => ingredient.name)
-                    .join(", ")}
+                  {product &&
+                    product.ingredients
+                      .map(({ ingredient }) => ingredient.name)
+                      .join(", ")}
                 </p>
               </div>
               <div>
                 <h2 className="text-base sm:text-lg font-semibold">Alergeni</h2>
                 <p className="text-muted-foreground text-sm sm:text-base">
-                  {product.ingredients.some(
+                  {product &&
+                  product.ingredients.some(
                     ({ ingredient }) => ingredient.isAlergen,
                   )
                     ? product.ingredients
