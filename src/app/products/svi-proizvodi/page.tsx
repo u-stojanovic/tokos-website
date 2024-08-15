@@ -3,7 +3,7 @@
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
 import ListingProductsSkeletonLoader from "@/components/shared/Products/ListingProductsSkeletonLoader";
-import { useFetchProducts } from "@/lib/hooks/useGetProducts";
+import { useFetchProducts } from "@/lib/hooks/products/useGetProducts";
 
 export default function AllProducts() {
   const { data: products, isLoading } = useFetchProducts();

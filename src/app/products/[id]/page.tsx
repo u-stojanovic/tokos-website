@@ -1,7 +1,7 @@
 "use client";
 
 import ProductPage from "@/components/shared/Products/IndividualProduct";
-import { useFetchProductById } from "@/lib/hooks/useGetProductById";
+import { useFetchProductById } from "@/lib/hooks/products/useGetProductById";
 import ProductDetailsSkeleton from "./ProductDetailsSkeleton";
 
 export default function Slug({ params }: { params: { id: number } }) {
