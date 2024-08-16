@@ -14,7 +14,7 @@ export default function Porudzbine() {
         <header className="fixed w-full z-50">
           <Navbar />
         </header>
-        <main className="flex flex-col justify-cent lg:flex-row gap-10 justify-center items-center flex-grow mt-36 px-4 lg:px-20 max-w-[1440px] mx-auto">
+        <main className="flex flex-col justify-cent lg:flex-row gap-10 justify-center items-center flex-grow mt-36 p-4 lg:px-20 max-w-[1440px] mx-auto">
           <div className="w-full lg:w-[70%]">
             <Form />
           </div>
