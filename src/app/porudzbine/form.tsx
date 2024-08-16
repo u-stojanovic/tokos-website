@@ -216,7 +216,11 @@ export default function Form() {
               )}
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="in-store-cash" id="in-store-cash" />
+              <RadioGroupItem
+                disabled={scheduleDelivery}
+                value="in-store-cash"
+                id="in-store-cash"
+              />
               <Label
                 htmlFor="in-store-cash"
                 className="text-gray-700 dark:text-gray-200"
