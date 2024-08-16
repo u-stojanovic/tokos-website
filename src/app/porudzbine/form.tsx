@@ -45,7 +45,7 @@ export default function Form() {
             <Input
               id="full-name"
               placeholder="Unesite vaše puno ime"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
           <div className="space-y-2">
@@ -58,7 +58,7 @@ export default function Form() {
             <Input
               id="phone"
               placeholder="Unesite vaš broj telefona"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function Form() {
             <Input
               id="email"
               placeholder="Unesite vaš email"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
           <div className="space-y-2">
@@ -86,7 +86,7 @@ export default function Form() {
             <Input
               id="city"
               placeholder="Unesite vaš grad"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
         </div>
@@ -101,7 +101,7 @@ export default function Form() {
             <Input
               id="address"
               placeholder="Unesite vašu adresu"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
           <div className="space-y-2">
@@ -114,7 +114,7 @@ export default function Form() {
             <Input
               id="zip"
               placeholder="Unesite vaš poštanski broj"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
             />
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function Form() {
               <DateTimePicker
                 label="M/D/Y : H/M"
                 ampm={true}
-                className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
+                className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-lightMode-secondary text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
               />
             </div>
           )}
@@ -234,7 +234,7 @@ export default function Form() {
       <CardFooter className="pt-6">
         <Button
           variant="default"
-          className="w-full py-3 bg-blue-600 dark:bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 dark:hover:bg-blue-700 transition-all"
+          className="w-full py-3 bg-green-500 dark:bg-green-700 text-white font-semibold rounded-md hover:bg-blue-700 dark:hover:bg-blue-700 transition-all"
         >
           Potvrdi narudžbinu
         </Button>
