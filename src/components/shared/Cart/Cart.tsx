@@ -131,7 +131,9 @@ export default function Cart() {
                         variant="ghost"
                         size="icon"
                         className="hover:bg-transparent"
-                        onClick={() => addToCart(item.product)}
+                        onClick={() =>
+                          addToCart(item.product, item.description)
+                        }
                       >
                         <PlusIcon className="h-5 w-5 text-green-500" />
                       </Button>
