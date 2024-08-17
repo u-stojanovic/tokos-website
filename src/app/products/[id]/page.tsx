@@ -3,7 +3,7 @@ import { HydrationBoundary } from "@tanstack/react-query";
 
 export default function Slug({ params }: { params: { id: number } }) {
   return (
-    <div className="flex flex-col items-center justify-center m-4">
+    <div className="flex flex-col items-center justify-center">
       <HydrationBoundary>
         <ProductPage id={params.id} />
       </HydrationBoundary>

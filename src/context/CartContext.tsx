@@ -8,15 +8,17 @@ import {
   ReactNode,
 } from "react";
 import { Product } from "@/lib/types";
+import { useToast } from "@/components/ui/use-toast";
 
 type CartItem = {
   product: Product;
+  description?: string;
   quantity: number;
 };
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, description?: string) => void;
   decrementQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
@@ -37,8 +39,8 @@ type CartProviderProps = {
 };
 
 export const CartProvider = ({ children }: CartProviderProps) => {
+  const { toast } = useToast();
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // Initialize state from localStorage, if available
     if (typeof window !== "undefined") {
       const storedCartItems = localStorage.getItem("cartItems");
       return storedCartItems ? JSON.parse(storedCartItems) : [];
@@ -46,24 +48,28 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     return [];
   });
 
-  // Save cart items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, description?: string) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(
-        (item) => item.product.id === product.id,
+        (item) =>
+          item.product.id === product.id && item.description === description,
       );
       if (existingItem) {
         return prevItems.map((item) =>
-          item.product.id === product.id
+          item.product.id === product.id && item.description === description
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
-      return [...prevItems, { product, quantity: 1 }];
+      toast({
+        title: "Korpa",
+        description: "Proizvod je dodat u korpu",
+      });
+      return [...prevItems, { product, description, quantity: 1 }];
     });
   };
 

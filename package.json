@@ -12,6 +12,7 @@
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@hookform/resolvers": "^3.9.0",
     "@mui/material": "^5.16.7",
     "@mui/material-nextjs": "^5.16.6",
     "@mui/x-date-pickers": "^7.12.1",
@@ -25,6 +26,7 @@
     "@radix-ui/react-slider": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
@@ -46,7 +48,8 @@
     "swiper": "^11.1.5",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-filters": "^3.0.0"
+    "tailwindcss-filters": "^3.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
