@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import Head from "next/head";
 import { CartProvider } from "@/context/CartContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
 
@@ -38,6 +39,7 @@ export default function RootLayout({
             </ThemeProvider>
           </CartProvider>
         </AppRouterCacheProvider>
+        <Toaster />
       </body>
     </html>
   );

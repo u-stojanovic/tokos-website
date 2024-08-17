@@ -1,5 +1,8 @@
 "use client";
 
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import {
   Card,
   CardHeader,
@@ -21,10 +24,40 @@ import {
 } from "@/components/ui/tooltip";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+const orderSchema = z.object({
+  name: z.string().min(1, "Product name is required"),
+  description: z.string().min(1, "Product description is required"),
+  category: z.string().min(1, "Product category is required"),
+  price: z.number().min(0, "Product price must be a positive number"),
+  addedIngredients: z
+    .array(
+      z.object({
+        name: z.string(),
+        isAlergen: z.boolean(),
+      }),
+    )
+    .min(1, "At least one ingredient must be selected"),
+  images: z.array(z.string()),
+});
+
+export type OrderFormInputs = z.infer<typeof orderSchema>;
+
 export default function Form() {
   const [scheduleDelivery, setScheduleDelivery] = useState(false);
 
   const paymentMethod = scheduleDelivery ? "cash-on-delivery" : "in-store-cash";
+
+  const methods = useForm<OrderFormInputs>({
+    resolver: zodResolver(orderSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      category: "",
+      price: 0,
+      addedIngredients: [],
+      images: [],
+    },
+  });
 
   return (
     <Card className="w-full lg:max-w-2xl p-6 bg-lightMode-background dark:bg-darkMode-background text-gray-900 dark:text-gray-100 rounded-lg shadow-lg">
@@ -83,13 +116,28 @@ export default function Form() {
             >
               Grad
             </Label>
-            <Input
-              id="city"
-              placeholder="Unesite vaš grad"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Input
+                    id="city"
+                    placeholder="Unesite vaš grad"
+                    className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
+                      !scheduleDelivery ? "cursor-not-allowed opacity-50" : ""
+                    }`}
+                    disabled={!scheduleDelivery}
+                  />
+                </TooltipTrigger>
+                {!scheduleDelivery && (
+                  <TooltipContent>
+                    <p>Ovo polje je onemogućeno dok nije zakazana dostava</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label
@@ -98,12 +146,27 @@ export default function Form() {
             >
               Adresa
             </Label>
-            <Input
-              id="address"
-              placeholder="Unesite vašu adresu"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Input
+                    id="address"
+                    placeholder="Unesite vašu adresu"
+                    className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
+                      !scheduleDelivery ? "cursor-not-allowed opacity-50" : ""
+                    }`}
+                    disabled={!scheduleDelivery}
+                  />
+                </TooltipTrigger>
+                {!scheduleDelivery && (
+                  <TooltipContent>
+                    <p>Ovo polje je onemogućeno dok nije zakazana dostava</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
           </div>
+
           <div className="space-y-2">
             <Label
               htmlFor="zip"
@@ -111,14 +174,27 @@ export default function Form() {
             >
               Poštanski broj
             </Label>
-            <Input
-              id="zip"
-              placeholder="Unesite vaš poštanski broj"
-              className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Input
+                    id="zip"
+                    placeholder="Unesite vaš poštanski broj"
+                    className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
+                      !scheduleDelivery ? "cursor-not-allowed opacity-50" : ""
+                    }`}
+                    disabled={!scheduleDelivery}
+                  />
+                </TooltipTrigger>
+                {!scheduleDelivery && (
+                  <TooltipContent>
+                    <p>Ovo polje je onemogućeno dok nije zakazana dostava</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
-
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
             <Label

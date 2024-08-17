@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import AddToCartButton from "../Cart/AddToCartButton";
 import { useFetchProducts } from "@/lib/hooks/products/useGetProducts";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
-
+import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
 const truncateText = (text: string, limit: number) => {
   if (text.length > limit) {
     return text.substring(0, limit) + "...";
@@ -61,7 +60,7 @@ export default function ListProducts() {
                       ? `${product.price.toFixed(2)} dinara`
                       : "150 dinara"}
                   </p>
-                  <AddToCartButton product={product} />
+                  <AddToCartButtonWithDialog product={product} />
                 </div>
               </div>
             ))}
