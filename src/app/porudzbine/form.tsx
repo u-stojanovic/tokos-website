@@ -216,17 +216,44 @@ export default function Form() {
               )}
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                disabled={scheduleDelivery}
-                value="in-store-cash"
-                id="in-store-cash"
-              />
-              <Label
-                htmlFor="in-store-cash"
-                className="text-gray-700 dark:text-gray-200"
-              >
-                U Prodavnici
-              </Label>
+              {scheduleDelivery ? (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="flex gap-1 items-center text-center cursor-not-allowed">
+                      <RadioGroupItem
+                        value="in-store-cash"
+                        id="in-store-cash"
+                        disabled
+                      />
+                      <Label
+                        htmlFor="in-store-cash"
+                        className="text-gray-500 dark:text-gray-500 cursor-not-allowed"
+                      >
+                        U Prodavnici
+                      </Label>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        Zakazali ste porudzbinu, plaćanje je moguce pouzećem
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                <>
+                  <RadioGroupItem
+                    disabled={scheduleDelivery}
+                    value="in-store-cash"
+                    id="in-store-cash"
+                  />
+                  <Label
+                    htmlFor="in-store-cash"
+                    className="text-gray-700 dark:text-gray-200"
+                  >
+                    U Prodavnici
+                  </Label>
+                </>
+              )}
             </div>
           </RadioGroup>
         </div>
