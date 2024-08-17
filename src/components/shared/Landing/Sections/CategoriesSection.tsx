@@ -19,7 +19,7 @@ export default function CategoriesSection() {
               title={category.title}
               description={category.description}
               image={category.image}
-              count={category.count}
+              // count={category.count}
               icon={category.icon}
               link={category.link}
             />
@@ -34,7 +34,7 @@ interface CategoryCardProps {
   title: string;
   description: string;
   image: string;
-  count: number;
+  // count: number;
   icon: React.ReactNode;
   link: string;
 }
@@ -43,7 +43,7 @@ function CategoryCard({
   title,
   description,
   image,
-  count,
+  // count,
   icon,
   link,
 }: CategoryCardProps) {
@@ -66,7 +66,7 @@ function CategoryCard({
           </div>
           <h3 className="mt-4 text-xl font-bold text-white">{title}</h3>
           <p className="mt-2 text-md text-gray-300">{description}</p>
-          <p className="mt-1 text-md text-gray-400">{count} products</p>
+          {/* <p className="mt-1 text-md text-gray-400">{count} products</p> */}
         </div>
       </div>
     </Link>
