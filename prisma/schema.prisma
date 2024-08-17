@@ -73,6 +73,7 @@ model Order {
   description     String
   orderedBy       String
   orderedProducts OrderedProduct[]
+  isOrderVerified Boolean
   status          OrderStatus
   completedBy     User?            @relation(fields: [userId], references: [id])
   userId          Int?
