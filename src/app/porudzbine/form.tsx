@@ -1,6 +1,11 @@
 "use client";
 
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  Controller,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -23,6 +28,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import dayjs from "dayjs";
 
 const orderSchema = z
   .object({
@@ -46,7 +52,6 @@ const orderSchema = z
             "10minutemail.com",
             "guerrillamail.com",
             "temporarymail.com",
-            // Add more temporary domains as needed
           ];
           return !tempEmailDomains.includes(domain);
         },
@@ -56,18 +61,19 @@ const orderSchema = z
     address: z.string().optional(),
     zip: z.string().optional(),
     scheduleDelivery: z.boolean(),
+    date: z.date().optional(),
   })
   .refine(
     (data) => {
       if (data.scheduleDelivery) {
-        return data.city && data.address && data.zip;
+        return data.city && data.address && data.zip && data.date;
       }
       return true;
     },
     {
       message:
-        "Grad, Adresa i Poštanski broj su neophodni kada je zakazana dostava",
-      path: ["city", "address", "zip"],
+        "Grad, Adresa, Poštanski broj i Datum su neophodni kada je zakazana dostava",
+      path: ["city", "address", "zip", "date"],
     },
   );
 
@@ -86,7 +92,9 @@ export default function Form() {
       address: "",
       zip: "",
       scheduleDelivery: false,
+      date: undefined,
     },
+    shouldFocusError: false,
   });
 
   const onSubmit: SubmitHandler<OrderFormInputs> = (data) => {
@@ -294,6 +302,9 @@ export default function Form() {
                   onCheckedChange={(checked) => {
                     setScheduleDelivery(checked);
                     methods.setValue("scheduleDelivery", checked);
+                    if (!checked) {
+                      methods.setValue("date", undefined);
+                    }
                   }}
                   className="bg-gray-300 dark:bg-gray-700 focus:ring-0 focus:ring-blue-500"
                 />
@@ -303,11 +314,25 @@ export default function Form() {
                   <Label className="text-lg font-medium text-gray-700 dark:text-gray-200">
                     Datum i vreme
                   </Label>
-                  <DateTimePicker
-                    label="M/D/Y : H/M"
-                    ampm={true}
-                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-lightMode-secondary text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
+                  <Controller
+                    name="date"
+                    control={methods.control}
+                    render={({ field }) => (
+                      <DateTimePicker
+                        {...field}
+                        label="M/D/Y : H/M"
+                        ampm={true}
+                        onChange={(value) => field.onChange(value?.toDate())}
+                        value={field.value ? dayjs(field.value) : null}
+                        className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-lightMode-secondary text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
+                      />
+                    )}
                   />
+                  {methods.formState.errors.date && (
+                    <p className="text-red-500 text-sm">
+                      {methods.formState.errors.date?.message}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
