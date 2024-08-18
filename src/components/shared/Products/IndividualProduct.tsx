@@ -43,9 +43,12 @@ export default function ProductPage({ id }: Props) {
     return <ProductDetailsSkeleton />;
   }
 
+  const isKolaci = product && product.category.name === "kolaci";
+  const isTorte = product && product.category.name === "torte";
+
   return (
-    <div className="xl:max-w-screen-2xl lg:max-w-7xl py-12 px-4 sm:px-6 lg:px-8 mx-auto">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 lg:gap-16">
+    <div className="xl:max-w-screen-2xl md:max-w-7xl pt-4 mb-32 px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
         <div className="space-y-6">
           <Swiper
             modules={[Navigation, EffectFade, Thumbs]}
@@ -113,9 +116,60 @@ export default function ProductPage({ id }: Props) {
                 <span className="sr-only">Go back</span>
               </Button>
             </div>
-            <div className="grid gap-6">
+            <div className="grid gap-4">
+              {isKolaci ? (
+                <>
+                  <Label htmlFor="size" className="text-base m-0 p-0 ">
+                    Veličina:
+                  </Label>
+                  <div className="flex flex-row gap-4 mt-4">
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">1kg</span>
+                      </div>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">2kg</span>
+                      </div>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">3kg</span>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : isTorte ? (
+                <>
+                  <Label htmlFor="size" className="text-base m-0 p-0 ">
+                    Veličina:
+                  </Label>
+                  <div className="flex flex-row gap-4 mt-4">
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+                        Mala
+                      </span>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <Square className="w-16 h-16 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+                        Velika
+                      </span>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+              <Label htmlFor="note" className="text-base m-0 p-0">
+                Napomena:
+              </Label>
               <div className="text-lightMode-text dark:text-darkMode-text text-base">
-                Napomena: Ukoliko želite drugačije detalje u odnosu na prikazanu
+                Ukoliko želite drugačije detalje u odnosu na prikazanu
                 dekoraciju torte, molimo Vas da to navedete ovde:
               </div>
               <Textarea
@@ -136,30 +190,11 @@ export default function ProductPage({ id }: Props) {
               <h1 className="text-3xl font-bold">{product && product.name}</h1>
             </div>
             <div className="grid gap-6">
-              <div className="grid gap-4">
-                <Label htmlFor="size" className="text-base">
-                  Veličina
-                </Label>
-                {product && product.category.name.toLowerCase() === "torte" && (
-                  <div className="flex flex-row gap-4 mt-4">
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
-                      </div>
-                      <span className="text-lightMode-text dark:text-darkMode-text mt-2">
-                        Mala
-                      </span>
-                    </div>
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-background dark:hover:bg-darkMode-background rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <Square className="w-16 h-16 stroke-[1.5]" />
-                      </div>
-                      <span className="text-lightMode-text dark:text-darkMode-text mt-2">
-                        Velika
-                      </span>
-                    </div>
-                  </div>
-                )}
+              <div>
+                <h2 className="text-lg font-semibold">Opis proizvoda</h2>
+                <p className="text-lightMode-text dark:text-darkMode-text text-base">
+                  {product && product.description}
+                </p>
               </div>
               <div className="text-4xl font-bold">
                 {product && product.price ? product.price : 20} RSD
@@ -173,12 +208,6 @@ export default function ProductPage({ id }: Props) {
               </Button>
             </div>
             <div className="grid gap-6">
-              <div>
-                <h2 className="text-lg font-semibold">Opis proizvoda</h2>
-                <p className="text-lightMode-text dark:text-darkMode-text text-base">
-                  {product && product.description}
-                </p>
-              </div>
               <div>
                 <h2 className="text-lg font-semibold">Sastojci</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
