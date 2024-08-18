@@ -118,48 +118,52 @@ export default function ProductPage({ id }: Props) {
             </div>
             <div className="grid gap-4">
               {isKolaci ? (
-                <div className="flex flex-row gap-4 mt-4">
+                <>
                   <Label htmlFor="size" className="text-base m-0 p-0 ">
                     Veličina:
                   </Label>
-                  <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                    <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                      <span className="text-2xl font-bold">1kg</span>
+                  <div className="flex flex-row gap-4 mt-4">
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">1kg</span>
+                      </div>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">2kg</span>
+                      </div>
+                    </div>
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <span className="text-2xl font-bold">3kg</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                    <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                      <span className="text-2xl font-bold">2kg</span>
-                    </div>
-                  </div>
-                  <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                    <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                      <span className="text-2xl font-bold">3kg</span>
-                    </div>
-                  </div>
-                </div>
+                </>
               ) : isTorte ? (
-                <div className="flex flex-row gap-4 mt-4">
+                <>
                   <Label htmlFor="size" className="text-base m-0 p-0 ">
                     Veličina:
                   </Label>
-                  <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                    <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                      <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+                  <div className="flex flex-row gap-4 mt-4">
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+                        Mala
+                      </span>
                     </div>
-                    <span className="text-lightMode-text dark:text-darkMode-text mt-1">
-                      Mala
-                    </span>
-                  </div>
-                  <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                    <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                      <Square className="w-16 h-16 stroke-[1.5]" />
+                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
+                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                        <Square className="w-16 h-16 stroke-[1.5]" />
+                      </div>
+                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+                        Velika
+                      </span>
                     </div>
-                    <span className="text-lightMode-text dark:text-darkMode-text mt-1">
-                      Velika
-                    </span>
                   </div>
-                </div>
+                </>
               ) : null}
               <Label htmlFor="note" className="text-base m-0 p-0">
                 Napomena:
