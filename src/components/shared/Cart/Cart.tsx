@@ -14,10 +14,26 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
+function formatOption(option: string) {
+  switch (option) {
+    case "ONE_KG":
+      return "1 kg";
+    case "TWO_KG":
+      return "2 kg";
+    case "THREE_KG":
+      return "3 kg";
+    case "SMALL":
+      return "Mala";
+    case "BIG":
+      return "Velika";
+    default:
+      return option;
+  }
+}
+
 export default function Cart() {
   const { cartItems, addToCart, removeFromCart, decrementQuantity } = useCart();
 
-  // Calculate total price and total quantity with useMemo to avoid recalculating on every render
   const totalPrice = useMemo(
     () =>
       cartItems.reduce(
@@ -114,7 +130,18 @@ export default function Cart() {
                       <TrashIcon className="h-5 w-5 text-red-500" />
                     </Button>
                   </div>
-                  <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
+                  {/* Display option and description here */}
+                  {item.option && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      Veličina: {formatOption(item.option)}
+                    </span>
+                  )}
+                  {item.description && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {item.description}
+                    </span>
+                  )}
+                  <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mt-2">
                     <div className="flex items-center">
                       <Button
                         variant="ghost"
@@ -132,7 +159,7 @@ export default function Cart() {
                         size="icon"
                         className="hover:bg-transparent"
                         onClick={() =>
-                          addToCart(item.product, item.description)
+                          addToCart(item.product, item.description, item.option)
                         }
                       >
                         <PlusIcon className="h-5 w-5 text-green-500" />

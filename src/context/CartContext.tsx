@@ -9,16 +9,22 @@ import {
 } from "react";
 import { Product } from "@/lib/types";
 import { useToast } from "@/components/ui/use-toast";
+import { CakeSize, CookieSize } from "@prisma/client";
 
 type CartItem = {
   product: Product;
   description?: string;
+  option?: CakeSize | CookieSize;
   quantity: number;
 };
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product, description?: string) => void;
+  addToCart: (
+    product: Product,
+    description?: string,
+    option?: CakeSize | CookieSize,
+  ) => void;
   decrementQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
@@ -50,17 +56,27 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log("cartItems: ", cartItems);
   }, [cartItems]);
 
-  const addToCart = (product: Product, description?: string) => {
+  const addToCart = (
+    product: Product,
+    description?: string,
+    option?: CakeSize | CookieSize,
+  ) => {
+    console.log("option: ", option);
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(
         (item) =>
-          item.product.id === product.id && item.description === description,
+          item.product.id === product.id &&
+          item.description === description &&
+          item.option === option,
       );
       if (existingItem) {
         return prevItems.map((item) =>
-          item.product.id === product.id && item.description === description
+          item.product.id === product.id &&
+          item.description === description &&
+          item.option === option
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
@@ -69,7 +85,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         title: "Korpa",
         description: "Proizvod je dodat u korpu",
       });
-      return [...prevItems, { product, description, quantity: 1 }];
+      return [...prevItems, { product, description, option, quantity: 1 }];
     });
   };
 
