@@ -1,17 +1,17 @@
 "use client";
 
+import { useToast } from "@/components/ui/use-toast";
+import { Product } from "@/lib/types";
+import { CakeSize, CookieSize } from "@prisma/client";
 import {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   ReactNode,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
-import { Product } from "@/lib/types";
-import { useToast } from "@/components/ui/use-toast";
-import { CakeSize, CookieSize } from "@prisma/client";
 
-type CartItem = {
+export type CartItem = {
   product: Product;
   description?: string;
   option?: CakeSize | CookieSize;

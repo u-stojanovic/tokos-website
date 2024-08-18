@@ -1,34 +1,37 @@
 "use client";
 
-import {
-  useForm,
-  FormProvider,
-  SubmitHandler,
-  Controller,
-} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { DateTimePicker } from "@mui/x-date-pickers";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useToast } from "@/components/ui/use-toast";
+import { useCart } from "@/context/CartContext";
+import { createOrder } from "@/lib/actions/orderActions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DateTimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import { useState } from "react";
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { z } from "zod";
 
 const orderSchema = z
   .object({
@@ -81,6 +84,8 @@ export type OrderFormInputs = z.infer<typeof orderSchema>;
 
 export default function Form() {
   const [scheduleDelivery, setScheduleDelivery] = useState(false);
+  const { cartItems, clearCart } = useCart();
+  const { toast } = useToast();
 
   const methods = useForm<OrderFormInputs>({
     resolver: zodResolver(orderSchema),
@@ -97,8 +102,28 @@ export default function Form() {
     shouldFocusError: false,
   });
 
-  const onSubmit: SubmitHandler<OrderFormInputs> = (data) => {
-    console.log("Form Submitted", data);
+  const onSubmit: SubmitHandler<OrderFormInputs> = async (data) => {
+    try {
+      await createOrder({ ...data, cartItems });
+
+      toast({
+        title: "Narudžbina uspešna",
+        description:
+          "Vaša narudžbina je uspešno kreirana. Poslali smo vam email, proverite i spam odnosno nepozeljeno sekciju na vašem email-u.",
+      });
+
+      clearCart();
+
+      methods.reset();
+    } catch (error) {
+      console.error("Error creating order:", error);
+
+      toast({
+        title: "Greška",
+        description: "Došlo je do greške prilikom kreiranja narudžbine.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
