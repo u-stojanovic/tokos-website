@@ -81,6 +81,7 @@ model Order {
   userId                     Int?
   orderDateTime              DateTime?
   createdAt                  DateTime                  @default(now())
+  verificationToken          String?                   @unique
 }
 
 model OrderDeliveryInformation {

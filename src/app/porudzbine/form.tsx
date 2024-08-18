@@ -21,6 +21,8 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useCart } from "@/context/CartContext";
 import { createOrder } from "@/lib/actions/orderActions";
+import { useCreateOrder } from "@/lib/hooks/orders/useCreateOrder";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
@@ -84,9 +86,7 @@ export type OrderFormInputs = z.infer<typeof orderSchema>;
 
 export default function Form() {
   const [scheduleDelivery, setScheduleDelivery] = useState(false);
-  const { cartItems, clearCart } = useCart();
-  const { toast } = useToast();
-
+  const { cartItems } = useCart();
   const methods = useForm<OrderFormInputs>({
     resolver: zodResolver(orderSchema),
     defaultValues: {
@@ -102,28 +102,10 @@ export default function Form() {
     shouldFocusError: false,
   });
 
-  const onSubmit: SubmitHandler<OrderFormInputs> = async (data) => {
-    try {
-      await createOrder({ ...data, cartItems });
+  const createOrderMutation = useCreateOrder();
 
-      toast({
-        title: "Narudžbina uspešna",
-        description:
-          "Vaša narudžbina je uspešno kreirana. Poslali smo vam email, proverite i spam odnosno nepozeljeno sekciju na vašem email-u.",
-      });
-
-      clearCart();
-
-      methods.reset();
-    } catch (error) {
-      console.error("Error creating order:", error);
-
-      toast({
-        title: "Greška",
-        description: "Došlo je do greške prilikom kreiranja narudžbine.",
-        variant: "destructive",
-      });
-    }
+  const onSubmit: SubmitHandler<OrderFormInputs> = (data) => {
+    createOrderMutation.mutate({ ...data, cartItems });
   };
 
   return (
@@ -484,8 +466,11 @@ export default function Form() {
               type="submit"
               variant="default"
               className="w-full py-3 bg-green-500 dark:bg-green-700 text-white font-semibold rounded-md hover:bg-blue-700 dark:hover:bg-blue-700 transition-all"
+              disabled={createOrderMutation.isPending}
             >
-              Potvrdi narudžbinu
+              {createOrderMutation.isPending
+                ? "Kreiranje narudžbine..."
+                : "Potvrdi narudžbinu"}
             </Button>
           </CardFooter>
         </Card>
