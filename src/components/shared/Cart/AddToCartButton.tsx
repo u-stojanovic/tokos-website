@@ -3,17 +3,23 @@
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
 import { useCart } from "@/context/CartContext";
+import { CakeSize, CookieSize } from "@prisma/client";
 
 interface Props {
   product: Product;
   description?: string;
+  option?: CakeSize | CookieSize;
 }
 
-export default function AddToCartButton({ product, description }: Props) {
+export default function AddToCartButton({
+  product,
+  description,
+  option,
+}: Props) {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart(product, description);
+    addToCart(product, description, option);
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Product } from "@/lib/types";
-
+import { CakeSize, CookieSize } from "@prisma/client";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { RectangleHorizontal, Square } from "lucide-react";
 
 interface Props {
   product: Product;
@@ -23,9 +24,80 @@ interface Props {
 export default function AddToCartButtonWithDialog({ product }: Props) {
   const { addToCart } = useCart();
   const [additionalDetails, setAdditionalDetails] = React.useState("");
+  const [selectedSize, setSelectedSize] = React.useState<
+    CakeSize | CookieSize | undefined
+  >(undefined);
 
   const handleAddToCart = () => {
-    addToCart(product, additionalDetails);
+    addToCart(product, additionalDetails, selectedSize);
+  };
+
+  const handleSizeSelection = (size: CakeSize | CookieSize) => {
+    setSelectedSize(size);
+  };
+
+  const renderSizeOptions = () => {
+    if (product.category.name === "kolaci") {
+      return (
+        <div className="flex flex-row gap-4 mt-4">
+          {[
+            { label: "1 kg", value: CookieSize.ONE_KG },
+            { label: "2 kg", value: CookieSize.TWO_KG },
+            { label: "3 kg", value: CookieSize.THREE_KG },
+          ].map(({ label, value }, index) => (
+            <div
+              key={index}
+              className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+                selectedSize === value
+                  ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                  : ""
+              }`}
+              onClick={() => handleSizeSelection(value)}
+            >
+              <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                <span className="text-2xl font-bold">{label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    } else if (product.category.name === "torte") {
+      return (
+        <div className="flex flex-row gap-4 mt-4">
+          <div
+            className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+              selectedSize === CakeSize.SMALL
+                ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                : ""
+            }`}
+            onClick={() => handleSizeSelection(CakeSize.SMALL)}
+          >
+            <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+              <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+            </div>
+            <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+              Mala
+            </span>
+          </div>
+          <div
+            className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+              selectedSize === CakeSize.BIG
+                ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                : ""
+            }`}
+            onClick={() => handleSizeSelection(CakeSize.BIG)}
+          >
+            <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+              <Square className="w-16 h-16 stroke-[1.5]" />
+            </div>
+            <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+              Velika
+            </span>
+          </div>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -49,18 +121,18 @@ export default function AddToCartButtonWithDialog({ product }: Props) {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          {renderSizeOptions()}
           <Textarea
             placeholder="Unesite dodatne detalje"
             value={additionalDetails}
             onChange={(e) => setAdditionalDetails(e.target.value)}
-            className="text-md font-semibold p-3 sm:p-4 min-h-[150px] sm:min-h-[200px] bg-muted text-muted-foreground border-none rounded-md"
+            className="p-4 min-h-[200px] bg-lightMode-background dark:bg-darkMode-background dark:border-darkMode-primary dark:text-white dark:placeholder-darkMode-text"
           />
         </div>
         <DialogFooter>
           <Button
             size="lg"
-            variant="ghost"
-            className="w-fit text-lightMode-text dark:text-darkMode-text text-lg py-3 font-bold rounded-md"
+            className="bg-darkMode-primary text-lightMode-text w-fit text-lg rounded-lg shadow-md transition-all duration-300 transform-gpu will-change-transform hover:shadow-xl hover:-translate-y-1 dark:hover:bg-darkMode-primary"
             onClick={handleAddToCart}
           >
             Dodaj

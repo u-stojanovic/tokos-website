@@ -28,6 +28,7 @@ enum CakeSize {
 
 enum CookieSize {
   ONE_KG
+  TWO_KG
   THREE_KG
 }
 

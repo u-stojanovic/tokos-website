@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import AddToCartButton from "../Cart/AddToCartButton";
 import { useFetchProductById } from "@/lib/hooks/products/useGetProductById";
 import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
-import { Ingredient } from "@prisma/client";
+import { CakeSize, CookieSize, Ingredient } from "@prisma/client";
 
 interface Props {
   id: number;
@@ -26,6 +26,9 @@ export default function ProductPage({ id }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [additionalDetails, setAdditionalDetails] = useState("");
+  const [selectedSize, setSelectedSize] = useState<
+    CakeSize | CookieSize | undefined
+  >(undefined);
 
   const { data: product, isLoading } = useFetchProductById(id);
 
@@ -43,8 +46,73 @@ export default function ProductPage({ id }: Props) {
     return <ProductDetailsSkeleton />;
   }
 
-  const isKolaci = product && product.category.name === "kolaci";
-  const isTorte = product && product.category.name === "torte";
+  const handleSizeSelection = (size: CakeSize | CookieSize) => {
+    setSelectedSize(size);
+  };
+
+  const renderSizeOptions = () => {
+    if (product && product.category.name === "kolaci") {
+      return (
+        <div className="flex flex-row gap-4 mt-4">
+          {[
+            { label: "1kg", value: CookieSize.ONE_KG },
+            { label: "2kg", value: CookieSize.TWO_KG },
+            { label: "3kg", value: CookieSize.THREE_KG },
+          ].map(({ label, value }, index) => (
+            <div
+              key={index}
+              className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+                selectedSize === value
+                  ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                  : ""
+              }`}
+              onClick={() => handleSizeSelection(value)}
+            >
+              <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+                <span className="text-2xl font-bold">{label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    } else if (product && product.category.name === "torte") {
+      return (
+        <div className="flex flex-row gap-4 mt-4">
+          <div
+            className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+              selectedSize === CakeSize.SMALL
+                ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                : ""
+            }`}
+            onClick={() => handleSizeSelection(CakeSize.SMALL)}
+          >
+            <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+              <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
+            </div>
+            <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+              Mala
+            </span>
+          </div>
+          <div
+            className={`group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg ${
+              selectedSize === CakeSize.BIG
+                ? "bg-lightMode-surface dark:bg-darkMode-surface"
+                : ""
+            }`}
+            onClick={() => handleSizeSelection(CakeSize.BIG)}
+          >
+            <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
+              <Square className="w-16 h-16 stroke-[1.5]" />
+            </div>
+            <span className="text-lightMode-text dark:text-darkMode-text mt-1">
+              Velika
+            </span>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="xl:max-w-screen-2xl md:max-w-7xl pt-4 mb-32 px-4 sm:px-6 lg:px-8 mx-auto">
@@ -117,54 +185,7 @@ export default function ProductPage({ id }: Props) {
               </Button>
             </div>
             <div className="grid gap-4">
-              {isKolaci ? (
-                <>
-                  <Label htmlFor="size" className="text-base m-0 p-0 ">
-                    Veličina:
-                  </Label>
-                  <div className="flex flex-row gap-4 mt-4">
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <span className="text-2xl font-bold">1kg</span>
-                      </div>
-                    </div>
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <span className="text-2xl font-bold">2kg</span>
-                      </div>
-                    </div>
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <span className="text-2xl font-bold">3kg</span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              ) : isTorte ? (
-                <>
-                  <Label htmlFor="size" className="text-base m-0 p-0 ">
-                    Veličina:
-                  </Label>
-                  <div className="flex flex-row gap-4 mt-4">
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <RectangleHorizontal className="w-12 h-12 stroke-[1.5]" />
-                      </div>
-                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
-                        Mala
-                      </span>
-                    </div>
-                    <div className="group flex flex-col items-center cursor-pointer hover:drop-shadow-md hover:bg-lightMode-surface dark:hover:bg-darkMode-surface rounded-lg">
-                      <div className="flex items-center justify-center text-lightMode-text dark:text-darkMode-text rounded-lg w-20 h-20">
-                        <Square className="w-16 h-16 stroke-[1.5]" />
-                      </div>
-                      <span className="text-lightMode-text dark:text-darkMode-text mt-1">
-                        Velika
-                      </span>
-                    </div>
-                  </div>
-                </>
-              ) : null}
+              {product && renderSizeOptions()}
               <Label htmlFor="note" className="text-base m-0 p-0">
                 Napomena:
               </Label>
@@ -176,11 +197,12 @@ export default function ProductPage({ id }: Props) {
                 placeholder="Unesite dodatne detalje"
                 value={additionalDetails}
                 onChange={(e) => setAdditionalDetails(e.target.value)}
-                className="p-4 min-h-[200px] bg-lightMode-primary dark:bg-darkMode-primary text-black"
+                className="p-4 min-h-[200px] bg-lightMode-background dark:bg-darkMode-background dark:border-darkMode-primary dark:text-white dark:placeholder-darkMode-text"
               />
               <AddToCartButton
                 product={product as any}
                 description={additionalDetails}
+                option={selectedSize}
               />
             </div>
           </div>
@@ -208,6 +230,12 @@ export default function ProductPage({ id }: Props) {
               </Button>
             </div>
             <div className="grid gap-6">
+              <div>
+                <h2 className="text-lg font-semibold">Kategorija</h2>
+                <p className="text-lightMode-text dark:text-darkMode-text text-base">
+                  {product && product.category.name}
+                </p>
+              </div>
               <div>
                 <h2 className="text-lg font-semibold">Sastojci</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
