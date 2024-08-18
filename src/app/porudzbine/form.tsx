@@ -305,6 +305,7 @@ export default function Form() {
                 </Label>
                 <Switch
                   id="schedule-delivery"
+                  type="button"
                   checked={scheduleDelivery}
                   onCheckedChange={(checked) => {
                     setScheduleDelivery(checked);
