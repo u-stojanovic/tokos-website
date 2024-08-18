@@ -51,11 +51,11 @@ export default function Cart() {
         >
           <SheetHeader className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4">
             <SheetTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-              Your Cart
+              Vaša Korpa
             </SheetTitle>
           </SheetHeader>
           <div className="p-6 text-gray-900 dark:text-gray-100">
-            <p>Your cart is empty.</p>
+            <p>Vaša korpa je prazna.</p>
           </div>
         </SheetContent>
       </Sheet>
@@ -83,7 +83,7 @@ export default function Cart() {
       >
         <SheetHeader className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4">
           <SheetTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-            Your Cart
+            Vaša Korpa
           </SheetTitle>
         </SheetHeader>
         <div className="p-6 space-y-6 text-gray-900 dark:text-gray-100 flex-grow overflow-auto">
