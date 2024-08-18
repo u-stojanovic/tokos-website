@@ -176,7 +176,7 @@ export default function ProductPage({ id }: Props) {
                 placeholder="Unesite dodatne detalje"
                 value={additionalDetails}
                 onChange={(e) => setAdditionalDetails(e.target.value)}
-                className="p-4 min-h-[200px] bg-lightMode-background border-lightMode-primary dark:bg-darkMode-background dark:border-darkMode-primary dark:text-white dark:placeholder-darkMode-text"
+                className="p-4 min-h-[200px] bg-lightMode-background dark:bg-darkMode-background dark:border-darkMode-primary dark:text-white dark:placeholder-darkMode-text"
               />
               <AddToCartButton
                 product={product as any}
