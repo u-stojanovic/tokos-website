@@ -4,6 +4,10 @@ import { OrderFormInputs } from "@/app/porudzbine/form";
 import { CartItem } from "@/context/CartContext";
 import { CakeSize, CookieSize, OrderStatus } from "@prisma/client";
 import prisma from "../../../prisma/client";
+import {
+  generateVerificationToken,
+  sendOrderVerificationEmail,
+} from "./mailActions";
 
 export async function createOrder(
   formValues: OrderFormInputs & { cartItems: CartItem[] },
@@ -26,6 +30,8 @@ export async function createOrder(
       });
     }
 
+    const verificationToken = generateVerificationToken();
+
     const order = await prisma.order.create({
       data: {
         orderedBy: formValues.email,
@@ -34,6 +40,7 @@ export async function createOrder(
         status: OrderStatus.Pending,
         orderDateTime: formValues.date,
         createdAt: new Date(),
+        verificationToken,
       },
     });
 
@@ -67,6 +74,8 @@ export async function createOrder(
         }
       }
     }
+
+    await sendOrderVerificationEmail(formValues.email, verificationToken);
 
     const completeOrder = await prisma.order.findUnique({
       where: { id: order.id },
