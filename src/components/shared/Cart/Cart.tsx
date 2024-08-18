@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useMemo } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
-  SheetTrigger,
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ShoppingBagIcon, MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { MinusIcon, PlusIcon, ShoppingBagIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 
 function formatOption(option: string) {
   switch (option) {
@@ -95,7 +95,7 @@ export default function Cart() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="h-auto w-[450px] sm:w-[500px] bg-lightMode-surface dark:bg-darkMode-surface shadow-lg flex flex-col justify-between"
+        className="h-auto w-[400px] sm:w-[500px] bg-lightMode-surface dark:bg-darkMode-surface shadow-lg flex flex-col justify-between"
       >
         <SheetHeader className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4">
           <SheetTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
