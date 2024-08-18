@@ -7,7 +7,7 @@ export function generateVerificationToken() {
 
 export async function sendOrderVerificationEmail(email: string, token: string) {
   const baseUrl =
-    process.env.NODE_ENV !== "development"
+    process.env.NODE_ENV !== ("DEV" as any)
       ? process.env.NEXT_PUBLIC_APP_URL_PROD
       : process.env.NEXT_PUBLIC_APP_URL_DEV;
 
