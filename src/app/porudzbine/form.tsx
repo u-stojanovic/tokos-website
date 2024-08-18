@@ -102,7 +102,7 @@ export default function Form() {
     shouldFocusError: false,
   });
 
-  const createOrderMutation = useCreateOrder();
+  const createOrderMutation = useCreateOrder(methods.reset);
 
   const onSubmit: SubmitHandler<OrderFormInputs> = (data) => {
     createOrderMutation.mutate({ ...data, cartItems });

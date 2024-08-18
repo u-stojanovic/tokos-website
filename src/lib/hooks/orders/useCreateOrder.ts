@@ -5,7 +5,7 @@ import { createOrder } from "@/lib/actions/orderActions";
 import { OrderFormInputs } from "@/app/porudzbine/form";
 import { CartItem } from "@/context/CartContext";
 
-export const useCreateOrder = () => {
+export const useCreateOrder = (reset: () => void) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { clearCart } = useCart();
@@ -22,6 +22,7 @@ export const useCreateOrder = () => {
           "Vaša narudžbina je uspešno kreirana. Poslali smo vam email, proverite i spam odnosno nepozeljeno sekciju na vašem email-u.",
       });
       clearCart();
+      reset();
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: () => {
