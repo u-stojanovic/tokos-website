@@ -364,6 +364,7 @@ export default function Form() {
                   <RadioGroupItem
                     value="online-payment"
                     id="online-payment"
+                    type="button"
                     disabled
                   />
                   <TooltipProvider>
@@ -388,6 +389,7 @@ export default function Form() {
                       <RadioGroupItem
                         value="cash-on-delivery"
                         id="cash-on-delivery"
+                        type="button"
                       />
                       <Label
                         htmlFor="cash-on-delivery"
@@ -401,6 +403,7 @@ export default function Form() {
                       <Tooltip>
                         <TooltipTrigger className="flex gap-1 items-center text-center cursor-not-allowed">
                           <RadioGroupItem
+                            type="button"
                             value="cash-on-delivery"
                             id="cash-on-delivery"
                             disabled
@@ -425,6 +428,7 @@ export default function Form() {
                       <Tooltip>
                         <TooltipTrigger className="flex gap-1 items-center text-center cursor-not-allowed">
                           <RadioGroupItem
+                            type="button"
                             value="in-store-cash"
                             id="in-store-cash"
                             disabled
@@ -446,6 +450,7 @@ export default function Form() {
                   ) : (
                     <>
                       <RadioGroupItem
+                        type="button"
                         disabled={scheduleDelivery}
                         value="in-store-cash"
                         id="in-store-cash"
