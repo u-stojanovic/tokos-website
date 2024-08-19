@@ -21,7 +21,10 @@ export default function ListProducts() {
     data: products,
     isLoading,
     isError,
-  } = useQuery({ queryKey, queryFn });
+  } = useQuery({
+    queryKey,
+    queryFn,
+  });
 
   if (isLoading) {
     return <ListingProductsSkeletonLoader />;
