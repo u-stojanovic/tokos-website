@@ -141,6 +141,7 @@ function NavLink({ href, text, pathname, onClick }: NavLinkProps) {
   return (
     <Link
       href={href}
+      prefetch
       className={isActive ? activeNavLinkStyle : navLinkStyle}
       onClick={onClick}
     >
@@ -152,7 +153,7 @@ function NavLink({ href, text, pathname, onClick }: NavLinkProps) {
 function NavListItem({ href, text, pathname, onClick }: NavListItemProps) {
   const isActive = pathname === href;
   return (
-    <Link href={href} onClick={onClick}>
+    <Link href={href} prefetch onClick={onClick}>
       <li
         className={
           isActive ? `${navLiComponentStyle} bg-pink-200` : navLiComponentStyle
