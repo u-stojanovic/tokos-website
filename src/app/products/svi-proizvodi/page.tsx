@@ -1,14 +1,18 @@
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
+import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+export default async function AllProducts() {
+  const queryClient = new QueryClient();
+  const { queryKey, queryFn } = useGetAllProducts();
 
-export default function AllProducts() {
+  await queryClient.prefetchQuery({ queryKey, queryFn });
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-left">

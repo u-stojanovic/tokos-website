@@ -1,5 +1,6 @@
 import ListCategoryProducts from "@/components/shared/Products/ListCategoriesProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
+import { useProductsByCategoryQuery } from "@/lib/hooks/products/useProductsByCategoryQuery";
 import {
   HydrationBoundary,
   QueryClient,
@@ -14,8 +15,12 @@ interface CategoryPageProps {
 
 const queryClient = new QueryClient();
 
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
+
+  const { queryKey, queryFn } = useProductsByCategoryQuery(category);
+
+  await queryClient.prefetchQuery({ queryKey, queryFn });
 
   const transformCategoryName = (category: string) => {
     switch (category) {

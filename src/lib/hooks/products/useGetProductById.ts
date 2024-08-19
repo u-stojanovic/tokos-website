@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProductById } from "../../actions/productActions";
+import { getProductById } from "@/lib/actions/productActions";
 
-const fetchProduct = async (id: number) => {
-  const product = await getProductById(id);
-  return product;
-};
+export const useGetProductById = (id: number) => {
+  const queryKey: [string, string] = ["getProductById", id.toString()];
 
-export const useFetchProductById = (id: number) => {
-  return useQuery({
-    queryKey: ["getProductById", id],
-    queryFn: ({ queryKey }) => fetchProduct(queryKey[1] as number),
-  });
+  const queryFn = async ({ queryKey }: { queryKey: string[] }) => {
+    return await getProductById(Number(queryKey[1]));
+  };
+
+  return { queryKey, queryFn };
 };
