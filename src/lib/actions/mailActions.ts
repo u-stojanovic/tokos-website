@@ -1,13 +1,17 @@
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 
-export function generateVerificationToken() {
-  return crypto.randomBytes(32).toString("hex");
+export function generateVerificationToken(email: string, phoneNum: string) {
+  const randomToken = crypto.randomBytes(32).toString("hex");
+  const encodedData = Buffer.from(JSON.stringify({ email, phoneNum })).toString(
+    "base64",
+  );
+  return `${randomToken}.${encodedData}`;
 }
 
 export async function sendOrderVerificationEmail(email: string, token: string) {
   const baseUrl =
-    process.env.NODE_ENV !== ("DEV" as any)
+    process.env.NODE_ENV === "production"
       ? process.env.NEXT_PUBLIC_APP_URL_PROD
       : process.env.NEXT_PUBLIC_APP_URL_DEV;
 

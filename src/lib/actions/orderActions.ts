@@ -26,11 +26,16 @@ export async function createOrder(
           city: formValues.city,
           adresa: formValues.address,
           zip: formValues.zip,
+          email: formValues.email,
+          phoneNum: formValues.phone,
         },
       });
     }
 
-    const verificationToken = generateVerificationToken();
+    const verificationToken = generateVerificationToken(
+      formValues.email,
+      formValues.phone,
+    );
 
     const order = await prisma.order.create({
       data: {

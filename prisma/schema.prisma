@@ -85,11 +85,13 @@ model Order {
 }
 
 model OrderDeliveryInformation {
-  id     Int     @id @default(autoincrement())
-  city   String?
-  adresa String?
-  zip    String?
-  Order  Order[]
+  id       Int     @id @default(autoincrement())
+  city     String?
+  adresa   String?
+  zip      String?
+  email    String?
+  phoneNum String?
+  Order    Order[]
 }
 
 model OrderedProduct {
