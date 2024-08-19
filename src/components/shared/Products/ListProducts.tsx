@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
-import { useQuery } from "@tanstack/react-query";
 import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
 
 const truncateText = (text: string, limit: number) => {
@@ -15,16 +14,7 @@ const truncateText = (text: string, limit: number) => {
 };
 
 export default function ListProducts() {
-  const { queryKey, queryFn } = useGetAllProducts();
-
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey,
-    queryFn,
-  });
+  const { data: products, isLoading, isError } = useGetAllProducts();
 
   if (isLoading) {
     return <ListingProductsSkeletonLoader />;
