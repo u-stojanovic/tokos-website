@@ -56,9 +56,7 @@ export default function ListProducts() {
                     {/* Adjust the character limit as needed */}
                   </p>
                   <p className="text-blue-500 font-semibold mb-4 text-lg">
-                    {product.price
-                      ? `${product.price.toFixed(2)} dinara`
-                      : "150 dinara"}
+                    {product.price ? `${product.price.toFixed(2)} RSD` : "N/A"}
                   </p>
                   <AddToCartButtonWithDialog product={product} />
                 </div>
