@@ -1,23 +1,22 @@
 "use client";
 
-import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useGetProductById } from "@/lib/hooks/products/useGetProductById";
-import { CakeSize, CookieSize } from "@prisma/client";
-import { useQuery } from "@tanstack/react-query";
-import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
 import "swiper/css";
-import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import "swiper/css/thumbs";
-import { EffectFade, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectFade, Thumbs } from "swiper/modules";
+import Image from "next/image";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import AddToCartButton from "../Cart/AddToCartButton";
+import { useFetchProductById } from "@/lib/hooks/products/useGetProductById";
+import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
+import { CakeSize, CookieSize, Ingredient } from "@prisma/client";
 
 interface Props {
   id: number;
@@ -31,14 +30,9 @@ export default function ProductPage({ id }: Props) {
     CakeSize | CookieSize | undefined
   >(undefined);
 
-  const { queryKey, queryFn } = useGetProductById(id);
-  const { data: product, isLoading, isError } = useQuery({ queryKey, queryFn });
+  const { data: product, isLoading } = useFetchProductById(id);
 
-  if (isLoading) {
-    return <ProductDetailsSkeleton />;
-  }
-
-  if (isError || !product) {
+  if (!product && !isLoading) {
     return (
       <div className="flex flex-col items-center justify-center m-4">
         <h1 className="text-3xl font-bold text-lightMode-text dark:text-darkMode-text mb-6">
@@ -48,12 +42,16 @@ export default function ProductPage({ id }: Props) {
     );
   }
 
+  if (!product && isLoading) {
+    return <ProductDetailsSkeleton />;
+  }
+
   const handleSizeSelection = (size: CakeSize | CookieSize) => {
     setSelectedSize(size);
   };
 
   const renderSizeOptions = () => {
-    if (product.category.name === "kolaci") {
+    if (product && product.category.name === "kolaci") {
       return (
         <div className="flex flex-row gap-4 mt-4">
           {[
@@ -77,7 +75,7 @@ export default function ProductPage({ id }: Props) {
           ))}
         </div>
       );
-    } else if (product.category.name === "torte") {
+    } else if (product && product.category.name === "torte") {
       return (
         <div className="flex flex-row gap-4 mt-4">
           <div
@@ -130,21 +128,24 @@ export default function ProductPage({ id }: Props) {
             thumbs={{ swiper: thumbsSwiper }}
             className="w-full h-auto"
           >
-            {product.images.map((image, index) => (
-              <SwiperSlide
-                key={index}
-                className="flex justify-center items-center"
-              >
-                <Image
-                  src={image.imageUrl}
-                  alt={`${product.name} image ${index + 1}`}
-                  loading="lazy"
-                  width={1500}
-                  height={1500}
-                  className="object-cover rounded-lg max-h-[600px]"
-                />
-              </SwiperSlide>
-            ))}
+            {product &&
+              product.images.map(
+                (image: { imageUrl: string }, index: number) => (
+                  <SwiperSlide
+                    key={index}
+                    className="flex justify-center items-center"
+                  >
+                    <Image
+                      src={image.imageUrl}
+                      alt={`${product.name} image ${index + 1}`}
+                      loading="lazy"
+                      width={1500}
+                      height={1500}
+                      className="object-cover rounded-lg max-h-[600px]"
+                    />
+                  </SwiperSlide>
+                ),
+              )}
           </Swiper>
           <Swiper
             onSwiper={setThumbsSwiper}
@@ -154,23 +155,26 @@ export default function ProductPage({ id }: Props) {
             watchSlidesProgress
             className="w-full h-auto"
           >
-            {product.images.map((image, index) => (
-              <SwiperSlide key={index} className="cursor-pointer">
-                <Image
-                  src={image.imageUrl}
-                  alt={`Thumbnail ${index + 1}`}
-                  width={200}
-                  height={200}
-                  className="object-cover rounded-lg"
-                />
-              </SwiperSlide>
-            ))}
+            {product &&
+              product.images.map(
+                (image: { imageUrl: string }, index: number) => (
+                  <SwiperSlide key={index} className="cursor-pointer">
+                    <Image
+                      src={image.imageUrl}
+                      alt={`Thumbnail ${index + 1}`}
+                      width={200}
+                      height={200}
+                      className="object-cover rounded-lg"
+                    />
+                  </SwiperSlide>
+                ),
+              )}
           </Swiper>
         </div>
         {showDetails ? (
           <div className="grid gap-6 bg-lightMode-background dark:bg-darkMode-background shadow-lg rounded-lg p-6">
             <div className="flex justify-between border-b border-muted pb-4">
-              <h1 className="text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-3xl font-bold">{product && product.name}</h1>
               <Button
                 variant="ghost"
                 size="icon"
@@ -181,7 +185,7 @@ export default function ProductPage({ id }: Props) {
               </Button>
             </div>
             <div className="grid gap-4">
-              {renderSizeOptions()}
+              {product && renderSizeOptions()}
               <Label htmlFor="note" className="text-base m-0 p-0">
                 Napomena:
               </Label>
@@ -196,7 +200,7 @@ export default function ProductPage({ id }: Props) {
                 className="p-4 min-h-[200px] bg-lightMode-background dark:bg-darkMode-background dark:border-darkMode-primary dark:text-white dark:placeholder-darkMode-text"
               />
               <AddToCartButton
-                product={product}
+                product={product as any}
                 description={additionalDetails}
                 option={selectedSize}
               />
@@ -205,16 +209,18 @@ export default function ProductPage({ id }: Props) {
         ) : (
           <div className="grid gap-6 bg-lightMode-background dark:bg-darkMode-background shadow-lg rounded-lg p-6">
             <div className="border-b border-muted pb-4">
-              <h1 className="text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-3xl font-bold">{product && product.name}</h1>
             </div>
             <div className="grid gap-6">
               <div>
                 <h2 className="text-lg font-semibold">Opis proizvoda</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
-                  {product.description}
+                  {product && product.description}
                 </p>
               </div>
-              <div className="text-4xl font-bold">{product.price} RSD</div>
+              <div className="text-4xl font-bold">
+                {product && product.price ? product.price : 20} RSD
+              </div>
               <Button
                 size="lg"
                 className="bg-lightMode-primary text-lightMode-text dark:bg-darkMode-primary dark:text-lightMode-text text-lg font-bold"
@@ -227,23 +233,40 @@ export default function ProductPage({ id }: Props) {
               <div>
                 <h2 className="text-lg font-semibold">Kategorija</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
-                  {product.category.name}
+                  {product && product.category.name}
                 </p>
               </div>
               <div>
                 <h2 className="text-lg font-semibold">Sastojci</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
-                  {product.ingredients
-                    .map(({ ingredient }) => ingredient.name)
-                    .join(", ")}
+                  {product &&
+                    product.ingredients
+                      .map(
+                        ({ ingredient }: { ingredient: Ingredient }) =>
+                          ingredient.name,
+                      )
+                      .join(", ")}
                 </p>
               </div>
               <div>
                 <h2 className="text-lg font-semibold">Alergeni</h2>
                 <p className="text-lightMode-text dark:text-darkMode-text text-base">
-                  {product.ingredients.some(({ ingredient }) =>
-                    ingredient.isAlergen ? ingredient.name : "Nema alergena",
-                  )}
+                  {product &&
+                  product.ingredients.some(
+                    ({ ingredient }: { ingredient: Ingredient }) =>
+                      ingredient.isAlergen,
+                  )
+                    ? product.ingredients
+                        .filter(
+                          ({ ingredient }: { ingredient: Ingredient }) =>
+                            ingredient.isAlergen,
+                        )
+                        .map(
+                          ({ ingredient }: { ingredient: Ingredient }) =>
+                            ingredient.name,
+                        )
+                        .join(", ")
+                    : "Ovaj proizvod ne sadrži alergene."}
                 </p>
               </div>
             </div>
