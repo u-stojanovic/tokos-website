@@ -14,23 +14,22 @@ export async function createOrder(
 ) {
   try {
     let orderDeliveryInfo = null;
-    if (
-      formValues.scheduleDelivery &&
-      formValues.city &&
-      formValues.address &&
-      formValues.zip &&
-      formValues.date
-    ) {
+    if (formValues.phone || formValues.email) {
       orderDeliveryInfo = await prisma.orderDeliveryInformation.create({
         data: {
           city: formValues.city,
           adresa: formValues.address,
           zip: formValues.zip,
+          email: formValues.email,
+          phoneNum: formValues.phone,
         },
       });
     }
 
-    const verificationToken = generateVerificationToken();
+    const verificationToken = generateVerificationToken(
+      formValues.email,
+      formValues.phone,
+    );
 
     const order = await prisma.order.create({
       data: {
