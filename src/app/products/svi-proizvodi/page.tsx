@@ -1,12 +1,12 @@
 import ListProducts from "@/components/shared/Products/ListProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
-import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
+import { getAllProductsConfig } from "@/lib/hooks/products/useGetProducts";
 import { QueryClient } from "@tanstack/react-query";
 
 export default async function AllProducts() {
   const queryClient = new QueryClient();
 
-  const { queryKey, queryFn } = useGetAllProducts();
+  const { queryKey, queryFn } = getAllProductsConfig();
   await queryClient.prefetchQuery({ queryKey, queryFn });
 
   return (
