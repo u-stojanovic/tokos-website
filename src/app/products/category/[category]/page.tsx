@@ -1,11 +1,7 @@
 import ListCategoryProducts from "@/components/shared/Products/ListCategoriesProducts";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
 import { getProductsyCategoryConfig } from "@/lib/hooks/products/useProductsByCategoryQuery";
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 interface CategoryPageProps {
   params: {
@@ -43,9 +39,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-left">
         <ProductsTitle title={transformCategoryName(category)} />
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ListCategoryProducts category={category} />
-        </HydrationBoundary>
+        <ListCategoryProducts category={category} />
       </div>
     </div>
   );
