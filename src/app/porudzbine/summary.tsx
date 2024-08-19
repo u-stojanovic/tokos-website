@@ -79,7 +79,9 @@ export default function OrderSummary() {
                     variant="outline"
                     size="icon"
                     className="p-1 border bg-lightMode-surface dark:bg-gray-950 border-gray-300 dark:border-gray-600"
-                    onClick={() => addToCart(item.product, item.description)}
+                    onClick={() =>
+                      addToCart(item.product, item.description, item.option)
+                    }
                   >
                     <PlusIcon className="h-4 w-4 text-gray-700 dark:text-gray-300" />
                   </Button>
