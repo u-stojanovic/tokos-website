@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useFetchProducts } from "@/lib/hooks/products/useGetProducts";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
+import { useQuery } from "@tanstack/react-query";
+import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
+
 const truncateText = (text: string, limit: number) => {
   if (text.length > limit) {
     return text.substring(0, limit) + "...";
@@ -13,15 +15,22 @@ const truncateText = (text: string, limit: number) => {
 };
 
 export default function ListProducts() {
-  const { data: products, isLoading } = useFetchProducts();
+  const { queryKey, queryFn } = useGetAllProducts();
 
-  if (!products && isLoading) {
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery({ queryKey, queryFn });
+
+  if (isLoading) {
     return <ListingProductsSkeletonLoader />;
   }
 
-  if (!products && !isLoading) {
+  if (isError) {
     return <p>Failed to fetch products</p>;
   }
+
   return (
     <div className="relative w-screen py-16 h-full md:py-24 text-lightMode-text dark:text-darkMode-text bg-lightMode-surface dark:bg-darkMode-surface">
       <div className="relative z-10 container mx-auto grid gap-12 px-4 md:px-6 max-w-7xl">
@@ -52,8 +61,7 @@ export default function ListProducts() {
                     {product.name}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-2 text-lg">
-                    {truncateText(product.description, 100)}{" "}
-                    {/* Adjust the character limit as needed */}
+                    {truncateText(product.description, 100)}
                   </p>
                   <p className="text-blue-500 font-semibold mb-4 text-lg">
                     {product.price ? `${product.price.toFixed(2)} RSD` : "N/A"}

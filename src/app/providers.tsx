@@ -8,6 +8,8 @@ function makeQueryClient() {
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000, // Set default staleTime for queries
+        // after 60 seconds the data becomes stale and the react query is refetching
+        // the data
       },
     },
   });
