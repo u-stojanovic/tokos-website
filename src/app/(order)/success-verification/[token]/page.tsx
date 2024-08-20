@@ -16,32 +16,33 @@ export default function OrderVerified({
       redirect("/");
     }
 
-    // Establish WebSocket connection
-    const ws = new WebSocket("ws://localhost:8000/ws");
+    // NOTE: Establish WebSocket connection
 
-    ws.onopen = () => {
-      console.log("WebSocket is open now.");
-      // Send the token to the backend
-      ws.send(JSON.stringify({ event: "new_order", data: params.token }));
-    };
-
-    ws.onmessage = (event) => {
-      console.log("Message received from server:", event.data);
-    };
-
-    ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    ws.onclose = () => {
-      console.log("WebSocket is closed now.");
-    };
-
-    return () => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.close();
-      }
-    };
+    // const ws = new WebSocket("ws://localhost:8000/ws");
+    //
+    // ws.onopen = () => {
+    //   console.log("WebSocket is open now.");
+    //   // Send the token to the backend
+    //   ws.send(JSON.stringify({ event: "new_order", data: params.token }));
+    // };
+    //
+    // ws.onmessage = (event) => {
+    //   console.log("Message received from server:", event.data);
+    // };
+    //
+    // ws.onerror = (error) => {
+    //   console.error("WebSocket error:", error);
+    // };
+    //
+    // ws.onclose = () => {
+    //   console.log("WebSocket is closed now.");
+    // };
+    //
+    // return () => {
+    //   if (ws.readyState === WebSocket.OPEN) {
+    //     ws.close();
+    //   }
+    // };
   }, [params.token]);
 
   return (
