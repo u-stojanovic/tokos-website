@@ -18,11 +18,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useToast } from "@/components/ui/use-toast";
 import { useCart } from "@/context/CartContext";
-import { createOrder } from "@/lib/actions/orderActions";
 import { useCreateOrder } from "@/lib/hooks/orders/useCreateOrder";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
@@ -187,7 +184,7 @@ export default function Form() {
                 </Label>
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="w-full">
+                    <TooltipTrigger type="button" className="w-full">
                       <Input
                         id="city"
                         placeholder="Unesite vaš grad"
@@ -197,6 +194,7 @@ export default function Form() {
                             ? "cursor-not-allowed opacity-50"
                             : ""
                         }`}
+                        type="text"
                         disabled={!scheduleDelivery}
                       />
                     </TooltipTrigger>
@@ -227,7 +225,7 @@ export default function Form() {
                 </Label>
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="w-full">
+                    <TooltipTrigger type="button" className="w-full">
                       <Input
                         id="address"
                         placeholder="Unesite vašu adresu"
@@ -237,6 +235,7 @@ export default function Form() {
                             ? "cursor-not-allowed opacity-50"
                             : ""
                         }`}
+                        type="text"
                         disabled={!scheduleDelivery}
                       />
                     </TooltipTrigger>
@@ -265,7 +264,7 @@ export default function Form() {
                 </Label>
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="w-full">
+                    <TooltipTrigger type="button" className="w-full">
                       <Input
                         id="zip"
                         placeholder="Unesite vaš poštanski broj"
@@ -275,6 +274,7 @@ export default function Form() {
                             ? "cursor-not-allowed opacity-50"
                             : ""
                         }`}
+                        type="text"
                         disabled={!scheduleDelivery}
                       />
                     </TooltipTrigger>
@@ -369,7 +369,10 @@ export default function Form() {
                   />
                   <TooltipProvider>
                     <Tooltip>
-                      <TooltipTrigger className="cursor-not-allowed">
+                      <TooltipTrigger
+                        type="button"
+                        className="cursor-not-allowed"
+                      >
                         <Label
                           htmlFor="online-payment"
                           className="text-gray-500 dark:text-gray-500 cursor-not-allowed"
@@ -401,7 +404,10 @@ export default function Form() {
                   ) : (
                     <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger className="flex gap-1 items-center text-center cursor-not-allowed">
+                        <TooltipTrigger
+                          type="button"
+                          className="flex gap-1 items-center text-center cursor-not-allowed"
+                        >
                           <RadioGroupItem
                             type="button"
                             value="cash-on-delivery"
@@ -426,7 +432,10 @@ export default function Form() {
                   {scheduleDelivery ? (
                     <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger className="flex gap-1 items-center text-center cursor-not-allowed">
+                        <TooltipTrigger
+                          type="button"
+                          className="flex gap-1 items-center text-center cursor-not-allowed"
+                        >
                           <RadioGroupItem
                             type="button"
                             value="in-store-cash"
