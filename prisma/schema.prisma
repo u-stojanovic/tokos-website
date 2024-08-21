@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+enum UserRoles {
+  HeadAdmin
+  Worker
+  None
+}
+
+enum OrderStatus {
+  Ordered
+  Completed
+  Pending
+  Canceled
+}
+
+enum CakeSize {
+  BIG
+  SMALL
+}
+
+enum CookieSize {
+  ONE_KG
+  TWO_KG
+  THREE_KG
+}
+
+model User {
+  id                Int                 @id @default(autoincrement())
+  email             String              @unique
+  password          String
+  username          String              @unique
+  firstName         String
+  lastName          String
+  role              UserRoles           @default(None)
+  isActive          Boolean             @default(false)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @default(now()) @updatedAt
+  verificationToken VerificationToken[]
+  Order             Order[]
+}
+
+model VerificationToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model Product {
+  id             Int                 @id @default(autoincrement())
+  name           String
+  description    String
+  categoryId     Int
+  subCategoryId  Int?
+  price          Int?
+  images         Image[]
+  category       Category            @relation(fields: [categoryId], references: [id])
+  ingredients    ProductIngredient[]
+  SubCategory    SubCategory?        @relation(fields: [subCategoryId], references: [id])
+  OrderedProduct OrderedProduct[]
+}
+
+model Order {
+  id                         Int                       @id @default(autoincrement())
+  orderedBy                  String
+  orderedProducts            OrderedProduct[]
+  orderDeliveryInformationId Int?
+  OrderDeliveryInformation   OrderDeliveryInformation? @relation(fields: [orderDeliveryInformationId], references: [id])
+  isOrderVerified            Boolean
+  status                     OrderStatus
+  completedBy                User?                     @relation(fields: [userId], references: [id])
+  userId                     Int?
+  orderDateTime              DateTime?
+  createdAt                  DateTime                  @default(now())
+  verificationToken          String?                   @unique
+}
+
+model OrderDeliveryInformation {
+  id       Int     @id @default(autoincrement())
+  city     String?
+  adresa   String?
+  zip      String?
+  email    String?
+  phoneNum String?
+  Order    Order[]
+}
+
+model OrderedProduct {
+  id          Int     @id @default(autoincrement())
+  product     Product @relation(fields: [productId], references: [id])
+  productId   Int
+  order       Order   @relation(fields: [orderId], references: [id])
+  orderId     Int
+  description String?
+  option      Option?
+  optionId    Int?    @unique
+  quantity    Int     @default(1)
+}
+
+model Option {
+  id               Int             @id @default(autoincrement())
+  cakeSize         CakeSize?
+  cookieSize       CookieSize?
+  orderedProduct   OrderedProduct? @relation(fields: [orderedProductId], references: [id])
+  orderedProductId Int?            @unique
+}
+
+model Category {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  subCategory SubCategory[]
+  products    Product[]
+}
+
+model SubCategory {
+  id         Int       @id @default(autoincrement())
+  name       String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  products   Product[]
+}
+
+model Ingredient {
+  id        Int                 @id @default(autoincrement())
+  name      String
+  isAlergen Boolean
+  products  ProductIngredient[]
+}
+
+model ProductIngredient {
+  productId    Int
+  ingredientId Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
+
+  @@id([productId, ingredientId])
+}
+
+model Image {
+  id        Int     @id @default(autoincrement())
+  imageUrl  String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
