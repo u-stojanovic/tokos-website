@@ -5,6 +5,7 @@ import Image from "next/image";
 import AddToCartButton from "../Cart/AddToCartButton";
 import { useFetchProductsFromCategories } from "@/lib/hooks/products/useProductsByCategoryQuery";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
+import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
 
 const truncateText = (text: string, limit: number) => {
   if (text.length > limit) {
@@ -65,7 +66,7 @@ export default function ListCategoryProducts({ category }: Props) {
                   <p className="text-blue-500 font-semibold mb-4 text-lg">
                     {product.price ? `${product.price.toFixed(2)} RSD` : "N/A"}
                   </p>
-                  <AddToCartButton product={product} />
+                  <AddToCartButtonWithDialog product={product} />
                 </div>
               </div>
             ))}
