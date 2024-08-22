@@ -1,9 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
-import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
 import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
 import ProductCard from "./ProductCard";
 
