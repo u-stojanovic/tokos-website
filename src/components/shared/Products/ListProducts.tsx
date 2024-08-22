@@ -5,6 +5,7 @@ import Image from "next/image";
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 import AddToCartButtonWithDialog from "../Cart/AddToCartWithDialog";
 import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
+import ProductCard from "./ProductCard";
 
 const truncateText = (text: string, limit: number) => {
   if (text.length > limit) {
@@ -30,38 +31,7 @@ export default function ListProducts() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products &&
             products.map((product: any) => (
-              <div
-                key={product.id}
-                className="relative flex flex-col items-center text-center bg-lightMode-background dark:bg-darkMode-background rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform hover:-translate-y-2"
-              >
-                <div className="relative w-full h-80 font-semibold rounded-t-lg overflow-hidden group">
-                  <Link href={`/products/${product.id}`}>
-                    <Image
-                      src={
-                        product.images.length > 0
-                          ? product.images[0].imageUrl
-                          : "/placeholder-image-url"
-                      }
-                      alt={product.name}
-                      layout="fill"
-                      objectFit="cover"
-                      className="object-cover opacity-95 transition-transform duration-300 transform group-hover:scale-105"
-                    />
-                  </Link>
-                </div>
-                <div className="p-4 w-full flex flex-col items-center">
-                  <h3 className="text-lightMode-text dark:text-darkMode-text font-bold text-xl mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2 text-lg">
-                    {truncateText(product.description, 100)}
-                  </p>
-                  <p className="text-blue-500 font-semibold mb-4 text-lg">
-                    {product.price ? `${product.price.toFixed(2)} RSD` : "N/A"}
-                  </p>
-                  <AddToCartButtonWithDialog product={product} />
-                </div>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
         </div>
       </div>
