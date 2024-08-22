@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { CircleCheckIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import React from "react";
 
 export default function OrderVerified({
   params,
@@ -16,33 +16,36 @@ export default function OrderVerified({
       redirect("/");
     }
 
-    // NOTE: Establish WebSocket connection
+    const wsUrl =
+      process.env.NODE_ENV === "production"
+        ? (process.env.NEXT_PUBLIC_WS_URL_PROD as string)
+        : (process.env.NEXT_PUBLIC_WS_URL_DEV as string);
 
-    // const ws = new WebSocket("ws://localhost:8000/ws");
-    //
-    // ws.onopen = () => {
-    //   console.log("WebSocket is open now.");
-    //   // Send the token to the backend
-    //   ws.send(JSON.stringify({ event: "new_order", data: params.token }));
-    // };
-    //
-    // ws.onmessage = (event) => {
-    //   console.log("Message received from server:", event.data);
-    // };
-    //
-    // ws.onerror = (error) => {
-    //   console.error("WebSocket error:", error);
-    // };
-    //
-    // ws.onclose = () => {
-    //   console.log("WebSocket is closed now.");
-    // };
-    //
-    // return () => {
-    //   if (ws.readyState === WebSocket.OPEN) {
-    //     ws.close();
-    //   }
-    // };
+    // NOTE: Establish WebSocket connection
+    const ws = new WebSocket(wsUrl);
+
+    ws.onopen = () => {
+      console.log("WebSocket is open now.");
+      ws.send(JSON.stringify({ event: "new_order", data: params.token }));
+    };
+
+    ws.onmessage = (event) => {
+      console.log("Message received from server:", event.data);
+    };
+
+    ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket is closed now.");
+    };
+
+    return () => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
+    };
   }, [params.token]);
 
   return (

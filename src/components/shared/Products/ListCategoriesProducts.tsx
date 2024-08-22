@@ -4,13 +4,6 @@ import { useFetchProductsFromCategories } from "@/lib/hooks/products/useProducts
 import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 import ProductCard from "./ProductCard";
 
-const truncateText = (text: string, limit: number) => {
-  if (text.length > limit) {
-    return text.substring(0, limit) + "...";
-  }
-  return text;
-};
-
 interface Props {
   category: string;
 }
