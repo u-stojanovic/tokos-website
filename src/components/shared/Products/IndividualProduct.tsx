@@ -1,22 +1,22 @@
 "use client";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import "swiper/css/thumbs";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Thumbs } from "swiper/modules";
-import Image from "next/image";
-import { useState } from "react";
+import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import AddToCartButton from "../Cart/AddToCartButton";
 import { useFetchProductById } from "@/lib/hooks/products/useGetProductById";
-import ProductDetailsSkeleton from "@/app/products/[id]/ProductDetailsSkeleton";
 import { CakeSize, CookieSize, Ingredient } from "@prisma/client";
+import { ArrowLeftIcon, RectangleHorizontal, Square } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/thumbs";
+import { EffectFade, Navigation, Thumbs } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import AddToCartButton from "../Cart/AddToCartButton";
 
 interface Props {
   id: number;

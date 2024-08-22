@@ -4,13 +4,6 @@ import ListingProductsSkeletonLoader from "./ListingProductsSkeletonLoader";
 import { useGetAllProducts } from "@/lib/hooks/products/useGetProducts";
 import ProductCard from "./ProductCard";
 
-const truncateText = (text: string, limit: number) => {
-  if (text.length > limit) {
-    return text.substring(0, limit) + "...";
-  }
-  return text;
-};
-
 export default function ListProducts() {
   const { data: products, isLoading, isError } = useGetAllProducts();
 

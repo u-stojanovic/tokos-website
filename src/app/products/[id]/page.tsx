@@ -1,5 +1,4 @@
 import ProductPage from "@/components/shared/Products/IndividualProduct";
-import { getProductById } from "@/lib/actions/productActions";
 import { getProductByIdConfig } from "@/lib/hooks/products/useGetProductById";
 import { HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
