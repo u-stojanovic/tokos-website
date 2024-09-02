@@ -203,6 +203,7 @@ export default function ProductPage({ id }: Props) {
                 product={product as any}
                 description={additionalDetails}
                 option={selectedSize}
+                disabled={!selectedSize}
               />
             </div>
           </div>
