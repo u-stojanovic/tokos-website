@@ -27,13 +27,20 @@ export default function AddToCartButtonWithDialog({ product }: Props) {
   const [selectedSize, setSelectedSize] = React.useState<
     CakeSize | CookieSize | undefined
   >(undefined);
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      setError("Molimo vas izaberite opciju za proizvod");
+      return;
+    }
     addToCart(product, additionalDetails, selectedSize);
+    setError(null);
   };
 
   const handleSizeSelection = (size: CakeSize | CookieSize) => {
     setSelectedSize(size);
+    setError(null);
   };
 
   const renderSizeOptions = () => {
@@ -122,6 +129,9 @@ export default function AddToCartButtonWithDialog({ product }: Props) {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           {renderSizeOptions()}
+          {error && (
+            <div className="text-red-500 text-sm sm:text-base">{error}</div>
+          )}
           <Textarea
             placeholder="Unesite dodatne detalje"
             value={additionalDetails}
