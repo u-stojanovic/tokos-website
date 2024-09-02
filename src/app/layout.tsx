@@ -6,6 +6,7 @@ import Head from "next/head";
 import { CartProvider } from "@/context/CartContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body className={inter.className} style={{ overflowX: "hidden" }}>
+        <Analytics />
         <AppRouterCacheProvider>
           <CartProvider>
             <ThemeProvider
