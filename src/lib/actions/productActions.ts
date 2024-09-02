@@ -2,10 +2,13 @@
 import { cookies } from "next/headers";
 import prisma from "../../../prisma/client";
 
-export async function getAllProducts() {
+export async function getAllProducts(page: number = 1, pageSize: number = 12) {
   const _ = cookies();
   try {
+    const skip = (page - 1) * pageSize;
     const products = await prisma.product.findMany({
+      skip,
+      take: pageSize,
       include: {
         category: true,
         images: true,
@@ -16,7 +19,10 @@ export async function getAllProducts() {
         },
       },
     });
-    return products;
+
+    const totalProducts = await prisma.product.count();
+
+    return { products, totalProducts };
   } catch (error) {
     console.log("error: ", error);
   }
