@@ -17,6 +17,7 @@ enum UserRoles {
 enum OrderStatus {
   Ordered
   Completed
+  Accepted
   Pending
   Canceled
 }

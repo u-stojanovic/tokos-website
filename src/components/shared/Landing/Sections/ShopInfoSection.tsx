@@ -3,7 +3,7 @@ import NumberTicker from "@/components/magicui/number-ticker";
 
 export default function ShopInfoSection() {
   return (
-    <section className="bg-lightMode-background py-12 text-lightMode-text dark:text-darkMode-text dark:bg-darkMode-background grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 items-stretch justify-between gap-8 p-6 drop-shadow-lg">
+    <section className="bg-lightMode-background py-12 text-lightMode-text dark:text-darkMode-text dark:bg-darkMode-background grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch justify-between gap-8 p-6 drop-shadow-lg">
       <TextCard />
       <PictureCard />
       <StatsCard />
