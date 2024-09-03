@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { RectangleHorizontal, Square } from "lucide-react";
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function AddToCartButtonWithDialog({ product }: Props) {
+  const [isOpen, setIsOpen] = React.useState(false);
   const { addToCart } = useCart();
   const [additionalDetails, setAdditionalDetails] = React.useState("");
   const [selectedSize, setSelectedSize] = React.useState<
@@ -30,12 +32,16 @@ export default function AddToCartButtonWithDialog({ product }: Props) {
   const [error, setError] = React.useState<string | null>(null);
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
+    if (
+      !selectedSize &&
+      (product.category.id == 3 || product.category.id == 1)
+    ) {
       setError("Molimo vas izaberite opciju za proizvod");
       return;
     }
     addToCart(product, additionalDetails, selectedSize);
     setError(null);
+    setIsOpen(false);
   };
 
   const handleSizeSelection = (size: CakeSize | CookieSize) => {
@@ -108,11 +114,12 @@ export default function AddToCartButtonWithDialog({ product }: Props) {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           size="lg"
           className="bg-darkMode-primary text-lightMode-text w-full text-lg font-bold rounded-lg shadow-md transition-all duration-300 transform-gpu will-change-transform hover:shadow-xl hover:-translate-y-1 dark:hover:bg-darkMode-primary"
+          onClick={() => setIsOpen(true)}
         >
           Dodaj u korpu
         </Button>
