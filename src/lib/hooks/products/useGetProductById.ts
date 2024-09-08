@@ -7,16 +7,3 @@ export const useFetchProductById = (id: number) => {
     queryFn: ({ queryKey }) => getProductById(queryKey[1] as number),
   });
 };
-
-export const getProductByIdConfig = (id: number) => {
-  const queryKey: [string, number] = ["getProductById", id];
-
-  const queryFn = async ({ queryKey }: { queryKey: [string, number] }) => {
-    return await getProductById(queryKey[1]);
-  };
-
-  return {
-    queryKey,
-    queryFn,
-  };
-};
