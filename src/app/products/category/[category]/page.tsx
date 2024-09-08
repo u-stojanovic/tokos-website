@@ -1,8 +1,6 @@
 import ListCategoryProducts from "@/components/shared/Products/ListCategoriesProducts";
 import ListingProductsSkeletonLoader from "@/components/shared/Products/ListingProductsSkeletonLoader";
 import ProductsTitle from "@/components/shared/Products/ProductsTitle";
-import { getProductsyCategoryConfig } from "@/lib/hooks/products/useProductsByCategoryQuery";
-import { QueryClient } from "@tanstack/react-query";
 import { Suspense } from "react";
 
 interface CategoryPageProps {
@@ -13,7 +11,6 @@ interface CategoryPageProps {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
-  const queryClient = new QueryClient();
 
   const transformCategoryName = (category: string) => {
     switch (category) {
@@ -29,13 +26,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         return category;
     }
   };
-
-  const { queryKey, queryFn } = getProductsyCategoryConfig(params.category);
-
-  await queryClient.prefetchQuery({
-    queryKey,
-    queryFn,
-  });
 
   return (
     <div className="flex flex-col items-center">
