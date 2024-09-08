@@ -30,6 +30,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+import { Domains } from "@/data/tempMailDomains";
 import { z } from "zod";
 
 const orderSchema = z
@@ -49,13 +50,7 @@ const orderSchema = z
       .refine(
         (email) => {
           const domain = email.split("@")[1];
-          const tempEmailDomains = [
-            "mailinator.com",
-            "10minutemail.com",
-            "guerrillamail.com",
-            "temporarymail.com",
-          ];
-          return !tempEmailDomains.includes(domain);
+          return !Domains.includes(domain);
         },
         { message: "Privremeni email nalozi nisu dozvoljeni" },
       ),
@@ -80,6 +75,31 @@ const orderSchema = z
   );
 
 export type OrderFormInputs = z.infer<typeof orderSchema>;
+const today = dayjs();
+const twoDays = dayjs().add(2, "day");
+
+const minTime = (date: any) => {
+  const day = date.day();
+  if (day === 6) {
+    // If selected date is Saturday
+    return dayjs(date).set("hour", 9).startOf("hour");
+  }
+  return dayjs(date).set("hour", 9).startOf("hour");
+};
+
+const maxTime = (date: any) => {
+  const day = date.day();
+  if (day === 6) {
+    // If selected date is Saturday
+    return dayjs(date).set("hour", 15).startOf("hour");
+  }
+  return dayjs(date).set("hour", 21).startOf("hour");
+};
+
+const shouldDisableDate = (date: any) => {
+  const day = date.day();
+  return day === 0;
+};
 
 export default function Form() {
   const [scheduleDelivery, setScheduleDelivery] = useState(false);
@@ -175,125 +195,71 @@ export default function Form() {
                   </p>
                 )}
               </div>
-              <div className="space-y-2">
-                <Label
-                  htmlFor="city"
-                  className="text-lg font-medium text-gray-700 dark:text-gray-200"
-                >
-                  Grad
-                </Label>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger type="button" className="w-full">
-                      <Input
-                        id="city"
-                        placeholder="Unesite vaš grad"
-                        {...methods.register("city")}
-                        className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
-                          !scheduleDelivery
-                            ? "cursor-not-allowed opacity-50"
-                            : ""
-                        }`}
-                        type="text"
-                        disabled={!scheduleDelivery}
-                      />
-                    </TooltipTrigger>
-                    {!scheduleDelivery && (
-                      <TooltipContent>
-                        <p>
-                          Ovo polje je onemogućeno dok nije zakazana dostava
-                        </p>
-                      </TooltipContent>
-                    )}
-                  </Tooltip>
-                </TooltipProvider>
-                {methods.formState.errors.city && (
-                  <p className="text-red-500 text-sm">
-                    {methods.formState.errors.city?.message}
-                  </p>
-                )}
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="address"
-                  className="text-lg font-medium text-gray-700 dark:text-gray-200"
-                >
-                  Adresa
-                </Label>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger type="button" className="w-full">
-                      <Input
-                        id="address"
-                        placeholder="Unesite vašu adresu"
-                        {...methods.register("address")}
-                        className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
-                          !scheduleDelivery
-                            ? "cursor-not-allowed opacity-50"
-                            : ""
-                        }`}
-                        type="text"
-                        disabled={!scheduleDelivery}
-                      />
-                    </TooltipTrigger>
-                    {!scheduleDelivery && (
-                      <TooltipContent>
-                        <p>
-                          Ovo polje je onemogućeno dok nije zakazana dostava
-                        </p>
-                      </TooltipContent>
-                    )}
-                  </Tooltip>
-                </TooltipProvider>
-                {methods.formState.errors.address && (
-                  <p className="text-red-500 text-sm">
-                    {methods.formState.errors.address?.message}
-                  </p>
-                )}
-              </div>
+            {scheduleDelivery && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="city"
+                    className="text-lg font-medium text-gray-700 dark:text-gray-200"
+                  >
+                    Grad
+                  </Label>
+                  <Input
+                    id="city"
+                    placeholder="Unesite vaš grad"
+                    {...methods.register("city")}
+                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+                  />
+                  {methods.formState.errors.city && (
+                    <p className="text-red-500 text-sm">
+                      {methods.formState.errors.city?.message}
+                    </p>
+                  )}
+                </div>
 
-              <div className="space-y-2">
-                <Label
-                  htmlFor="zip"
-                  className="text-lg font-medium text-gray-700 dark:text-gray-200"
-                >
-                  Poštanski broj
-                </Label>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger type="button" className="w-full">
-                      <Input
-                        id="zip"
-                        placeholder="Unesite vaš poštanski broj"
-                        {...methods.register("zip")}
-                        className={`p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50 ${
-                          !scheduleDelivery
-                            ? "cursor-not-allowed opacity-50"
-                            : ""
-                        }`}
-                        type="text"
-                        disabled={!scheduleDelivery}
-                      />
-                    </TooltipTrigger>
-                    {!scheduleDelivery && (
-                      <TooltipContent>
-                        <p>
-                          Ovo polje je onemogućeno dok nije zakazana dostava
-                        </p>
-                      </TooltipContent>
-                    )}
-                  </Tooltip>
-                </TooltipProvider>
-                {methods.formState.errors.zip && (
-                  <p className="text-red-500 text-sm">
-                    {methods.formState.errors.zip?.message}
-                  </p>
-                )}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="address"
+                    className="text-lg font-medium text-gray-700 dark:text-gray-200"
+                  >
+                    Adresa
+                  </Label>
+                  <Input
+                    id="address"
+                    placeholder="Unesite vašu adresu"
+                    {...methods.register("address")}
+                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+                  />
+                  {methods.formState.errors.address && (
+                    <p className="text-red-500 text-sm">
+                      {methods.formState.errors.address?.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="zip"
+                    className="text-lg font-medium text-gray-700 dark:text-gray-200"
+                  >
+                    Poštanski broj
+                  </Label>
+                  <Input
+                    id="zip"
+                    placeholder="Unesite vaš poštanski broj"
+                    {...methods.register("zip")}
+                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-darkMode-surface text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-50"
+                  />
+                  {methods.formState.errors.zip && (
+                    <p className="text-red-500 text-sm">
+                      {methods.formState.errors.zip?.message}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
@@ -317,32 +283,43 @@ export default function Form() {
                   className="bg-gray-300 dark:bg-gray-700 focus:ring-0 focus:ring-blue-500"
                 />
               </div>
-              {scheduleDelivery && (
-                <div className="flex flex-col space-y-2">
-                  <Label className="text-lg font-medium text-gray-700 dark:text-gray-200">
-                    Datum i vreme
-                  </Label>
-                  <Controller
-                    name="date"
-                    control={methods.control}
-                    render={({ field }) => (
-                      <DateTimePicker
-                        {...field}
-                        label="M/D/Y : H/M"
-                        ampm={true}
-                        onChange={(value) => field.onChange(value?.toDate())}
-                        value={field.value ? dayjs(field.value) : null}
-                        className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-lightMode-secondary text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
-                      />
-                    )}
-                  />
-                  {methods.formState.errors.date && (
-                    <p className="text-red-500 text-sm">
-                      {methods.formState.errors.date?.message}
-                    </p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex flex-col space-y-2">
+                <Label className="text-lg font-medium text-gray-700 dark:text-gray-200">
+                  Datum i vreme
+                </Label>
+                <Controller
+                  name="date"
+                  control={methods.control}
+                  render={({ field }) => (
+                    <DateTimePicker
+                      {...field}
+                      label="M/D/Y : H/M"
+                      ampm={false}
+                      onChange={(value) => {
+                        const selectedDate = value?.toDate();
+                        field.onChange(selectedDate);
+                        minTime(dayjs(selectedDate));
+                        maxTime(dayjs(selectedDate));
+                      }}
+                      value={field.value ? dayjs(field.value) : null}
+                      defaultValue={today}
+                      minDate={twoDays}
+                      minTime={minTime(dayjs(field.value || today))}
+                      maxTime={maxTime(dayjs(field.value || today))}
+                      shouldDisableDate={shouldDisableDate}
+                      className="p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-lightMode-surface dark:bg-lightMode-secondary text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
+                    />
                   )}
-                </div>
-              )}
+                />
+                {methods.formState.errors.date && (
+                  <p className="text-red-500 text-sm">
+                    {methods.formState.errors.date?.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className="space-y-4">

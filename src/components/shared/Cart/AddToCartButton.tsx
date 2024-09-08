@@ -9,16 +9,22 @@ interface Props {
   product: Product;
   description?: string;
   option?: CakeSize | CookieSize;
-  disabled: boolean;
+  selectedSize?: CakeSize | CookieSize | undefined;
 }
 
 export default function AddToCartButton({
   product,
   description,
   option,
-  disabled,
+  selectedSize,
 }: Props) {
   const { addToCart } = useCart();
+
+  let disabled = false;
+
+  if (!selectedSize && (product.categoryId == 3 || product.category.id == 1)) {
+    disabled = true;
+  }
 
   const handleAddToCart = () => {
     addToCart(product, description, option);
